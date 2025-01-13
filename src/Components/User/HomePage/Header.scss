@@ -1,0 +1,221 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #e4eefb; // Màu nền cho toàn bộ trang
+}
+
+.header {
+  position: fixed;
+  z-index: 9;
+  width: 100%;
+  top: 0;
+  // display: grid;
+  // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  .header_box {
+    // box-sizing: border-box;
+
+    .header_box_top {
+      background: url("../../../assets/boxtop-bg.png") center bottom no-repeat;
+      background-size: 100% 100%;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 30px;
+      // background-color: #fff;
+      box-sizing: border-box;
+      .header_box_top_text {
+        text-align: center;
+        padding-top: 4px;
+        color: #fff;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 15px;
+      }
+    }
+
+    .header_box_1 {
+      // background-color: #fff;
+      margin-top: 10px;
+      .container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        position: relative;
+
+        .header_box1_main {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 5px 0;
+
+          .header_box1Left {
+            display: flex;
+            align-items: center;
+            height: 50px;
+            .header_box_1Logo {
+              width: 110px;
+              position: relative;
+              margin: 0;
+
+              img {
+                width: 100%;
+                height: auto;
+                display: block;
+              }
+            }
+          }
+
+          .header_box1Right {
+            display: flex;
+            align-items: center;
+            height: 50px;
+
+            .header_box1Address {
+              position: relative;
+
+              ul {
+                list-style: none;
+                margin: 1em 0;
+                padding-left: 40px;
+                unicode-bidi: isolate;
+
+                ::before {
+                  background: url("../../../assets/icon1.jpg") 0 center
+                    no-repeat;
+                  content: "";
+                  position: absolute;
+                  top: 20px;
+                  left: 0;
+                  width: 35px;
+                  height: 35px;
+                  background-size: cover;
+                }
+              }
+
+              //giờ mở cửa
+              @media (max-width: 1200px) {
+                display: none;
+              }
+            }
+
+            .header_box1Call {
+              margin-left: 25px;
+              text-align: center;
+              position: relative;
+
+              ul {
+                list-style: none;
+
+                ::before {
+                  background: url("../../../assets/icon2.jpg") 0 center
+                    no-repeat;
+                  content: "";
+                  position: absolute;
+                  top: 20px;
+                  left: 5px;
+                  width: 30px;
+                  height: 30px;
+                  background-size: cover;
+                }
+              }
+
+              ul,
+              li {
+                color: #000;
+                font-size: 13px;
+
+                b {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+
+          .header_box1_menu {
+            display: none;
+            @media (max-width: 1200px) {
+              display: block;
+            }
+          }
+          //box 1 main
+          @media (max-width: 1200px) {
+            justify-content: center;
+            .header_box1Left,
+            .header_box1Right {
+              display: flex;
+              align-items: center;
+              height: 50px;
+            }
+            .header_box1Right {
+              position: absolute;
+              right: 0;
+              gap: 18px;
+            }
+            .header_box1_menu {
+              display: block;
+              position: absolute;
+              left: 0;
+              color: #0056a2;
+              font-size: 40px;
+            }
+          }
+        }
+      }
+    }
+
+    .header_box_2 {
+      background-color: #d9d9d9;
+      padding: 0;
+      @media (max-width: 1200px) {
+        display: none;
+      }
+      .container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        position: relative;
+        .header_box_2Main {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .header_box_2Logo {
+            display: none;
+          }
+          .header_box_2_menu {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            .header_box_2_menuSub {
+              display: flex;
+              align-items: center;
+              border-top: 3px solid rgba(0, 0, 0, 0);
+              padding: 8px 12px;
+              .header_box_2_title {
+                padding: 5px 10px;
+                display: block;
+                font-size: 14px;
+                cursor: pointer;
+                text-align: center;
+                position: relative;
+                font-weight: 500;
+                text-transform: uppercase;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .header_box_top {
+    display: none;
+  }
+}
