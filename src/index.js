@@ -2,12 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import Layout from "./Layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  // <Provider store={store}>
+  //   <PersistGate loading={null} persistor={persistor}>
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   </React.StrictMode>
+  //   </PersistGate>
+  // </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

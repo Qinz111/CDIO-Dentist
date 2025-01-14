@@ -1,29 +1,16 @@
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #e4eefb; // Màu nền cho toàn bộ trang
-}
-
 .header {
-  position: fixed;
-  z-index: 9;
+  // z-index: 9;
   width: 100%;
   top: 0;
-  // display: grid;
-  // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
   .header_box {
-    // box-sizing: border-box;
-
     .header_box_top {
       background: url("../../../assets/boxtop-bg.png") center bottom no-repeat;
-      background-size: 100% 100%;
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      min-height: 30px;
+      // background-size: 100% 100%;
+      // position: relative;
+      // z-index: 2;
+      // width: 100%;
+      min-height: 20px;
       // background-color: #fff;
       box-sizing: border-box;
       .header_box_top_text {
@@ -31,13 +18,11 @@ body {
         padding-top: 4px;
         color: #fff;
         font-weight: 600;
-        text-transform: uppercase;
         font-size: 15px;
       }
     }
 
     .header_box_1 {
-      // background-color: #fff;
       margin-top: 10px;
       .container {
         padding-right: 15px;
@@ -51,7 +36,7 @@ body {
           align-items: center;
           justify-content: space-between;
           padding: 5px 0;
-
+          // z-index: 10000;
           .header_box1Left {
             display: flex;
             align-items: center;
@@ -98,29 +83,45 @@ body {
 
               //giờ mở cửa
               @media (max-width: 1200px) {
-                display: none;
+                ul {
+                  display: none;
+                }
               }
             }
 
             .header_box1Call {
               margin-left: 25px;
-              text-align: center;
-              position: relative;
 
+              margin-top: 10px;
+              display: flex;
+              justify-content: center;
+              .icon2 {
+                width: auto;
+                height: 70%;
+                background-size: 100%;
+              }
+              .text {
+                padding: 0 5px;
+              }
               ul {
-                list-style: none;
-
-                ::before {
-                  background: url("../../../assets/icon2.jpg") 0 center
-                    no-repeat;
-                  content: "";
-                  position: absolute;
-                  top: 20px;
-                  left: 5px;
-                  width: 30px;
-                  height: 30px;
-                  background-size: cover;
+                @media (max-width: 1200px) {
+                  display: none;
                 }
+                list-style: none;
+                li {
+                  top: 10px;
+                }
+                // ::before {
+                //   background: url("../../../assets/icon2.jpg") 0 center
+                //     no-repeat;
+                //   content: "";
+                //   position: absolute;
+                //   top: 10px;
+                //   left: -5px;
+                //   width: 30px;
+                //   height: 30px;
+                //   background-size: 100%;
+                // }
               }
 
               ul,

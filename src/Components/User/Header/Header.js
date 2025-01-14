@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./Header.scss";
+import icon2 from "../../../assets/icon2.jpg";
+import "bootstrap/dist/css/bootstrap.min.css";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -32,8 +34,9 @@ const Header = () => {
                     <li>Từ T2 - CN</li>
                   </ul>
                 </div>
-                <div className="header_box1Call popup_Caller">
-                  <ul>
+                <div className="header_box1Call">
+                  <img src={icon2} alt="" className="icon2" />
+                  <ul className="text">
                     <li>Tư vấn miễn phí</li>
                     <li>
                       <b>123456789</b>
@@ -53,9 +56,7 @@ const Header = () => {
         <div className="header_box_2">
           <div className="container">
             <div className="header_box_2Main">
-              {/* <a href="" className="header_box_2Logo">
-                <img src="" alt="nha khoa" />
-              </a> */}
+              <img src="" alt="nha khoa" />
               <ul className="header_box_2_menu">
                 <li className="header_box_2_menuSub">
                   <div className="header_box_2_title">
