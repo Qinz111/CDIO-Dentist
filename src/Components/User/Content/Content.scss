@@ -1,4 +1,18 @@
-.container {
-  display: flex;
-  border: 1px solid red;
+.content-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+
+  .container {
+    margin: 0 auto;
+    padding: 0 15px;
+
+    .content {
+      padding: 15px;
+      border-radius: 4px;
+      // Để text không bị tràn
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+  }
 }

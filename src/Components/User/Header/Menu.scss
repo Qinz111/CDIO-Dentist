@@ -1,0 +1,236 @@
+// Variables
+$font-primary: "Roboto", Arial, sans-serif;
+$primary: #ff0000;
+$dark: #252525;
+$white: #fff;
+$black: #000;
+
+// Header section
+.ftco-section {
+  padding: 2em 0;
+
+  .heading-section {
+    font-size: 28px;
+    color: $black;
+  }
+}
+
+// Navbar brand
+.navbar-brand {
+  color: $black;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 20px;
+
+  span {
+    display: block;
+    font-size: 12px;
+    color: rgba($black, 0.3);
+  }
+}
+
+// Main navigation
+.ftco-navbar-light {
+  background: $dark !important;
+  padding: 0;
+
+  .navbar-nav {
+    > .nav-item {
+      > .nav-link {
+        font-size: 11px;
+        padding: 1.5rem 20px;
+        font-weight: 500;
+        color: $white;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+
+        &:before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: $primary;
+          transition: 0.3s;
+        }
+
+        &:hover {
+          color: $primary;
+
+          &:before {
+            width: 100%;
+          }
+        }
+      }
+
+      &.active > .nav-link {
+        color: $primary;
+      }
+    }
+  }
+
+  // Dropdown menu
+  .dropdown-menu {
+    border: none;
+    background: $white;
+    box-shadow: 0 10px 34px -20px rgba(0, 0, 0, 0.41);
+    border-radius: 4px;
+
+    .dropdown-item {
+      font-size: 12px;
+      color: $black;
+
+      &:hover {
+        background: $primary;
+        color: $white;
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 991.98px) {
+  .ftco-navbar-light {
+    background: $black !important;
+    position: relative;
+    padding: 10px 15px;
+
+    .navbar-nav {
+      padding-bottom: 10px;
+
+      > .nav-item > .nav-link {
+        padding: 0.7rem 0;
+        color: rgba($white, 0.7);
+
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+.menu-container {
+  width: 100%;
+  background: transparent;
+
+  .menu-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      position: relative;
+
+      // Thêm gạch chân khi hover
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #0056a2;
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        &::after {
+          width: 100%;
+        }
+      }
+
+      .menu-link {
+        padding: 5px 10px;
+        display: block;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        position: relative;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #333;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: #0056a2;
+          transform: translateY(-2px); // Hiệu ứng nâng lên khi hover
+        }
+      }
+    }
+  }
+}
+
+// Mobile styles
+@media (max-width: 1000px) {
+  .menu-container {
+    .menu-list {
+      flex-direction: column;
+
+      .menu-item {
+        width: 100%;
+        padding: 0;
+        border-bottom: 1px solid #eee;
+
+        // Bỏ gạch chân cho mobile
+        &::after {
+          display: none;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .menu-link {
+          width: 100%;
+          padding: 12px 20px;
+          text-align: left;
+
+          &:hover {
+            background: #f5f5f5;
+            color: #0056a2;
+            transform: none; // Bỏ hiệu ứng nâng lên trên mobile
+            padding-left: 25px; // Thêm hiệu ứng lùi vào trong khi hover
+            transition: all 0.3s ease;
+          }
+        }
+      }
+    }
+  }
+}
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 70%;
+  height: 100vh;
+  background-color: white;
+  transition: 0.3s;
+
+  &.active {
+    left: 0;
+  }
+}
