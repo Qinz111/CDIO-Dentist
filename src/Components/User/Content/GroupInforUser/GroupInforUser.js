@@ -76,7 +76,7 @@ const GroupInforUser = () => {
           </div>
         </div>
         <div className="group-info-container-right">
-          <div>
+          <div className="image-info">
             <img src={selectedUser.image} alt="" />
           </div>
         </div>
@@ -96,6 +96,10 @@ const GroupInforUser = () => {
             >
               <div className="user-info">
                 <img src={user.image} alt="?" />
+              </div>
+              <div className="detail-info">
+                <p>{user.birthday}</p>
+                <p> {user.name} </p>
               </div>
             </div>
           ))}

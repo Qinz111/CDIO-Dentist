@@ -3,6 +3,8 @@
   flex-direction: column;
   gap: 20px;
 
+  --web-color: #e4eefb;
+
   .group-info-container {
     padding: 20px;
     background: #fff;
@@ -34,38 +36,6 @@
         // display: grid;
         // grid-template-columns: repeat(2, 1fr);
         gap: 15px;
-
-        .info-item {
-          display: flex;
-          align-items: flex-start;
-          padding: 15px;
-          background: #f8f9fa;
-          border-radius: 6px;
-          transition: all 0.3s ease;
-
-          &:hover {
-            background: #f0f0f0;
-            transform: translateY(-2px);
-          }
-
-          .info-content {
-            flex: 1;
-
-            label {
-              display: block;
-              color: #666;
-              font-size: 14px;
-              margin-bottom: 5px;
-            }
-
-            p {
-              color: #333;
-              font-size: 16px;
-              font-weight: 500;
-              margin: 0;
-            }
-          }
-        }
       }
     }
 
@@ -101,8 +71,8 @@
       display: flex;
       gap: 15px;
       overflow-x: auto;
-      padding-bottom: 10px;
-
+      padding: 10px;
+      justify-content: space-between;
       &::-webkit-scrollbar {
         height: 8px;
       }
@@ -122,16 +92,17 @@
       }
 
       .user-item {
-        display: flex;
-        align-items: center;
-        padding: 15px;
         border-radius: 6px;
         cursor: pointer;
         transition: all 0.3s ease;
         flex-shrink: 0;
-        img {
-          padding: 0 10px;
-        }
+        padding: 10px;
+        text-align: center;
+        display: block;
+        box-shadow: 0px 0px 30px var(--web-color);
+        border: 0.2px solid #eee;
+        height: auto;
+        width: 150px;
 
         &:hover {
           background: #f0f0f0;
@@ -152,20 +123,9 @@
           align-items: center;
           justify-content: center;
           margin-right: 15px;
-
-          svg {
-            color: white;
-            font-size: 20px;
-          }
         }
 
         .user-info {
-          h4 {
-            margin: 0;
-            font-size: 16px;
-            color: #333;
-          }
-
           p {
             margin: 5px 0;
             font-size: 14px;
@@ -174,36 +134,22 @@
 
           img {
             width: 100%;
-            height: 150px;
+            height: 130px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-top: 10px;
+            border-radius: 50%;
+            margin: 10px 0;
+          }
+        }
+        .detail-info {
+          margin-top: 10px;
+          p {
+            margin: 0;
           }
         }
       }
     }
   }
 }
-
-// Responsive
-// @media (max-width: 100px) {
-//   .group-info-wrapper {
-//     .group-info-container {
-//       flex-direction: column;
-
-//       .group-info-container-left,
-//       .group-info-container-right {
-//         max-width: 100%;
-//         padding-top: 20px;
-//       }
-
-//       .group-title {
-//         position: relative;
-//         top: 0;
-//       }
-//     }
-//   }
-// }
 
 @media (max-width: 1000px) {
   .group-info-wrapper {
