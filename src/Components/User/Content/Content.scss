@@ -1,18 +1,56 @@
-.content-wrapper {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+.content-container {
+  .content-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
 
-  .container {
-    margin: 0 auto;
-    padding: 0 15px;
+    .container {
+      margin: 0 auto;
+      padding: 0 15px;
 
-    .content {
-      padding: 15px;
-      border-radius: 4px;
-      // Để text không bị tràn
-      word-wrap: break-word;
-      overflow-wrap: break-word;
+      .content {
+        padding: 15px;
+        border-radius: 4px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+    }
+
+    .fixed-buttons {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      z-index: 20;
+      @media (max-width: 1000px) {
+        display: none;
+      }
+      .btn-image {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        .btn-dk {
+          button {
+            background-color: white;
+            img {
+              width: 50px;
+              height: 50px;
+            }
+          }
+        }
+        .btn-phone {
+          button {
+            background-color: #0d68fd;
+            img {
+              width: 50px;
+              height: 50px;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 10;
   .header_box {
     .header_box_top {
       background: url("../../../assets/boxtop-bg.png") center bottom no-repeat;
@@ -116,7 +116,7 @@
                   padding: 10px;
                   border-radius: 4px;
                   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-                  z-index: 1000;
+                  z-index: 20;
                   min-width: 120px;
 
                   &.show {
@@ -218,6 +218,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
+
           .header_box_2Logo {
             display: none;
           }

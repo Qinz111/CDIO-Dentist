@@ -132,35 +132,35 @@ const Header = () => {
                   <div className="header_box_2_title">
                     VỀ NHA
                     <br />
-                    KHOA PARIS
+                    KHOA CDIO
                   </div>
                 </li>
                 <li className="header_box_2_menuSub">
                   <div className="header_box_2_title">
-                    VỀ NHA
+                    NHA KHOA
                     <br />
-                    KHOA PARIS
+                    THẨM MỸ
                   </div>
                 </li>
                 <li className="header_box_2_menuSub">
                   <div className="header_box_2_title">
-                    VỀ NHA
+                    NHA KHOA
                     <br />
-                    KHOA PARIS
+                    TỔNG QUÁT
                   </div>
                 </li>
                 <li className="header_box_2_menuSub">
                   <div className="header_box_2_title">
-                    VỀ NHA
+                    THẨM MỸ
                     <br />
-                    KHOA PARIS
+                    HÀM MẶT
                   </div>
                 </li>
                 <li className="header_box_2_menuSub">
                   <div className="header_box_2_title">
-                    VỀ NHA
+                    BẢNG GIÁ
                     <br />
-                    KHOA PARIS
+                    ƯU ĐÃI
                   </div>
                 </li>
               </ul>

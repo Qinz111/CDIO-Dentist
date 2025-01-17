@@ -1,0 +1,117 @@
+.modal {
+  .container-box {
+    padding: 20px;
+    .box-header {
+      text-align: center;
+      margin-bottom: 20px;
+
+      .header-logo {
+        box-shadow: 0 1px rgba(0, 0, 0, 0.1);
+        img {
+          max-width: 150px;
+          margin-bottom: 15px;
+        }
+        margin-bottom: 5px;
+      }
+
+      .header-note {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .header-call {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 10px 0;
+        background-color: red;
+        padding: 10px;
+
+        width: 100%;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        img {
+          width: 30px;
+          margin-right: 10px;
+        }
+
+        &:hover {
+          background: #f50909;
+        }
+      }
+    }
+
+    .box-content {
+      .input-phone {
+        margin-bottom: 15px;
+
+        input {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+
+          &:focus {
+            outline: none;
+            border-color: #0056a2;
+          }
+        }
+      }
+
+      .btn-send {
+        input[type="submit"] {
+          width: 100%;
+          padding: 12px;
+          background: #0056a2;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-weight: bold;
+
+          &:hover {
+            background: #004080;
+          }
+        }
+      }
+    }
+
+    .box-close {
+      cursor: pointer;
+      position: absolute;
+      top: -24px;
+      right: -16px;
+
+      .close-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 700;
+        transform-origin: center;
+
+        &:hover {
+          animation: spin 0.5s linear infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

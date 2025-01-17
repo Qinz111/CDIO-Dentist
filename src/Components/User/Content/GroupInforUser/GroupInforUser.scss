@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-
   --web-color: #e4eefb;
 
   .group-info-container {
@@ -18,14 +17,13 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      color: #333;
+      color: #0056a2;
       font-size: 24px;
       margin-bottom: 30px;
       padding-bottom: 10px;
       border-bottom: 2px solid #e0e0e0;
       width: calc(100% - 40px);
       background: #fff;
-      z-index: 1;
     }
 
     .group-info-container-left {
@@ -33,8 +31,6 @@
       padding-top: 70px;
 
       .info-grid {
-        // display: grid;
-        // grid-template-columns: repeat(2, 1fr);
         gap: 15px;
       }
     }

@@ -64,8 +64,7 @@ const GroupInforUser = () => {
   return (
     <div className="group-info-wrapper">
       <div className="group-info-container">
-        <h2 className="group-title">Thông tin cá nhân</h2>
-
+        <h2 className="group-title">ĐỘI HÌNH</h2>
         <div className="group-info-container-left">
           <div className="info-grid">
             <p>Họ và tên: {selectedUser.name}</p>
