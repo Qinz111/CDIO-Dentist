@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  --web-color: #e4eefb;
+  // --web-color: #e4eefb;
 
   .group-info-container {
     padding: 20px;
-    background: #fff;
+    // background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     gap: 30px;
     position: relative;
@@ -23,7 +23,7 @@
       padding-bottom: 10px;
       border-bottom: 2px solid #e0e0e0;
       width: calc(100% - 40px);
-      background: #fff;
+      // background: #fff;
     }
 
     .group-info-container-left {
@@ -69,6 +69,7 @@
       overflow-x: auto;
       padding: 10px;
       justify-content: space-between;
+
       &::-webkit-scrollbar {
         height: 8px;
       }
@@ -136,6 +137,7 @@
             margin: 10px 0;
           }
         }
+
         .detail-info {
           margin-top: 10px;
           p {
@@ -147,32 +149,196 @@
   }
 }
 
-@media (max-width: 1000px) {
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
   .group-info-wrapper {
     .group-info-container {
-      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+}
 
-      .group-info-container-left {
-        flex: 1;
-        min-width: 0;
+// Large devices (desktops, 992px to 1199px)
+@media (min-width: 992px) and (max-width: 1199px) {
+  .group-info-wrapper {
+    .group-info-container {
+      gap: 20px;
 
-        .info-grid {
-          grid-template-columns: 1fr;
-          font-size: 14px;
+      .group-info-container-right {
+        width: 350px;
 
-          p {
-            margin: 8px 0;
-            word-break: break-word;
+        img {
+          height: 350px;
+        }
+      }
+    }
+
+    .user-list-container {
+      .user-list {
+        .user-item {
+          width: 140px;
+
+          .user-info {
+            img {
+              height: 120px;
+            }
           }
         }
       }
+    }
+  }
+}
 
+// Medium devices (tablets, 768px to 991px)
+@media (min-width: 768px) and (max-width: 991px) {
+  .group-info-wrapper {
+    .group-info-container {
+      flex-direction: column;
+      gap: 15px;
+
+      .group-title {
+        font-size: 22px;
+      }
+
+      .group-info-container-left,
       .group-info-container-right {
-        width: 150px;
-        min-width: 150px;
+        width: 100%;
+        padding-top: 60px;
+      }
 
-        img {
-          height: 200px;
+      .group-info-container-right img {
+        height: 300px;
+      }
+    }
+
+    .user-list-container {
+      h3 {
+        font-size: 18px;
+      }
+
+      .user-list {
+        .user-item {
+          width: 130px;
+
+          .user-info {
+            img {
+              height: 110px;
+            }
+
+            p {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px to 767px)
+@media (min-width: 576px) and (max-width: 767px) {
+  .group-info-wrapper {
+    .group-info-container {
+      padding: 15px;
+      flex-direction: column;
+
+      .group-title {
+        font-size: 20px;
+        top: 15px;
+        left: 15px;
+      }
+
+      .group-info-container-left,
+      .group-info-container-right {
+        width: 100%;
+        padding-top: 50px;
+      }
+
+      .group-info-container-right img {
+        height: 250px;
+      }
+    }
+
+    .user-list-container {
+      padding: 15px;
+
+      h3 {
+        font-size: 16px;
+      }
+
+      .user-list {
+        gap: 10px;
+
+        .user-item {
+          width: 120px;
+
+          .user-info {
+            img {
+              height: 100px;
+            }
+
+            p {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Extra small devices (phones, less than 576px)
+@media (max-width: 575px) {
+  .group-info-wrapper {
+    .group-info-container {
+      padding: 10px;
+      flex-direction: column;
+
+      .group-title {
+        font-size: 18px;
+        top: 10px;
+        left: 10px;
+      }
+
+      .group-info-container-left,
+      .group-info-container-right {
+        width: 100%;
+        padding-top: 45px;
+      }
+
+      .group-info-container-right img {
+        height: 200px;
+      }
+    }
+
+    .user-list-container {
+      padding: 10px;
+
+      h3 {
+        font-size: 15px;
+      }
+
+      .user-list {
+        gap: 8px;
+
+        .user-item {
+          width: 110px;
+          padding: 8px;
+
+          .user-info {
+            img {
+              height: 90px;
+            }
+
+            p {
+              font-size: 11px;
+            }
+          }
+
+          .detail-info p {
+            font-size: 11px;
+          }
         }
       }
     }

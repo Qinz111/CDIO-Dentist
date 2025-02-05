@@ -1,0 +1,64 @@
+.modal {
+  .modal-content {
+    padding: 0 10px;
+    .container {
+      padding-bottom: 0;
+      .container-box {
+        padding-bottom: 0;
+      }
+    }
+
+    .list-dentist {
+      max-height: 300px;
+      overflow-x: auto;
+      // padding: 0 10px;
+
+      &::-webkit-scrollbar {
+        height: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgb(39, 28, 28);
+        border-radius: 3px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background: #e4eefb;
+        }
+      }
+
+      .list-dentist-container {
+        display: flex;
+        min-width: min-content;
+
+        &.hovered .select-dentist:not(:hover) {
+          filter: blur(5px);
+        }
+
+        .select-dentist {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          width: 200px;
+          transition: transform 0.3s ease;
+
+          img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 10px;
+          }
+
+          &:hover {
+            background: #e4eefb;
+            border-radius: 10px;
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+}

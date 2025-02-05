@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import icon2 from "../../../assets/icon2.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Menu from "./Menu";
 import { BsList } from "react-icons/bs";
 import Menu from "./Menu";
+import { Link } from "react-scroll";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,11 +17,10 @@ const Header = () => {
   const togglePhone = (e) => {
     if (window.innerWidth <= 1000) {
       setShowPhone(!showPhone);
-      e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
+      e.stopPropagation();
     }
   };
 
-  // Đóng phone number khi click ra ngoài
   useEffect(() => {
     const handleClickOutside = () => {
       if (showPhone) {
@@ -35,32 +34,23 @@ const Header = () => {
     };
   }, [showPhone]);
 
-  //lấy size
-  let handleResize = () => {
-    const header = document.querySelector(".header");
-    const appBody = document.querySelector(".app-body");
-
-    if (header && appBody) {
-      const headerHeight = header.offsetHeight;
-      appBody.style.marginTop = `${headerHeight}px`;
-    }
-
-    // Thêm resize listener để cập nhật khi kích thước màn hình thay đổi
+  useEffect(() => {
     const handleResize = () => {
+      const header = document.querySelector(".header");
+      const appBody = document.querySelector(".app-body");
       if (header && appBody) {
         const headerHeight = header.offsetHeight;
         appBody.style.marginTop = `${headerHeight}px`;
       }
     };
 
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  };
-
-  useEffect(handleResize, []);
+  }, []);
 
   return (
     <div className="header">
@@ -103,7 +93,7 @@ const Header = () => {
                 </div>
               </div>
               <div className="header_box1_menu">
-                <button className="menu" onClick={() => toggleMenu()}>
+                <button className="menu" onClick={toggleMenu}>
                   <BsList />
                 </button>
                 {isMenuOpen && (
@@ -129,39 +119,49 @@ const Header = () => {
             <div className="header_box_2Main">
               <ul className="header_box_2_menu">
                 <li className="header_box_2_menuSub">
-                  <div className="header_box_2_title">
-                    VỀ NHA
-                    <br />
-                    KHOA CDIO
-                  </div>
+                  <Link to="cdio" spy={true} smooth={true} duration={500}>
+                    <div className="header_box_2_title">
+                      VỀ NHA
+                      <br />
+                      KHOA CDIO
+                    </div>
+                  </Link>
                 </li>
                 <li className="header_box_2_menuSub">
-                  <div className="header_box_2_title">
-                    NHA KHOA
-                    <br />
-                    THẨM MỸ
-                  </div>
+                  <Link to="thammy" spy={true} smooth={true} duration={500}>
+                    <div className="header_box_2_title">
+                      NHA KHOA
+                      <br />
+                      THẨM MỸ
+                    </div>
+                  </Link>
                 </li>
                 <li className="header_box_2_menuSub">
-                  <div className="header_box_2_title">
-                    NHA KHOA
-                    <br />
-                    TỔNG QUÁT
-                  </div>
+                  <Link to="tongquat" spy={true} smooth={true} duration={500}>
+                    <div className="header_box_2_title">
+                      NHA KHOA
+                      <br />
+                      TỔNG QUÁT
+                    </div>
+                  </Link>
                 </li>
                 <li className="header_box_2_menuSub">
-                  <div className="header_box_2_title">
-                    THẨM MỸ
-                    <br />
-                    HÀM MẶT
-                  </div>
+                  <Link to="hammat" spy={true} smooth={true} duration={500}>
+                    <div className="header_box_2_title">
+                      THẨM MỸ
+                      <br />
+                      HÀM MẶT
+                    </div>
+                  </Link>
                 </li>
                 <li className="header_box_2_menuSub">
-                  <div className="header_box_2_title">
-                    BẢNG GIÁ
-                    <br />
-                    ƯU ĐÃI
-                  </div>
+                  <Link to="uudai" spy={true} smooth={true} duration={500}>
+                    <div className="header_box_2_title">
+                      BẢNG GIÁ
+                      <br />
+                      ƯU ĐÃI
+                    </div>
+                  </Link>
                 </li>
               </ul>
             </div>

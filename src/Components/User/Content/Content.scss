@@ -28,26 +28,87 @@
       @media (max-width: 1000px) {
         display: none;
       }
+
       .btn-image {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 10px;
         .btn-dk {
           button {
-            background-color: white;
-            img {
-              width: 50px;
-              height: 50px;
-            }
+            outline: none;
+            border: none;
+            background: none;
+            color: #00ffea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          }
+
+          button::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(
+              circle,
+              rgba(0, 255, 234, 0.3),
+              transparent
+            );
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            border-radius: 50%;
+          }
+
+          button:hover {
+            color: #1a1a1a;
+            background: #00ffea;
+            box-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea, 0 0 60px #00ffea;
+          }
+
+          button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
           }
         }
         .btn-phone {
           button {
-            background-color: #0d68fd;
-            img {
-              width: 50px;
-              height: 50px;
-            }
+            outline: none;
+            border: none;
+            background: none;
+            color: #00ffea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          }
+
+          button::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(
+              circle,
+              rgba(0, 255, 234, 0.3),
+              transparent
+            );
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            border-radius: 50%;
+          }
+
+          button:hover {
+            color: #1a1a1a;
+            background: #00ffea;
+            box-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea, 0 0 60px #00ffea;
+          }
+
+          button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
           }
         }
       }

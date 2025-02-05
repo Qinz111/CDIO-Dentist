@@ -22,7 +22,7 @@ const FormRegister = (props) => {
                 <div className="call-icon">
                   <img src="/images/phone-icon.png" alt="" />
                 </div>
-                Gọi ngay
+                0912314189
               </a>
               <div className="box-header">
                 <div className="header-note">
