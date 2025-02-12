@@ -2,13 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  // --web-color: #e4eefb;
-
+  background: #fff;
   .group-info-container {
     padding: 20px;
-    // background: #fff;
     border-radius: 8px;
-    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     gap: 30px;
     position: relative;
@@ -23,7 +20,6 @@
       padding-bottom: 10px;
       border-bottom: 2px solid #e0e0e0;
       width: calc(100% - 40px);
-      // background: #fff;
     }
 
     .group-info-container-left {
@@ -50,7 +46,6 @@
   }
 
   .user-list-container {
-    background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -150,14 +145,14 @@
 }
 
 // Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
-  .group-info-wrapper {
-    .group-info-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-  }
-}
+// @media (min-width: 1200px) {
+//   .group-info-wrapper {
+//     .group-info-container {
+//       max-width: 1200px;
+//       margin: 0 auto;
+//     }
+//   }
+// }
 
 // Large devices (desktops, 992px to 1199px)
 @media (min-width: 992px) and (max-width: 1199px) {

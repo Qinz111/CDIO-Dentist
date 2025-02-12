@@ -7,21 +7,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import s1 from "../../../../../assets/s1.png";
+import s2 from "../../../../../assets/s2.png";
+import s3 from "../../../../../assets/s3.png";
+import s4 from "../../../../../assets/s4.png";
+import s5 from "../../../../../assets/s5.png";
+import s6 from "../../../../../assets/s6.png";
+import video from "../../../../../assets/home.mp4";
 
 const CDIO = () => {
   useEffect(() => {
     AOS.init({ duration: 2000, offset: 50 });
   }, []);
+
   return (
     <>
       <div className="cdio-section" id="cdio">
         <div className="container">
           <div className="cdio-content">
-            <div className="cdio-image-content" data-aos="fade-right">
+            <div className="cdio-image-content" data-aos="fade-up">
               <img src={Doctor} alt="Doctor Group" className="cdio-image1" />
             </div>
 
-            <div className="cdio-text-content" data-aos="fade-left">
+            <div className="cdio-text-content" data-aos="fade-up">
               <h3 className="cdio-title">
                 <span>CDIO Dentist</span>
               </h3>
@@ -55,10 +63,10 @@ const CDIO = () => {
         </div>
       </div>
 
-      <div className="ba-section">
+      {/* <div className="ba-section">
         <div className="container">
           <div className="ba-content">
-            <div className="ba-image-content" data-aos="zoom-in">
+            <div className="ba-image-content" data-aos="fade-up">
               <img src={Chanh} alt="Doctor Group" className="ba-image1" />
             </div>
 
@@ -85,7 +93,7 @@ const CDIO = () => {
                   icon={faCircleCheck}
                   style={{ color: "#1E8FFD" }}
                 />{" "}
-                Chăm sóc khẩn cấp 24/7
+                Hỗ trợ tư vấn online
               </p>
 
               <p className="ba-checks ba-check-last">
@@ -95,6 +103,48 @@ const CDIO = () => {
                 />{" "}
                 Đăng ký đơn giản, dễ dàng
               </p>
+            </div>
+          </div>
+        </div>
+      </div> */}
+
+      <div className="service">
+        <div className="service-container">
+          <div className="content">
+            <div className="content-title">Dịch vụ của chúng tôi</div>
+            <div className="content-container">
+              <div className="content-container-icon">
+                <img src={s1} alt="" />
+                Làm trắng răng
+              </div>
+              <div className="content-container-icon">
+                <img src={s5} alt="" />
+                Niềng răng
+              </div>
+              <div className="content-container-icon">
+                <img src={s6} alt="" />
+                Trồng răng
+              </div>
+              <div className="content-container-icon">
+                <img src={s2} alt="" />
+                Kiểm tra tổng quát
+              </div>
+              <div className="content-container-icon">
+                <img src={s3} alt="" />
+                Thẩm mỹ
+              </div>
+              <div className="content-container-icon">
+                <img src={s4} alt="" />
+                Tư vấn
+              </div>
+            </div>
+          </div>
+          <div className="video-container">
+            <div className="video">
+              <video autoPlay muted loop playsInline controls={false}>
+                <source src={video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>

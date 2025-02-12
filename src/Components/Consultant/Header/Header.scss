@@ -1,0 +1,198 @@
+.header-consultant {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #e4eefb;
+  left: 0;
+  right: 0;
+  // // padding-bottom: 200px;
+  // margin-bottom: 200px;
+  .header_top {
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../../../assets/boxtop-bg.png") center bottom no-repeat;
+    background-size: cover;
+    color: #f0ebeb;
+    font-weight: medium;
+    font-size: 20px;
+  }
+  .header_content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    .header_content_left {
+      position: relative;
+      max-width: 500px; /* Tăng kích thước tối đa */
+      text-align: center;
+      img {
+        width: auto; /* Để ảnh tự điều chỉnh theo chiều rộng */
+        max-height: 230px;
+        object-fit: contain;
+        // filter: brightness(1.05) saturate(1.1);
+        // height: 200px;
+      }
+    }
+    .header_content_right {
+      position: absolute; /* Để đè lên */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 50%;
+      transform: translateY(-50%); /* căn giữa theo chiều dọc */
+      right: 50px; /* Khoảng cách từ bên phải */
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      z-index: 2; /* Đảm bảo nằm trên cùng */
+      img {
+        margin-bottom: 5px;
+        width: 54px;
+        height: 54px;
+      }
+      ul {
+        padding-right: 20px;
+        gap: 8px;
+      }
+    }
+  }
+  .header_bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #7bc1e0;
+    // height: 58px;
+    width: 100%;
+    .header_bottom_left {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      position: relative;
+      .header_bottom_left_menu {
+        display: none;
+        position: absolute;
+        top: 42px;
+        left: 0;
+        background-color: white;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+
+        ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+          li {
+            width: 306px;
+            height: 90px;
+            background-color: #6b767b;
+            display: flex;
+            a {
+              font-size: 20px;
+              gap: 10px;
+              font-style: italic;
+              text-decoration: none;
+              color: rgb(255, 255, 255);
+              display: flex;
+              align-items: center;
+              svg {
+                margin-right: 8px;
+                margin-left: 32px;
+                font-size: 24px;
+              }
+              &:hover {
+                background-color: #83969e;
+              }
+            }
+          }
+        }
+      }
+      .show-menu {
+        display: block;
+      }
+      .header_bottom_left_icon {
+        margin-left: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .icon {
+          width: 42px;
+          height: auto; /* Để ảnh tự điều chỉnh chiều cao */
+          object-fit: contain; /* Giữ tỷ lệ ảnh */
+          color: #fff;
+        }
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &:active {
+          opacity: 0.6;
+        }
+        img {
+          width: 42px;
+          height: auto; /* Để ảnh tự điều chỉnh chiều cao */
+          object-fit: contain; /* Giữ tỷ lệ ảnh */
+        }
+      }
+    }
+    .header_bottom_right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 50px;
+      max-height: 100%;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      &:hover {
+        opacity: 0.8;
+        color: #5e1d1d;
+      }
+      &:active {
+        opacity: 0.6;
+        color: #5e1d1d;
+      }
+      .header_bottom_right_icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* img{
+                  width: 40px;
+                  height: 34.23px ;
+                  color: #fff;
+                  margin-right: 10px;
+              } */
+        .icon {
+          /* width: 40px; */
+        }
+      }
+      .header_bottom_right_text {
+        width: auto;
+        font-size: 23px;
+        font-weight: 500;
+        font-weight: bold;
+        color: #fff;
+        white-space: nowrap;
+        margin-left: 10px;
+      }
+    }
+  }
+  .header_bottom_bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e4eefb;
+    .header_bottom_bottom_text {
+      text-align: center;
+      max-width: 100%;
+      font-size: 20px;
+      font-weight: medium;
+      color: #27438a;
+      width: 80%;
+      border-bottom: 2px solid #d9d9d9;
+    }
+  }
+}

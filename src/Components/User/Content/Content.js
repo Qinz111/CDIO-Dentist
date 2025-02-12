@@ -1,38 +1,28 @@
 import React, { useState } from "react";
 import "./Content.scss";
 import GroupInforUser from "./GroupInforUser/GroupInforUser";
-import LocationModal from "./Location/LocationModal";
-import DentistModal from "./Dentist/DentistModal";
 import FormRegister from "./FormRegister/FormRegister";
-import Calendar from "./Calendar/Calendar";
 import UuDai from "./Description/BangGiaUuDai/UuDai";
 import CDIO from "./Description/VeNhaKhoaCDIO/CDIO";
 import ThamMy from "./Description/NhaKhoaThamMy/ThamMy";
 import TongQuat from "./Description/NhaKhoaTongQuat/TongQuat";
 import HamMat from "./Description/ThamMyHamMat/HamMat";
-
+// import HomePage from "./HomePage/HomePage";
+import s1 from "../../../assets/cdio-dentist.png";
+import s2 from "../../../assets/hp2.png";
+import s3 from "../../../assets/hp3.png";
+import s4 from "../../../assets/hp4.png";
 const Content = () => {
-  const [showLocation, setShowLocation] = useState(false);
-  const [showDentist, setShowDentist] = useState(false);
   const [showFormRegister, setShowFormRegister] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedDentist, setSelectedDentist] = useState(null);
-
-  const handleLocationSelect = (location) => {
-    setSelectedLocation(location);
-    setShowDentist(true);
-  };
-
-  const handleDentistSelect = (dentist) => {
-    setSelectedDentist(dentist);
-    setShowDentist(false);
-    setShowCalendar(true);
-  };
-
   return (
     <div className="content-container">
       <div className="content-wrapper">
+        <div className="home-page">
+          <img src={s1} alt="" />
+          <img src={s2} alt="" />
+          <img src={s3} alt="" />
+          <img src={s4} alt="" />
+        </div>
         <div className="container">
           <div className="content">
             <GroupInforUser />
@@ -42,7 +32,7 @@ const Content = () => {
         <div className="fixed-buttons">
           <div className="btn-image">
             <div className="btn-dk">
-              <button onClick={() => setShowLocation(true)}>
+              <button onClick={() => setShowFormRegister(true)}>
                 <img src="/images/dk-btn.png" alt="" />
               </button>
             </div>
@@ -57,29 +47,12 @@ const Content = () => {
           </div>
         </div>
       </div>
+
       <CDIO />
       <ThamMy />
       <TongQuat />
       <HamMat />
       <UuDai />
-
-      <LocationModal
-        show={showLocation}
-        setShow={setShowLocation}
-        onSelectLocation={handleLocationSelect}
-      />
-
-      <DentistModal
-        show={showDentist}
-        setShow={setShowDentist}
-        onSelectDentist={handleDentistSelect}
-      />
-
-      <Calendar
-        show={showCalendar}
-        setShow={setShowCalendar}
-        dentist={selectedDentist}
-      />
 
       <FormRegister show={showFormRegister} setShow={setShowFormRegister} />
     </div>

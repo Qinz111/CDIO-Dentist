@@ -1,11 +1,19 @@
 import React from "react";
-// import "./Consultant.scss";
-
+import Header from "./Header/Header";
+import { Outlet } from "react-router-dom";
+import "./Consultant.scss";
 const Consultant = () => {
   return (
-    <div className="consultant-container">
-      <h1>Consultant Dashboard</h1>
-      {/* Add consultant content here */}
+    <div>
+      <div className="consultant">
+        <div className="consultant-header">
+          <Header />
+        </div>
+
+        <div className="consultant-content">
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };

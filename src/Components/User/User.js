@@ -1,6 +1,7 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Content from "./Content/Content";
+import { Outlet } from "react-router-dom";
 
 const User = () => {
   return (
@@ -9,7 +10,7 @@ const User = () => {
         <Header />
       </div>
       <div className="app-body">
-        <Content />
+        <Outlet />
       </div>
       <div className="app-footer">
         <Footer />
