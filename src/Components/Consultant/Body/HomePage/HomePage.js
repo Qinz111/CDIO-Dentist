@@ -2,13 +2,10 @@ import React from "react";
 import "./HomePage.scss";
 const HomePage = () => {
   return (
-    <div className="home-page">
+    <div className="home-page-container">
       <div className="left">
         <div className="thongtincanhanh">
           <div className="contener">
-            {/* <div className="j79">
-                    <img src="/images/khung.png" alt="?" />
-                </div> */}
             <div className="j97">
               <img src="/images/j97.png" alt="?" />
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 import "./TuVan.scss";
 
 const TuVan = () => {
-  return <div className="container">asfjasvd dsvj</div>;
+  return <div className="container-tuvan">asfjasvd dsvj</div>;
 };
 
 export default TuVan;
