@@ -1,0 +1,52 @@
+<h1>, <h2>, ..., <h6>: Thẻ tiêu đề từ lớn nhất đến nhỏ nhất.
+<p>: Thẻ đoạn văn.
+<b>: Văn bản in đậm.
+<i>: Văn bản in nghiêng.
+<u>: Gạch chân văn bản.
+<strong>: Nhấn mạnh (thường được đọc đậm).
+<em>: Nhấn mạnh (thường được đọc nghiêng).
+<small>: Văn bản nhỏ hơn.
+<mark>: Đánh dấu văn bản (highlight).
+<br>: Xuống dòng.
+<hr>: Đường kẻ ngang chia nội dung.
+
+<ul>: Danh sách không thứ tự (dấu chấm).
+<ol>: Danh sách có thứ tự (số, chữ cái...).
+<li>: Phần tử trong danh sách.
+<dl>: Danh sách định nghĩa.
+<dt>: Thuật ngữ cần định nghĩa.
+<dd>: Mô tả cho thuật ngữ.
+<a href="https://example.com">Liên kết</a>
+<img src="url_ảnh" alt="mô tả ảnh">
+<video>: Chèn video.
+<audio>: Chèn âm thanh.
+<source>: Nguồn cho thẻ <video> và <audio>.
+
+<table>: Bảng.
+<tr>: Hàng trong bảng.
+<td>: Ô dữ liệu.
+<th>: Ô tiêu đề.
+<thead>: Phần đầu bảng.
+<tbody>: Phần thân bảng.
+<tfoot>: Phần chân bảng.
+<caption>: Tiêu đề bảng.
+
+<form>: Biểu mẫu.
+<input>: Ô nhập liệu.
+<textarea>: Ô nhập liệu nhiều dòng.
+<button>: Nút bấm.
+<label>: Nhãn của trường nhập liệu.
+<select>: Menu thả xuống.
+<option>: Tùy chọn trong menu.
+<fieldset>: Nhóm các trường nhập liệu.
+<legend>: Tiêu đề cho <fieldset>.
+
+<div>: Chia vùng nội dung (khối).
+<span>: Chia nhỏ nội dung (dòng).
+<section>: Phần nội dung.
+<article>: Bài viết.
+<header>: Phần đầu.
+<footer>: Phần chân.
+<nav>: Thanh điều hướng.
+<aside>: Phần nội dung bên cạnh.
+<main>: Nội dung chính.
