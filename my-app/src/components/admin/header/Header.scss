@@ -26,6 +26,7 @@
             max-width: 500px;  /* Tăng kích thước tối đa */
             text-align: center;
             img{
+                cursor: pointer;
                 width: auto;  /* Để ảnh tự điều chỉnh theo chiều rộng */
                 max-height: 230px;  
                 object-fit: contain;

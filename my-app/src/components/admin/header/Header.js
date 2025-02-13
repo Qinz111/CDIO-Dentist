@@ -34,7 +34,8 @@ const Header = () => {
             </div>
             <div className="header_content">
                 <div className="header_content_left">
-                    <img src={logo2} alt="logo2" />
+                    <img onClick={() => window.location.reload()}
+                    src={logo2} alt="logo2" />
                 </div>
                 <div className="header_content_right">
                     <div className="header_content_right_icon">
