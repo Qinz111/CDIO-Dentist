@@ -6,6 +6,8 @@ import { GoCheck } from 'react-icons/go';
 
 const Adjust = ({ onClose }) => {
     const [image, setImage] = useState(null);
+    const [name, setName] = useState('Bruno Fernandes'); // Initial name value
+    const [PhoneNumber, setPhoneNumber] = useState('0981633043');
     const notify = () => toast.success("Cập nhật thành công!", {
         icon: <GoCheck style={{ color: '#0C2D79', fontSize: '24px'}} />,
         position: "top-right",
@@ -20,7 +22,17 @@ const Adjust = ({ onClose }) => {
             fontWeight: 'bold',      // Làm chữ đậm hơn
         }
     });
-
+    const getInput = ()=>{
+        const name = document.getElementById('name').value;
+        const dob = document.getElementById('dob').value;
+        const password = document.getElementById('pass').value;
+        const gender = document.getElementById('gender').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const role = document.getElementById('role').value;
+        const startDate = document.getElementById('startDate').value;
+        console.log(name, dob);
+    }
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -31,6 +43,8 @@ const Adjust = ({ onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        notify();
+        getInput();
     };
 
     return (
@@ -57,27 +71,32 @@ const Adjust = ({ onClose }) => {
                     <form onSubmit={handleSubmit}>
                         <div className="Adjust_content_bottom">
                             <div className="Adjust_content_bottom_grid">
-                                <p>HỌ TÊN: <input type="text" placeholder='Nhập họ tên' required /></p>
-                                <p>NGÀY SINH: <input type="date" placeholder='Nhập ngày sinh' required /></p>
+                            <p>HỌ TÊN: <input id='name' 
+                                              type="text" 
+                                              placeholder='Nhập họ tên' 
+                                              value={name}
+                                              onChange={(e) => setName(e.target.value)}
+                                              required /></p>
+                                <p>NGÀY SINH: <input id='dob' type="date" placeholder='Nhập ngày sinh' required /></p>
                                 <p>GIỚI TÍNH: 
-                                    <select required>
+                                    <select id='gender' required>
                                         <option value="">Chọn giới tính</option>
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
                                     </select>
                                 </p>
-                                <p>MSNV: <input type="text" placeholder='Nhập mã số nhân viên' required /></p>
-                                <p>SĐT: <input type="tel" placeholder='Nhập số điện thoại' required /></p>
-                                <p>EMAIL: <input type="email" placeholder='Nhập email' required /></p>
-                                <p>CHỨC VỤ: <input type="text" placeholder='Nhập chức vụ' required /></p>
-                                <p>NGÀY BẮT ĐẦU LÀM VIỆC: <input type="date" required /></p>
+                                <p>Password: <input id='pass' type="text" placeholder='Tạo mật khẩu cho nhân viên' required /></p>
+                                <p>SĐT: <input id='phone' type="tel" placeholder='Nhập số điện thoại' required /></p>
+                                <p>EMAIL: <input id='email' type="email" placeholder='Nhập email' required /></p>
+                                <p>CHỨC VỤ: <input id='role' type="text" placeholder='Nhập chức vụ' required /></p>
+                                <p>NGÀY BẮT ĐẦU LÀM VIỆC: <input id='startDate' type="date" required /></p>
                             </div>
                         </div>
                         <div className="Adjust_content_bottom_button">
                             <button type="button" onClick={onClose} className="cancel-btn">
                                 Hủy
                             </button>
-                            <button type="submit" onClick={notify} className="submit-btn"> Cập nhật 
+                            <button type="submit" className="submit-btn"> Cập nhật 
                                 <ToastContainer /> 
                             </button>
                         </div>

@@ -72,7 +72,7 @@
         .pagination {
             li {
                 a {
-                    color: #030303; // Màu chữ mặc định (xanh dương)
+                    color: #030303;     
                     &:hover {
                         color: #0056b3; // Màu khi hover (xanh đậm hơn)
                     }
@@ -85,4 +85,7 @@
         }
     }
 }
+}
+.Consultants_content .Consultants_list .title {
+    background-color: #8ab5e3;
 }

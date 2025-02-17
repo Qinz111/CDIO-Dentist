@@ -4,7 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoCheck } from 'react-icons/go';
 
-const AddEmployees = ({ onClose }) => {
+const AddEmployees = ({ onClose , isConsulting}) => {
+    // props; truyền dữ liệu từ components cha sang con
     const [image, setImage] = useState(null);
     const notify = () => toast.success("Thêm nhân viên thành công!", {
         icon: <GoCheck style={{ color: '#0C2D79', fontSize: '24px'}} />,
@@ -20,7 +21,8 @@ const AddEmployees = ({ onClose }) => {
             fontWeight: 'bold',      // Làm chữ đậm hơn
         }
     });
-    //event.target.files[0]: Lấy file đầu tiên mà người dùng chọn.
+
+//event.target.files[0]: Lấy file đầu tiên mà người dùng chọn.
 
 // URL.createObjectURL(file): Tạo URL tạm thời để có thể hiển thị ảnh trong trình duyệt.
 
@@ -70,27 +72,29 @@ const AddEmployees = ({ onClose }) => {
                     <form onSubmit={handleSubmit}>
                         <div className="AddEmployees_content_bottom">
                             <div className="AddEmployees_content_bottom_grid">
-                                <p>HỌ TÊN: <input type="text" placeholder='Nhập họ tên' required /></p>
-                                <p>NGÀY SINH: <input type="date" placeholder='Nhập ngày sinh' required /></p>
+                                <p>HỌ TÊN: <input id='name' type="text" placeholder='Nhập họ tên' required /></p>
+                                <p>NGÀY SINH: <input id='dob' type="date" placeholder='Nhập ngày sinh' required /></p>
                                 <p>GIỚI TÍNH: 
-                                    <select required>
+                                    <select id='gender' required>
                                         <option value="">Chọn giới tính</option>
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
                                     </select>
                                 </p>
-                                <p>MSNV: <input type="text" placeholder='Nhập mã số nhân viên' required /></p>
-                                <p>SĐT: <input type="tel" placeholder='Nhập số điện thoại' required /></p>
-                                <p>EMAIL: <input type="email" placeholder='Nhập email' required /></p>
-                                <p>CHỨC VỤ: <input type="text" placeholder='Nhập chức vụ' required /></p>
-                                <p>NGÀY BẮT ĐẦU LÀM VIỆC: <input type="date" required /></p>
+                                <p>SĐT: <input id='phone' type="tel" placeholder='Nhập số điện thoại' required /></p>
+                                <p>EMAIL: <input id='email' type="email" placeholder='Nhập email' required /></p>
+                                <p>CHỨC VỤ: <input id='role' type="text" placeholder='Nhập chức vụ' required /></p>
+                                <p>NGÀY BẮT ĐẦU LÀM VIỆC: <input id='startDate' type="date" required /></p>
+                                {isConsulting && (
+                                    <p>Password: <input id='pass' type="text" placeholder='Tạo mật khẩu cho nhân viên' required /></p>
+                                )}
                             </div>
                         </div>
                         <div className="AddEmployees_content_bottom_button">
                             <button type="button" onClick={onClose} className="cancel-btn">
                                 Hủy
                             </button>
-                            <button type="submit" onClick={notify} className="submit-btn"> Xác nhận 
+                            <button type="submit" onClick={notify}  className="submit-btn"> Xác nhận 
                                 <ToastContainer /> 
                             </button>
                         </div>
