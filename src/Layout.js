@@ -9,6 +9,7 @@ import Consultant from "./Components/Consultant/Consultant";
 import HomePage from "./Components/Consultant/Body/HomePage/HomePage";
 import QuanLy from "./Components/Consultant/Body/QuanLy/QuanLy";
 import TuVan from "./Components/Consultant/Body/TuVan/TuVan";
+import CalendarManage from "./Components/Consultant/Body/QuanLy/Calendar/CalenderManage";
 
 const Layout = () => {
   return (
@@ -22,8 +23,9 @@ const Layout = () => {
       <Route path="/admin" element={<Admin />} />
       <Route path="/consultant" element={<Consultant />}>
         <Route index element={<HomePage />} />
-        <Route path="/consultant/quan-li-bs" element={<QuanLy />} />
-        <Route path="/consultant/dang-ki-tu-van" element={<TuVan />} />
+        <Route path="quan-li-bs" element={<QuanLy />} />
+        <Route path="quan-li-bs/calendar/:id" element={<CalendarManage />} />
+        <Route path="dang-ki-tu-van" element={<TuVan />} />
       </Route>
     </Routes>
   );

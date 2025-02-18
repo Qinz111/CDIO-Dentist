@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import SolutionStep from "./SolutionStep";
 import Doctor from "../../../../../assets/doctor-group.png";
-import Chanh from "../../../../../assets/chanh.jpg";
 import "./CDIO.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import s1 from "../../../../../assets/s1.png";
@@ -62,51 +59,6 @@ const CDIO = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="ba-section">
-        <div className="container">
-          <div className="ba-content">
-            <div className="ba-image-content" data-aos="fade-up">
-              <img src={Chanh} alt="Doctor Group" className="ba-image1" />
-            </div>
-
-            <div className="ba-text-content" data-aos="fade-up">
-              <h3 className="ba-title">
-                <span>Tại Sao Chọn CIDO-Dentist?</span>
-              </h3>
-              <p className="ba-description">
-                Khám phá lý do tại sao CIDO-Dentist là lựa chọn tốt nhất cho sức
-                khỏe răng miệng của bạn. Chúng tôi mang đến dịch vụ chuyên
-                nghiệp, tiện lợi và giải pháp cá nhân hóa, giúp bạn có một nụ
-                cười khỏe mạnh và tự tin hơn.
-              </p>
-
-              <p className="ba-checks ba-check-first">
-                <FontAwesomeIcon
-                  icon={faCircleCheck}
-                  style={{ color: "#1E8FFD" }}
-                />{" "}
-                Đội ngũ nha sĩ chuyên nghiệp
-              </p>
-              <p className="ba-checks">
-                <FontAwesomeIcon
-                  icon={faCircleCheck}
-                  style={{ color: "#1E8FFD" }}
-                />{" "}
-                Hỗ trợ tư vấn online
-              </p>
-
-              <p className="ba-checks ba-check-last">
-                <FontAwesomeIcon
-                  icon={faCircleCheck}
-                  style={{ color: "#1E8FFD" }}
-                />{" "}
-                Đăng ký đơn giản, dễ dàng
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       <div className="service">
         <div className="service-container">
