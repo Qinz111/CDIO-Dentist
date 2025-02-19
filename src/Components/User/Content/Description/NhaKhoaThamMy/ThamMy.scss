@@ -28,8 +28,14 @@
     gap: 20px;
     padding: 0 0.2rem;
     .thammy_content_img {
-      width: 70%;
+      flex: 0 0 40%;
+      max-width: 40%;
       img {
+        max-width: 100%;
+      }
+
+      @media screen and (max-width: 992px) {
+        flex: 0 0 auto;
         max-width: 100%;
       }
     }
@@ -73,12 +79,10 @@
   }
 }
 
-.thammy_loiich {
-  margin-top: 4rem;
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: center;
-  //   justify-content: center;
+.thammy_loiich_container {
+  padding-top: 3rem;
+  margin: auto;
+  max-width: 1200px;
   .loiich_title {
     text-align: center;
     color: #1515b4;
@@ -96,25 +100,45 @@
     justify-content: center;
     gap: 20px;
     padding: 0 0.2rem;
+
+    @media screen and (max-width: 992px) {
+      flex-direction: column;
+    }
     .loiich_img {
-      width: 40%;
-      //   left: 0;
+      flex: 0 0 40%;
+      max-width: 40%;
       img {
         max-width: 100%;
+      }
+      @media screen and (max-width: 992px) {
+        flex: 0 0 auto;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          max-width: 80%;
+          height: auto;
+          margin: 0 auto;
+        }
       }
     }
 
     .loiich_content_detail {
+      flex: 0 0 60%;
+      max-width: 60%;
+      @media screen and (max-width: 992px) {
+        flex: 0 0 auto;
+        max-width: 100%;
+      }
       .loiich_info {
         padding: 10px;
         cursor: pointer;
-        transition: all 0.3s ease;
       }
 
       .active-info {
-        color: red;
+        color: #1270fc;
         font-size: large;
-        text-align: center;
         .loiich_info_detail {
           color: black;
         }

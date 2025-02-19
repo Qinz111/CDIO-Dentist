@@ -69,8 +69,10 @@ const ThamMy = () => {
           </div>
         </div>
       </div>
-      <div className="thammy_loiich">
-        <div className="loiich_title">Lợi Ích Khi Làm Thẩm Mỹ Răng</div>
+      <div className="thammy_loiich_container">
+        <div className="loiich_title">
+          Lợi Ích Khi <br /> Làm Thẩm Mỹ Răng
+        </div>
         <div className="loiich_title_detail">
           Thẩm mỹ răng là giải pháp được nhiều khách hàng lựa chọn để cải thiện
           khiếm khuyết răng nướu và lấy lại hàm răng khỏe đẹp, trắng sáng cùng
