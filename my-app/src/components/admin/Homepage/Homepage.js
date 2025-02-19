@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Homepage.scss';
-import { FaUser, FaLock, FaAddressCard } from "react-icons/fa"; 
+import { FaUser, FaLock} from "react-icons/fa"; 
 import { useNavigate } from 'react-router-dom';
 import s1 from "../../../assets/cdio-dentist.png";
 import s2 from "../../../assets/hp2.png";
@@ -13,23 +13,23 @@ const Homepage = () => {
     const [password,setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const GoAhead = async (event) => {
+    
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:3001/api/v1/admin/login', { email, password });
 
-            // If login is successful, save tokens or redirect
-            const { accessToken, refreshToken } = response.data;
+           
+            const { accessToken, refreshToken } = response.data ; // dữ liệu trả về từ API
             
-            // Example: You can store the token in localStorage or Context for use across the app
+          
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
 
-            // Redirect to another page after successful login (for example: dashboard)
+            
             navigate('/Doctors');
         } catch (error) {
-            // Handle error in login
             if (error.response) {
-                setErrorMessage(error.response.data.message);  // Show error message from the backend
+                setErrorMessage(error.response.data.message);  
             } 
         }
     }
@@ -51,7 +51,7 @@ const Homepage = () => {
                             type="email" 
                             placeholder="Nhập Email" 
                             className="login__input"
-                            value={email}
+                            value = {email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
@@ -68,9 +68,9 @@ const Homepage = () => {
                         />
                         <FaLock className="login__icon" />
                     </div>
-                    
-           
+                    <div className="errorMessage">
                     {errorMessage}
+                    </div>
                     <button type="submit" className="login__button">Xác nhận</button>
                 </form>
             </div>

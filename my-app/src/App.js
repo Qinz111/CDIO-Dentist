@@ -12,7 +12,6 @@ const App = () => {
   return (
     <div className="App">
       <Routes>
-        {/* Trang Homepage không có Header */}
         <Route path="/" element={<Homepage />} />
         <Route path="/homepage" element={<Homepage />} />
         <Route element = {<Header />} >         

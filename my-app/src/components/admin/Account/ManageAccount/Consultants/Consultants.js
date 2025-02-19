@@ -89,7 +89,11 @@ function Consultants() {
                 </nav>
             </div>
             {addEmployees === true && (
-                <AddEmployees onClose={() => setAddEmployees(false) } isConsulting ={true} />
+                <AddEmployees 
+                onClose={() => setAddEmployees(false) } 
+                isConsulting ={true}
+                checkRole={true}
+                />
             )}
             {showInformation === true && (
                 <ShowInformation onClose={() => setShowInformation(false)} />

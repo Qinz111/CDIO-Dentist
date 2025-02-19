@@ -3,8 +3,8 @@ import './AddEmployees.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoCheck } from 'react-icons/go';
-
-const AddEmployees = ({ onClose , isConsulting}) => {
+import axios from 'axios';
+const AddEmployees = (props) => {
     // props; truyền dữ liệu từ components cha sang con
     const [image, setImage] = useState(null);
     const notify = () => toast.success("Thêm nhân viên thành công!", {
@@ -36,8 +36,33 @@ const AddEmployees = ({ onClose , isConsulting}) => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append("name", document.getElementById("name").value);
+        formData.append("date_of_birth", document.getElementById("dob").value);
+        formData.append("gender", document.getElementById("gender").value);
+        formData.append("phone", document.getElementById("phone").value);
+        formData.append("email", document.getElementById("email").value);
+        formData.append("position", document.getElementById("role").value);
+        formData.append("start_date", document.getElementById("startDate").value);
+        if(props.isConsulting) {
+            formData.append("password", document.getElementById("pass").value);
+        }
+        if (image) {
+            const fileInput = document.getElementById("image-upload");
+            if (fileInput.files.length > 0) {
+                formData.append("image", fileInput.files[0]);  // Thêm file ảnh vào FormData
+            }
+        }
+        try {
+            const url = props.checkRole 
+            ? 'http://localhost:3001/api/v1/admin/doctor' 
+            : 'http://localhost:3001/api/v1/admin/consultant';
+            const response = await axios.post(url, formData)
+            notify();
+        } catch (error) {
+        }
     };
 // {image ? 'Thay đổi ảnh' : 'Tải ảnh lên'}  kiểm tra xem ảnh có giá trị hay không , có thì thay đổi ảnh
 //{image && <img src={image} alt="Preview" className="image-preview" />}
@@ -85,16 +110,16 @@ const AddEmployees = ({ onClose , isConsulting}) => {
                                 <p>EMAIL: <input id='email' type="email" placeholder='Nhập email' required /></p>
                                 <p>CHỨC VỤ: <input id='role' type="text" placeholder='Nhập chức vụ' required /></p>
                                 <p>NGÀY BẮT ĐẦU LÀM VIỆC: <input id='startDate' type="date" required /></p>
-                                {isConsulting && (
+                                {props.isConsulting && (
                                     <p>Password: <input id='pass' type="text" placeholder='Tạo mật khẩu cho nhân viên' required /></p>
                                 )}
                             </div>
                         </div>
                         <div className="AddEmployees_content_bottom_button">
-                            <button type="button" onClick={onClose} className="cancel-btn">
+                            <button type="button" onClick={props.onClose} className="cancel-btn">
                                 Hủy
                             </button>
-                            <button type="submit" onClick={notify}  className="submit-btn"> Xác nhận 
+                            <button type="submit"  className="submit-btn"> Xác nhận 
                                 <ToastContainer /> 
                             </button>
                         </div>
