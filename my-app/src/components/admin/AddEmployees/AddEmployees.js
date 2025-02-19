@@ -38,30 +38,37 @@ const AddEmployees = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("name", document.getElementById("name").value);
-        formData.append("date_of_birth", document.getElementById("dob").value);
-        formData.append("gender", document.getElementById("gender").value);
-        formData.append("phone", document.getElementById("phone").value);
-        formData.append("email", document.getElementById("email").value);
-        formData.append("position", document.getElementById("role").value);
-        formData.append("start_date", document.getElementById("startDate").value);
-        if(props.isConsulting) {
-            formData.append("password", document.getElementById("pass").value);
+        const token = localStorage.getItem('accessToken');
+      
+        const newEmployees = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            location: document.getElementById('location').value,
+            dob: document.getElementById('dob').value,
+            male: document.getElementById('male').value === 'Nam' ? true : false,
         }
-        if (image) {
-            const fileInput = document.getElementById("image-upload");
-            if (fileInput.files.length > 0) {
-                formData.append("image", fileInput.files[0]);  // Thêm file ảnh vào FormData
-            }
+        if(props.isConsulting === true) {
+            newEmployees.password = document.getElementById('password').value
+        } else {
+            newEmployees.experience = document.getElementById('experience').value
         }
+        console.log(newEmployees);
         try {
             const url = props.checkRole 
-            ? 'http://localhost:3001/api/v1/admin/doctor' 
-            : 'http://localhost:3001/api/v1/admin/consultant';
-            const response = await axios.post(url, formData)
-            notify();
+            ? 'http://localhost:3001/api/v1/admin/consultant' 
+            : 'http://localhost:3001/api/v1/admin/doctor';
+            const response = await axios.post(url, newEmployees, {
+                headers: {
+                    "Authorization": `Bearer ${token}`,  // Thêm token vào headers
+                    "Content-Type": "application/json" // Quan trọng khi gửi FormData
+                  },
+            });
+            notify(response.data.message);
         } catch (error) {
+            if(error.response) {
+                toast.error(error.response.data.message);
+            }
         }
     };
 // {image ? 'Thay đổi ảnh' : 'Tải ảnh lên'}  kiểm tra xem ảnh có giá trị hay không , có thì thay đổi ảnh
@@ -100,7 +107,7 @@ const AddEmployees = (props) => {
                                 <p>HỌ TÊN: <input id='name' type="text" placeholder='Nhập họ tên' required /></p>
                                 <p>NGÀY SINH: <input id='dob' type="date" placeholder='Nhập ngày sinh' required /></p>
                                 <p>GIỚI TÍNH: 
-                                    <select id='gender' required>
+                                    <select id='male' required>
                                         <option value="">Chọn giới tính</option>
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
@@ -108,10 +115,12 @@ const AddEmployees = (props) => {
                                 </p>
                                 <p>SĐT: <input id='phone' type="tel" placeholder='Nhập số điện thoại' required /></p>
                                 <p>EMAIL: <input id='email' type="email" placeholder='Nhập email' required /></p>
-                                <p>CHỨC VỤ: <input id='role' type="text" placeholder='Nhập chức vụ' required /></p>
-                                <p>NGÀY BẮT ĐẦU LÀM VIỆC: <input id='startDate' type="date" required /></p>
-                                {props.isConsulting && (
-                                    <p>Password: <input id='pass' type="text" placeholder='Tạo mật khẩu cho nhân viên' required /></p>
+                                <p>ĐỊA CHỈ: <input id='location' type="text" placeholder='Nhập chức vụ' required /></p>
+                                {props.isConsulting===true && (
+                                    <p>Password: <input id='password' type="text" placeholder='Tạo mật khẩu cho nhân viên' required /></p>
+                                )}
+                                  {props.isConsulting===false && (
+                                    <p>Kinh nghiệm: <input id='experience' type="text" placeholder='Nhập số năm kinh nghiệm' required /></p>
                                 )}
                             </div>
                         </div>

@@ -12,20 +12,17 @@ const Homepage = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const storeTokenData = (accessToken,refreshToken) => {
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+    }
+    // Xử lý đăng nhập
     const GoAhead = async (event) => {
-    
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:3001/api/v1/admin/login', { email, password });
-
-           
             const { accessToken, refreshToken } = response.data ; // dữ liệu trả về từ API
-            
-          
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', refreshToken);
-
-            
+            storeTokenData(accessToken, refreshToken);
             navigate('/Doctors');
         } catch (error) {
             if (error.response) {
@@ -33,6 +30,16 @@ const Homepage = () => {
             } 
         }
     }
+    // Tự RefreshAccessToken
+    // const refreshAccessToken = async () => {
+    //   try {
+    //     const refreshToken = localStorage.getItem('refreshToken');
+    //     const response = await axios.post('http://localhost:3001/api/v1/admin/refresh', { refreshToken });
+    //     const {accessToken} = response.data;
+    //     storeTokenData(accessToken, refreshToken);
+    //   } catch (error) {    
+    //   }
+    // } 
     return (
         <div className="login">
             <div className="home-page">
