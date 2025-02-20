@@ -1,0 +1,258 @@
+.calendar-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1300px;
+  margin: auto;
+  gap: 20px;
+
+  .user-calendar-container {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .dentist-calendar {
+    @media (max-width: 1000px) {
+      display: none;
+    }
+    width: 300px;
+    text-align: center;
+    .dentist-image {
+      margin-bottom: 20px;
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+    .dentist-status {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+      .free {
+        background-color: green;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      .busy {
+        background-color: red;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+// Styles cho modal Calendar to hơn
+.modal-xl {
+  max-width: 90% !important;
+  margin: 1.75rem auto;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .calendar-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1300px;
+    margin: auto;
+    gap: 20px;
+
+    .user-calendar-container {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    .dentist-calendar {
+      width: 300px;
+      text-align: center;
+      .dentist-image {
+        margin-bottom: 20px;
+        img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+      .dentist-status {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+        .free {
+          background-color: green;
+          color: white;
+          padding: 5px 15px;
+          border-radius: 5px;
+          font-size: 16px;
+        }
+
+        .busy {
+          background-color: red;
+          color: white;
+          padding: 5px 15px;
+          border-radius: 5px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+// Large devices (desktops, 992px to 1199px)
+@media (min-width: 992px) and (max-width: 1199px) {
+  .calendar-container {
+    padding: 15px;
+    max-width: 960px;
+    gap: 15px;
+
+    .user-calendar-container {
+      margin-right: 15px;
+    }
+
+    .dentist-calendar {
+      width: 250px;
+
+      .dentist-status {
+        .free,
+        .busy {
+          padding: 4px 12px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+// Medium devices (tablets, 768px to 991px)
+@media (min-width: 768px) and (max-width: 991px) {
+  .calendar-container {
+    padding: 10px;
+    max-width: 720px;
+    gap: 10px;
+    flex-direction: column;
+
+    .user-calendar-container {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+
+    .dentist-calendar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .dentist-image {
+        margin-bottom: 0;
+        width: 200px;
+        img {
+          width: 100%;
+        }
+      }
+
+      .dentist-status {
+        flex: 1;
+        flex-direction: column;
+        gap: 10px;
+
+        .free,
+        .busy {
+          padding: 8px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px to 767px)
+@media (min-width: 576px) and (max-width: 767px) {
+  .calendar-container {
+    padding: 10px;
+    max-width: 540px;
+    flex-direction: column;
+
+    .user-calendar-container {
+      margin-right: 0;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .dentist-calendar {
+      width: 100%;
+
+      .dentist-image {
+        max-width: 180px;
+        margin: 0 auto 15px;
+      }
+
+      .dentist-status {
+        .free,
+        .busy {
+          padding: 4px 10px;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+// Extra small devices (phones, less than 576px)
+@media (max-width: 575px) {
+  .calendar-container {
+    padding: 5px;
+    flex-direction: column;
+
+    .user-calendar-container {
+      margin-right: 0;
+      margin-bottom: 10px;
+      font-size: 12px;
+
+      .fc {
+        .fc-toolbar {
+          flex-direction: column;
+          gap: 10px;
+
+          .fc-toolbar-chunk {
+            display: flex;
+            justify-content: center;
+          }
+        }
+
+        .fc-view {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .dentist-calendar {
+      width: 100%;
+
+      .dentist-image {
+        max-width: 150px;
+        margin: 0 auto 10px;
+      }
+
+      .dentist-status {
+        flex-direction: column;
+        gap: 8px;
+
+        .free,
+        .busy {
+          padding: 3px 8px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

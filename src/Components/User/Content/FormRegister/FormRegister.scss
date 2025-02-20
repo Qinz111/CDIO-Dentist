@@ -1,0 +1,269 @@
+.modal {
+  .container {
+    .container-box {
+      padding: 20px;
+      .box-header {
+        text-align: center;
+        margin-bottom: 20px;
+
+        .header-logo {
+          box-shadow: 0 1px rgba(0, 0, 0, 0.1);
+          img {
+            max-width: 150px;
+            margin-bottom: 15px;
+          }
+          margin-bottom: 5px;
+        }
+
+        .header-note {
+          font-size: 20px;
+          color: #333;
+          margin-bottom: 10px;
+          font-weight: bold;
+        }
+
+        .header-call {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          font-weight: bold;
+          margin: 10px 0;
+          background-color: red;
+          padding: 10px;
+          width: 100%;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+
+          img {
+            width: 30px;
+            margin-right: 10px;
+          }
+
+          &:hover {
+            background: #f50909;
+          }
+        }
+      }
+
+      .box-content {
+        .input-phone {
+          margin-bottom: 15px;
+
+          input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+
+            &:focus {
+              outline: none;
+              border-color: #0056a2;
+            }
+          }
+        }
+
+        .btn-send {
+          input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #0056a2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+
+            &:hover {
+              background: #004080;
+            }
+          }
+        }
+      }
+
+      .box-close {
+        cursor: pointer;
+        position: absolute;
+        top: -24px;
+        right: -16px;
+
+        .close-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          font-size: 25px;
+          font-weight: 700;
+          transform-origin: center;
+
+          &:hover {
+            animation: spin 0.5s linear infinite;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .modal {
+    .container {
+      max-width: 500px;
+    }
+  }
+}
+
+// Large devices (desktops, 992px to 1199px)
+@media (min-width: 992px) and (max-width: 1199px) {
+  .modal {
+    .container {
+      max-width: 450px;
+
+      .container-box {
+        .box-header {
+          .header-note {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Medium devices (tablets, 768px to 991px)
+@media (min-width: 768px) and (max-width: 991px) {
+  .modal {
+    .container {
+      max-width: 400px;
+
+      .container-box {
+        padding: 15px;
+
+        .box-header {
+          .header-logo img {
+            max-width: 130px;
+          }
+
+          .header-note {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px to 767px)
+@media (min-width: 576px) and (max-width: 767px) {
+  .modal {
+    .container {
+      max-width: 350px;
+
+      .container-box {
+        padding: 12px;
+
+        .box-header {
+          .header-logo img {
+            max-width: 120px;
+          }
+
+          .header-note {
+            font-size: 15px;
+          }
+
+          .header-call {
+            font-size: 14px;
+            img {
+              width: 25px;
+            }
+          }
+        }
+
+        .box-content {
+          .input-phone input {
+            padding: 8px;
+            font-size: 14px;
+          }
+
+          .btn-send input[type="submit"] {
+            padding: 10px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Extra small devices (phones, less than 576px)
+@media (max-width: 575px) {
+  .modal {
+    .container {
+      max-width: 300px;
+      margin: 0 10px;
+
+      .container-box {
+        padding: 10px;
+
+        .box-header {
+          .header-logo img {
+            max-width: 100px;
+          }
+
+          .header-note {
+            font-size: 14px;
+          }
+
+          .header-call {
+            font-size: 13px;
+            padding: 8px;
+            img {
+              width: 20px;
+            }
+          }
+        }
+
+        .box-content {
+          .input-phone input {
+            padding: 6px;
+            font-size: 13px;
+          }
+
+          .btn-send input[type="submit"] {
+            padding: 8px;
+            font-size: 13px;
+          }
+        }
+
+        .box-close .close-icon {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-text {
+  color: red;
+}
+
+.form-select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

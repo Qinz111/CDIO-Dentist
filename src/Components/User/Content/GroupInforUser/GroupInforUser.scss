@@ -1,0 +1,341 @@
+.group-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #fff;
+  .group-info-container {
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    gap: 30px;
+    position: relative;
+
+    .group-title {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #0056a2;
+      font-size: 24px;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e0e0;
+      width: calc(100% - 40px);
+    }
+
+    .group-info-container-left {
+      flex: 1;
+      padding-top: 70px;
+
+      .info-grid {
+        gap: 15px;
+      }
+    }
+
+    .group-info-container-right {
+      width: 400px;
+      padding-top: 70px;
+
+      img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .user-list-container {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+    h3 {
+      color: #333;
+      font-size: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .user-list {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding: 10px;
+      justify-content: space-between;
+
+      &::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+
+        &:hover {
+          background: #555;
+        }
+      }
+
+      .user-item {
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        padding: 10px;
+        text-align: center;
+        display: block;
+        box-shadow: 0px 0px 30px var(--web-color);
+        border: 0.2px solid #eee;
+        height: auto;
+        width: 150px;
+
+        &:hover {
+          background: #f0f0f0;
+          transform: translateY(-2px);
+        }
+
+        &.active {
+          background: #e3f2fd;
+          border: 1px solid #0056a2;
+        }
+
+        .user-avatar {
+          width: 40px;
+          height: 40px;
+          background: #0056a2;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 15px;
+        }
+
+        .user-info {
+          p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+          }
+
+          img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 10px 0;
+          }
+        }
+
+        .detail-info {
+          margin-top: 10px;
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) {
+//   .group-info-wrapper {
+//     .group-info-container {
+//       max-width: 1200px;
+//       margin: 0 auto;
+//     }
+//   }
+// }
+
+// Large devices (desktops, 992px to 1199px)
+@media (min-width: 992px) and (max-width: 1199px) {
+  .group-info-wrapper {
+    .group-info-container {
+      gap: 20px;
+
+      .group-info-container-right {
+        width: 350px;
+
+        img {
+          height: 350px;
+        }
+      }
+    }
+
+    .user-list-container {
+      .user-list {
+        .user-item {
+          width: 140px;
+
+          .user-info {
+            img {
+              height: 120px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Medium devices (tablets, 768px to 991px)
+@media (min-width: 768px) and (max-width: 991px) {
+  .group-info-wrapper {
+    .group-info-container {
+      flex-direction: column;
+      gap: 15px;
+
+      .group-title {
+        font-size: 22px;
+      }
+
+      .group-info-container-left,
+      .group-info-container-right {
+        width: 100%;
+        padding-top: 60px;
+      }
+
+      .group-info-container-right img {
+        height: 300px;
+      }
+    }
+
+    .user-list-container {
+      h3 {
+        font-size: 18px;
+      }
+
+      .user-list {
+        .user-item {
+          width: 130px;
+
+          .user-info {
+            img {
+              height: 110px;
+            }
+
+            p {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Small devices (landscape phones, 576px to 767px)
+@media (min-width: 576px) and (max-width: 767px) {
+  .group-info-wrapper {
+    .group-info-container {
+      padding: 15px;
+      flex-direction: column;
+
+      .group-title {
+        font-size: 20px;
+        top: 15px;
+        left: 15px;
+      }
+
+      .group-info-container-left,
+      .group-info-container-right {
+        width: 100%;
+        padding-top: 50px;
+      }
+
+      .group-info-container-right img {
+        height: 250px;
+      }
+    }
+
+    .user-list-container {
+      padding: 15px;
+
+      h3 {
+        font-size: 16px;
+      }
+
+      .user-list {
+        gap: 10px;
+
+        .user-item {
+          width: 120px;
+
+          .user-info {
+            img {
+              height: 100px;
+            }
+
+            p {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Extra small devices (phones, less than 576px)
+@media (max-width: 575px) {
+  .group-info-wrapper {
+    .group-info-container {
+      padding: 10px;
+      flex-direction: column;
+
+      .group-title {
+        font-size: 18px;
+        top: 10px;
+        left: 10px;
+      }
+
+      .group-info-container-left,
+      .group-info-container-right {
+        width: 100%;
+        padding-top: 45px;
+      }
+
+      .group-info-container-right img {
+        height: 200px;
+      }
+    }
+
+    .user-list-container {
+      padding: 10px;
+
+      h3 {
+        font-size: 15px;
+      }
+
+      .user-list {
+        gap: 8px;
+
+        .user-item {
+          width: 110px;
+          padding: 8px;
+
+          .user-info {
+            img {
+              height: 90px;
+            }
+
+            p {
+              font-size: 11px;
+            }
+          }
+
+          .detail-info p {
+            font-size: 11px;
+          }
+        }
+      }
+    }
+  }
+}
