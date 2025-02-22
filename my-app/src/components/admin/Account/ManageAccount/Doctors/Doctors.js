@@ -1,30 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Doctors.scss';
 import { FaUserPlus } from "react-icons/fa";
 import AddEmployees from "../../../AddEmployees/AddEmployees";
 import ShowInformation from "../../../ShowInformation/ShowInformation";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import axios from "axios";
+import Adjust from "../../../ModelAdjust/Adjust";
 function Doctors() {
-    const doctorsList = [
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-      {name: "ád Fernandes", Gender: "Male", Position: "First"},
-
-      
-    ];
-    
+    const [doctorsList, setDoctorsList] = useState([]);   
     const [addEmployees, setAddEmployees] = useState(false);
     const [showInformation, setShowInformation] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const doctorsPerPage = 6; // Set this to 6
-
+    const [selectedEmployeeId, setSelectedEmployeeId] = useState(null);
     // Calculate the doctors to display on the current page
     const indexOfLastDoctor = currentPage * doctorsPerPage;
     const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
@@ -36,7 +24,21 @@ function Doctors() {
     const handleClick = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+    // call Api
+    const getDoctors = async () => {
+        try {
+            const token = localStorage.getItem('accessToken');
+            const response = await axios.get("http://localhost:3001/api/v1/admin/doctors", {
+                headers: { "Authorization": `Bearer ${token}` },
+            });
+            setDoctorsList(response.data); // Cập nhật danh sách từ API
+        } catch (error) {
 
+        }
+    };
+    useEffect(() => {
+        getDoctors();
+    }, []);
     return (
         <div className="Doctors">
             <div className="Doctors_header">
@@ -57,6 +59,7 @@ function Doctors() {
                                 <th className="title" scope="col">Họ và tên</th>
                                 <th className="title" scope="col">Giới tính</th>
                                 <th className="title" scope="col">Vị trí</th>
+                                <th className="title" scope="col">Số điện thoại</th>
                                 <th className="title" scope="col"></th>
                             </tr>
                         </thead>
@@ -65,9 +68,14 @@ function Doctors() {
                                 <tr >
                                     <th scope="row">{indexOfFirstDoctor + index + 1}</th>
                                     <td>{doctor.name}</td>
-                                    <td>{doctor.Gender}</td>
-                                    <td>{doctor.Position}</td>
-                                    <td><button className="check_view" onClick={() => setShowInformation(true)}>Chi tiết</button></td>
+                                    <td>{doctor.male ? "Nam" : "Nữ"}</td>
+                                    <td>{doctor.location}</td>
+                                    <td>{doctor.phone}</td>
+                                    <td><button className="check_view" onClick={() => { 
+                                        setSelectedEmployeeId(doctor.id); 
+                                        setShowInformation(true);
+                                    }                                           
+                                    } >Chi tiết</button></td>
                                 </tr>
                             ))}
                         </tbody>
@@ -99,8 +107,12 @@ function Doctors() {
                 />
             )}
             {showInformation === true && (
-                <ShowInformation onClose={() => setShowInformation(false)} />
+                <ShowInformation onClose={() => setShowInformation(false)}
+                isConsulting={false}
+                employeeId={selectedEmployeeId} />
             )}
+            {/* <Adjust  isConsulting = {true}
+                     employeeId={selectedEmployeeId}    />   */}
         </div>
     );
 }

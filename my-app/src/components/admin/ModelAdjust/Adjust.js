@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Adjust.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoCheck } from 'react-icons/go';
+import axios from 'axios';
 
-const Adjust = ({ onClose }) => {
+const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
     const [image, setImage] = useState(null);
-    const [name, setName] = useState('Bruno Fernandes'); // Initial name value
-    const [PhoneNumber, setPhoneNumber] = useState('0981633043');
+    const [employee, setEmployee] = useState(null);
+
     const notify = () => toast.success("Cập nhật thành công!", {
-        icon: <GoCheck style={{ color: '#0C2D79', fontSize: '24px'}} />,
+        icon: <GoCheck style={{ color: '#0C2D79', fontSize: '24px' }} />,
         position: "top-right",
         autoClose: 1200,
         hideProgressBar: false,
@@ -18,21 +19,75 @@ const Adjust = ({ onClose }) => {
         draggable: false,
         theme: "light",
         style: {
-            color: '#0C2D79',        // Đổi màu chữ thành xanh
-            fontWeight: 'bold',      // Làm chữ đậm hơn
+            color: '#0C2D79',
+            fontWeight: 'bold',
         }
     });
-    const getInput = ()=>{
-        const name = document.getElementById('name').value;
-        const dob = document.getElementById('dob').value;
-        const password = document.getElementById('pass').value;
-        const gender = document.getElementById('gender').value;
-        const phone = document.getElementById('phone').value;
-        const email = document.getElementById('email').value;
-        const role = document.getElementById('role').value;
-        const startDate = document.getElementById('startDate').value;
-        console.log(name, dob);
+    const token = localStorage.getItem("accessToken");
+    const url = isAdjustConsulting
+        ? `http://localhost:3001/api/v1/admin/consultant/${adjustEmployeeId}`
+        : `http://localhost:3001/api/v1/admin/doctor/${adjustEmployeeId}`;
+    useEffect(() => {
+        const fetchEmployee = async () => {
+            try {
+                const response = await axios.get(url, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                setEmployee(response.data[0]);
+            } catch (error) {
+                if (error.response) {
+                    toast.error(error.response.data.message);
+                }
+            }
+        };
+        fetchEmployee();
+    }, [adjustEmployeeId, isAdjustConsulting]);
+
+    if (!employee) {
+        return <p>Đang tải dữ liệu...</p>;
     }
+    // API update
+    const adjustEmployee = async () => {
+        const adjustedEmployees = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            location: document.getElementById('location').value,
+            dob: document.getElementById('dob').value,
+            male: document.getElementById('male').value === 'Nam' ? true : false,
+        }
+        if(isAdjustConsulting === false) {
+            adjustedEmployees.experience = document.getElementById('experience').value
+        }
+        try {
+            const response = await axios.put(url,adjustedEmployees, {
+                headers: {
+                    "Authorization": `Bearer ${token}`,  // Thêm token vào headers
+                    "Content-Type": "application/json" // Quan trọng khi gửi FormData
+                  },
+            });
+            notify(response.data.message);
+        } catch (error) {
+            if (error.response) {
+                toast.error(error.response.data.message);
+            }
+        }
+    }
+    //onchange
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        
+        let newValue = value;
+        if (id === "male") {
+            newValue = value === "Nam"; 
+        }
+    
+        setEmployee((prev) => ({
+            ...prev,
+            [id]: newValue
+        }));
+    };
+
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -43,27 +98,24 @@ const Adjust = ({ onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        notify();
-        getInput();
+        adjustEmployee();
     };
 
     return (
-        <div className="Adjust-overlay"> 
-            <div className="Adjust">           
-                <div className="Adjust_header">
-                    CẬP NHẬT NHÂN VIÊN
-                </div>
+        <div className="Adjust-overlay">
+            <div className="Adjust">
+                <div className="Adjust_header">CẬP NHẬT NHÂN VIÊN</div>
                 <div className="Adjust_content">
                     <div className="Adjust_content_top">
                         <div className="image-upload-section">
-                            <input 
-                                type="file" 
-                                accept="image/*" 
-                                id="image-upload" 
+                            <input
+                                type="file"
+                                accept="image/*"
+                                id="image-upload"
                                 onChange={handleImageChange}
                             />
                             <label htmlFor="image-upload" className="upload-label">
-                                {image ? 'Thay đổi ảnh' : 'Tải ảnh lên'} 
+                                {image ? 'Thay đổi ảnh' : 'Tải ảnh lên'}
                             </label>
                             {image && <img src={image} alt="Preview" className="image-preview" />}
                         </div>
@@ -71,34 +123,50 @@ const Adjust = ({ onClose }) => {
                     <form onSubmit={handleSubmit}>
                         <div className="Adjust_content_bottom">
                             <div className="Adjust_content_bottom_grid">
-                            <p>HỌ TÊN: <input id='name' 
-                                              type="text" 
-                                              placeholder='Nhập họ tên' 
-                                              value={name}
-                                              onChange={(e) => setName(e.target.value)}
-                                              required /></p>
-                                <p>NGÀY SINH: <input id='dob' type="date" placeholder='Nhập ngày sinh' required /></p>
-                                <p>GIỚI TÍNH: 
-                                    <select id='gender' required>
+                                <p>HỌ TÊN:
+                                    <input id='name' type="text" placeholder='Nhập họ tên'
+                                        value={employee.name || ''}
+                                        onChange={handleInputChange} required />
+                                </p>
+                                <p>NGÀY SINH:
+                                    <input id='dob' type="date" placeholder='Nhập ngày sinh'
+                                        value={employee.dob ? new Date(employee.dob).toISOString().split("T")[0] : ""}
+                                        onChange={handleInputChange} required />
+                                </p>
+                                <p>GIỚI TÍNH:
+                                    <select id='male' value={employee.male ? "Nam" : "Nữ"} onChange={handleInputChange} required>
                                         <option value="">Chọn giới tính</option>
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
                                     </select>
                                 </p>
-                                <p>Password: <input id='pass' type="text" placeholder='Tạo mật khẩu cho nhân viên' required /></p>
-                                <p>SĐT: <input id='phone' type="tel" placeholder='Nhập số điện thoại' required /></p>
-                                <p>EMAIL: <input id='email' type="email" placeholder='Nhập email' required /></p>
-                                <p>CHỨC VỤ: <input id='role' type="text" placeholder='Nhập chức vụ' required /></p>
-                                <p>NGÀY BẮT ĐẦU LÀM VIỆC: <input id='startDate' type="date" required /></p>
+                                <p>SĐT:
+                                    <input id='phone' type="tel" placeholder='Nhập số điện thoại'
+                                        value={employee.phone || ''}
+                                        onChange={handleInputChange} required />
+                                </p>
+                                <p>EMAIL:
+                                    <input id='email' type="email" placeholder='Nhập email'
+                                        value={employee.email || ''}
+                                        onChange={handleInputChange} required />
+                                </p>
+                                <p>ĐỊA CHỈ:
+                                    <input id='location' type="text" placeholder='Nhập địa chỉ'
+                                        value={employee.location || ''}
+                                        onChange={handleInputChange} required />
+                                </p>
+                                {!isAdjustConsulting && (
+                                    <p>KINH NGHIỆM:
+                                        <input id='experience' type="text" placeholder='Nhập kinh nghiệm'
+                                            value={employee.experience || ''}
+                                            onChange={handleInputChange} required />
+                                    </p>
+                                )}
                             </div>
                         </div>
                         <div className="Adjust_content_bottom_button">
-                            <button type="button" onClick={onClose} className="cancel-btn">
-                                Hủy
-                            </button>
-                            <button type="submit" className="submit-btn"> Cập nhật 
-                                <ToastContainer /> 
-                            </button>
+                            <button type="button" onClick={onClose} className="cancel-btn">Hủy</button>
+                            <button type="submit" className="submit-btn">Cập nhật <ToastContainer /></button>
                         </div>
                     </form>
                 </div>
@@ -114,6 +182,6 @@ const Adjust = ({ onClose }) => {
             />
         </div>
     );
-};      
+};
 
 export default Adjust;

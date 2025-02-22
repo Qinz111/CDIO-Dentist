@@ -53,7 +53,6 @@ const AddEmployees = (props) => {
         } else {
             newEmployees.experience = document.getElementById('experience').value
         }
-        console.log(newEmployees);
         try {
             const url = props.checkRole 
             ? 'http://localhost:3001/api/v1/admin/consultant' 
