@@ -32,18 +32,32 @@ const Content = () => {
 
         <div className="fixed-buttons">
           <div className="btn-image">
-            <div className="btn-dk">
-              <button onClick={() => setShowFormRegister(true)}>
-                <img src="/images/dk-btn.png" alt="" />
-              </button>
+            <div className="hotline-phone-ring-wrap">
+              <div className="hotline-phone-ring">
+                <div className="hotline-phone-ring-circle"></div>
+                <div className="hotline-phone-ring-circle-fill"></div>
+                <div className="hotline-phone-ring-img-circle">
+                  <a
+                    href="tel: 123456789"
+                    className="pps-btn-img"
+                    rel="nofollow"
+                  >
+                    <img src="/images/btn-phone.png" alt="Gọi ngay" />
+                  </a>
+                </div>
+              </div>
             </div>
-
-            <div className="btn-phone">
-              <a href="tel:1900123456">
-                <button>
-                  <img src="/images/phone-btn.png" alt="" />
-                </button>
-              </a>
+            <div className="hotline-register-ring-wrap">
+              <div className="hotline-register-ring">
+                <div className="hotline-register-ring-circle"></div>
+                <div className="hotline-register-ring-circle-fill"></div>
+                <div
+                  className="hotline-register-ring-img-circle"
+                  onClick={() => setShowFormRegister(true)}
+                >
+                  <img src="/images/dk-btn.png" alt="Register" />
+                </div>
+              </div>
             </div>
           </div>
         </div>

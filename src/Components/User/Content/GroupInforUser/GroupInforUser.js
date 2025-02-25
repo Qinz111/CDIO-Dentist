@@ -4,17 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { getAllDentist } from "../../../../services/userService";
 
 const GroupInforUser = (props) => {
-  const getListDentist = async () => {
-    try {
-      let res = await getAllDentist();
-      // console.log(res.data.doctors);
-      return res;
-    } catch (error) {
-      console.log("loi ", error);
-    }
-  };
-
-  getListDentist();
   const userList = [
     {
       id: 1,
@@ -299,12 +288,12 @@ const GroupInforUser = (props) => {
             <p>Email: {selectedUser.email}</p>
             <p>Địa chỉ: {selectedUser.address}</p>
           </div>
-          <div className="btn-dk">
+          <div className="btn-dk_schedule">
             <button
-              className="btn-dk"
+              className="btn-dk_"
               onClick={() => handleSelectDentist(selectedUser)}
             >
-              DK
+              Xem lịch làm việc
             </button>
           </div>
         </div>
@@ -359,8 +348,8 @@ export default GroupInforUser;
 //       try {
 //         let res = await getAllDentist();
 //         if (res.data?.doctors) {
-//           setUserList(res.data.doctors);
-//           setSelectedUser(res.data.doctors[0]);
+//           setUserList(res.data.doctors); //nếu có dentist thì sẽ lưu vào userList
+//           setSelectedUser(res.data.doctors[0]); //gán bs đầu tiên vào state ni
 //         }
 //       } catch (error) {
 //         console.error("Lỗi khi lấy danh sách nha sĩ: ", error);

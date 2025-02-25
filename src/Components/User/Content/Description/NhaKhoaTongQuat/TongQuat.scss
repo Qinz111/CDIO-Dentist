@@ -1,0 +1,57 @@
+.tongquat_container {
+  padding-top: 80px;
+
+  .tongquat_title {
+    text-align: center;
+    color: #0f6ffd;
+    font-size: x-large;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .tongquat_detail {
+    padding: 20px 20px;
+    font-weight: 500;
+    a {
+      color: #1515b4;
+      text-decoration: none;
+    }
+  }
+  .tongquat_description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 100%;
+  }
+  .tongquat_img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+
+    img {
+      max-width: 80%;
+      height: auto;
+    }
+  }
+
+  .text-small-title {
+    color: #0d6efd;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  h3 {
+    padding: 10px;
+    color: #0d6efd;
+  }
+
+  .quytrinh_detail {
+    li {
+      padding: 10px;
+    }
+  }
+}

@@ -18,6 +18,7 @@ const FormRegister = (props) => {
     time: "",
     date: "",
   });
+
   const [validated, setValidated] = useState({ name: false, phone: false });
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
