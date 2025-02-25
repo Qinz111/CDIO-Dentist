@@ -19,14 +19,17 @@ const TongQuat = () => {
               className="text-xl font-bold mb-4 tongquat_detail"
               data-aos="fade-up"
             >
-              Để có một hàm răng khỏe đẹp giúp chúng ta tự tin và thoải mái hơn
-              trong mọi hoạt động của cuộc sống. Vì vậy, việc thăm khám nha khoa
-              thường xuyên là rất quan trọng và cần được chú ý. Điều này giúp
-              phát hiện sớm các vấn đề hoặc bệnh lý về răng miệng. Để đảm bảo
-              sức khỏe răng miệng tốt, bạn nên thăm khám nha khoa tổng quát định
-              kỳ ít nhất 6 tháng một lần. Vậy, bạn đã khám nha khoa tổng quát
-              chưa? Hãy đến <a className="text-blue">CDIO DENTIST</a> để trãi
-              nghiệm ngay nhé!
+              <div data-aos="fade-up">
+                Để có một hàm răng khỏe đẹp giúp chúng ta tự tin và thoải mái
+                hơn trong mọi hoạt động của cuộc sống. Vì vậy, việc thăm khám
+                nha khoa thường xuyên là rất quan trọng và cần được chú ý. Điều
+                này giúp phát hiện sớm các vấn đề hoặc bệnh lý về răng miệng. Để
+                đảm bảo sức khỏe răng miệng tốt, bạn nên thăm khám nha khoa tổng
+                quát định kỳ ít nhất 6 tháng một lần. Vậy, bạn đã khám nha khoa
+                tổng quát chưa? Hãy đến{" "}
+                <a className="text-blue">CDIO DENTIST</a> để trãi nghiệm ngay
+                nhé!
+              </div>
             </div>
             <h3
               className="text-lg font-semibold mb-2 text-small-title"
@@ -39,16 +42,19 @@ const TongQuat = () => {
               trung vào việc chẩn đoán, điều trị và phòng ngừa các vấn đề liên
               quan đến răng miệng và đưa ra phương pháp điều trị phù hợp và kịp
               thời.
-              <div className="tongquat_img" data-aos="fade-up">
+              <div className="tongquat_img">
                 <img src={tongquat} alt="" />
               </div>
-              Thường xuyên đi khám nha khoa tổng quát là cách tốt nhất để bảo vệ
-              và ngăn ngừa các bệnh về răng miệng, giúp có một hàm răng khỏe
-              mạnh, ăn nhai dễ dàng và thẩm mỹ. Giúp bạn tự tin và gặp nhiều
-              thuận lợi trong cuộc sống. Việc thăm khám nha khoa tổng quát nên
-              được thực hiện định kỳ, ít nhất là 6 tháng một lần để có thể can
-              thiệp kịp thời và hiệu quả. Nếu không chữa trị kịp thời, các bệnh
-              lý về răng miệng có thể dẫn đến việc mất răng sớm.
+              <div data-aos="fade-up">
+                Thường xuyên đi khám nha khoa tổng quát là cách tốt nhất để bảo
+                vệ và ngăn ngừa các bệnh về răng miệng, giúp có một hàm răng
+                khỏe mạnh, ăn nhai dễ dàng và thẩm mỹ. Giúp bạn tự tin và gặp
+                nhiều thuận lợi trong cuộc sống. Việc thăm khám nha khoa tổng
+                quát nên được thực hiện định kỳ, ít nhất là 6 tháng một lần để
+                có thể can thiệp kịp thời và hiệu quả. Nếu không chữa trị kịp
+                thời, các bệnh lý về răng miệng có thể dẫn đến việc mất răng
+                sớm.
+              </div>
             </div>
             <h3 className="text-lg font-semibold mb-2" data-aos="fade-up">
               Dịch vụ nha khoa tổng quát bao gồm:
