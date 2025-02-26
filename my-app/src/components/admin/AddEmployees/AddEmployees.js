@@ -21,23 +21,7 @@ const AddEmployees = (props) => {
             fontWeight: 'bold',      // Làm chữ đậm hơn
         }
     });
-
-//event.target.files[0]: Lấy file đầu tiên mà người dùng chọn.
-
-// URL.createObjectURL(file): Tạo URL tạm thời để có thể hiển thị ảnh trong trình duyệt.
-
-// setImage(imageUrl): Cập nhật state image với URL của ảnh.
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setImage(imageUrl);
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const addEmployeeAPI = async () => {
         const token = localStorage.getItem('accessToken');
       
         const newEmployees = {
@@ -64,11 +48,30 @@ const AddEmployees = (props) => {
                   },
             });
             notify(response.data.message);
+            props.onClose();
         } catch (error) {
             if(error.response) {
                 toast.error(error.response.data.message);
             }
         }
+    }
+//event.target.files[0]: Lấy file đầu tiên mà người dùng chọn.
+
+// URL.createObjectURL(file): Tạo URL tạm thời để có thể hiển thị ảnh trong trình duyệt.
+
+// setImage(imageUrl): Cập nhật state image với URL của ảnh.
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            setImage(imageUrl);
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addEmployeeAPI();
     };
 // {image ? 'Thay đổi ảnh' : 'Tải ảnh lên'}  kiểm tra xem ảnh có giá trị hay không , có thì thay đổi ảnh
 //{image && <img src={image} alt="Preview" className="image-preview" />}
@@ -119,7 +122,7 @@ const AddEmployees = (props) => {
                                     <p>Password: <input id='password' type="text" placeholder='Tạo mật khẩu cho nhân viên' required /></p>
                                 )}
                                   {props.isConsulting===false && (
-                                    <p>Kinh nghiệm: <input id='experience' type="text" placeholder='Nhập số năm kinh nghiệm' required /></p>
+                                    <p>Kinh nghiệm: <input id='experience' type="textarea" placeholder='Nhập số năm kinh nghiệm' required /></p>
                                 )}
                             </div>
                         </div>

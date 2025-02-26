@@ -1,44 +1,57 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import './Doctors.scss';
 import { FaUserPlus } from "react-icons/fa";
 import AddEmployees from "../../../AddEmployees/AddEmployees";
 import ShowInformation from "../../../ShowInformation/ShowInformation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-import Adjust from "../../../ModelAdjust/Adjust";
+import { IoSearchSharp } from "react-icons/io5";
+
 function Doctors() {
     const [doctorsList, setDoctorsList] = useState([]);   
     const [addEmployees, setAddEmployees] = useState(false);
     const [showInformation, setShowInformation] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const doctorsPerPage = 6; // Set this to 6
+    const doctorsPerPage = 6; 
     const [selectedEmployeeId, setSelectedEmployeeId] = useState(null);
-    // Calculate the doctors to display on the current page
-    const indexOfLastDoctor = currentPage * doctorsPerPage;
-    const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
-    const currentDoctors = doctorsList.slice(indexOfFirstDoctor, indexOfLastDoctor);
+    const [searchText, setSearchText] = useState('');
 
-    // Calculate the total number of pages
-    const totalPages = Math.ceil(doctorsList.length / doctorsPerPage);
-
-    const handleClick = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
-    // call Api
+    // Tìm kiếm Doctors theo tên
+    const filteredDoctors = useMemo(()=>{
+        return doctorsList.filter(doctor =>doctor.name.toLowerCase().includes(searchText.toLowerCase()))
+    }, [doctorsList,searchText]);
+    // Hiển thị Doctors 
+    const currentDoctors = useMemo(()=>{
+        const indexOfLastDoctor = currentPage * doctorsPerPage;
+        const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
+        return filteredDoctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+    }, [filteredDoctors, currentPage]);
+    // Tính trang 
+    const totalPages = useMemo(() => {
+        return Math.ceil(filteredDoctors.length / doctorsPerPage);
+    }, [filteredDoctors]);
+    // Tải danh sách bác sĩ từ API
     const getDoctors = async () => {
         try {
             const token = localStorage.getItem('accessToken');
             const response = await axios.get("http://localhost:3001/api/v1/admin/doctors", {
                 headers: { "Authorization": `Bearer ${token}` },
             });
-            setDoctorsList(response.data); // Cập nhật danh sách từ API
+            setDoctorsList(response.data);
         } catch (error) {
-
+            console.error("Lỗi khi lấy dữ liệu bác sĩ:", error);
         }
     };
+
     useEffect(() => {
         getDoctors();
     }, []);
+
+    // Xử lý tìm kiếm
+    const handleSearch = (event) => {
+        setSearchText(event.target.value);
+        setCurrentPage(1);
+    };
     return (
         <div className="Doctors">
             <div className="Doctors_header">
@@ -49,6 +62,17 @@ function Doctors() {
                     <FaUserPlus />
                     Thêm nhân viên
                 </button>
+                <div className="Doctors_middle_right">
+                    <div className="Doctors_container">
+                            <input 
+                                type="text" 
+                                placeholder="Nhập tên nhân viên" 
+                                value={searchText}
+                                onChange={handleSearch}
+                            />
+                            <IoSearchSharp className="iconSearch" />
+                     </div>
+                </div>
             </div>
             <div className="Doctors_content">
                 <div className="Doctors_list">
@@ -65,54 +89,65 @@ function Doctors() {
                         </thead>
                         <tbody>
                             {currentDoctors.map((doctor, index) => (
-                                <tr >
-                                    <th scope="row">{indexOfFirstDoctor + index + 1}</th>
+                                <tr key={doctor.id}>
+                                    <th scope="row">{(currentPage - 1) * doctorsPerPage + index + 1}</th>
                                     <td>{doctor.name}</td>
                                     <td>{doctor.male ? "Nam" : "Nữ"}</td>
                                     <td>{doctor.location}</td>
                                     <td>{doctor.phone}</td>
-                                    <td><button className="check_view" onClick={() => { 
-                                        setSelectedEmployeeId(doctor.id); 
-                                        setShowInformation(true);
-                                    }                                           
-                                    } >Chi tiết</button></td>
+                                    <td>
+                                        <button className="check_view" 
+                                            onClick={() => { 
+                                                setSelectedEmployeeId(doctor.id); 
+                                                setShowInformation(true);
+                                            }}>
+                                            Chi tiết
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    {filteredDoctors.length === 0 && <p className="text-center">Không tìm thấy bác sĩ nào</p>}
                 </div>
             </div>
             <div className="Doctors_bottom">
                 <nav aria-label="Page navigation example">
                     <ul className="pagination">
                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                            <a className="page-link" href="#" onClick={() => handleClick(currentPage - 1)}>Previous</a>
+                            <button className="page-link" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>
+                                Previous
+                            </button>
                         </li>
                         {[...Array(totalPages)].map((_, index) => (
                             <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                                <a className="page-link" href="#" onClick={() => handleClick(index + 1)}>{index + 1}</a>
+                                <button className="page-link" onClick={() => setCurrentPage(index + 1)}>
+                                    {index + 1}
+                                </button>
                             </li>
                         ))}
                         <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                            <a className="page-link" href="#" onClick={() => handleClick(currentPage + 1)}>Next</a>
+                            <button className="page-link" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>
+                                Next
+                            </button>
                         </li>
                     </ul>
                 </nav>
             </div>
-            {addEmployees === true && (
-                <AddEmployees onClose={() => 
-                    setAddEmployees(false)} 
+            {addEmployees && (
+                <AddEmployees 
+                    onClose={() => setAddEmployees(false)} 
                     isConsulting={false}
                     checkRole={false}    
                 />
             )}
-            {showInformation === true && (
-                <ShowInformation onClose={() => setShowInformation(false)}
-                isConsulting={false}
-                employeeId={selectedEmployeeId} />
+            {showInformation && (
+                <ShowInformation 
+                    onClose={() => setShowInformation(false)}
+                    isConsulting={false}
+                    employeeId={selectedEmployeeId} 
+                />
             )}
-            {/* <Adjust  isConsulting = {true}
-                     employeeId={selectedEmployeeId}    />   */}
         </div>
     );
 }

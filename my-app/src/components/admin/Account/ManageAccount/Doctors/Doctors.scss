@@ -18,7 +18,7 @@
             .Doctors_list {
                 width: 100%;
                 .title{
-                    background-color: #cccaca;
+                    background-color: #8ab5e3;
                 }
                 .check_view {
                     border: none;
@@ -37,6 +37,7 @@
         max-width: 500px;
     }
     &_middle {
+        position: relative;
         text-align: center;
         margin: 30px 0 ;
         button {
@@ -63,6 +64,43 @@
             &:hover {
                 background-color: #c5c5c5;
             }
+        }
+        &_right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            .Doctors_container{
+                position: relative;
+                display: flex;
+                align-items: center;
+                padding-left: -12px;
+                    input {
+                        width: 300px;
+                        padding: 5px 35px 5px 10px; // Chừa khoảng trống bên phải cho icon
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        height: 30px;
+
+                        &:hover {
+                            background-color: #ebe9e9;
+                        }
+                        &:focus {
+                            background-color: #ebe9e9;
+                            outline: none;
+                        }
+                    }
+            .iconSearch {
+            position: absolute;
+            right: 10px; // Canh icon bên phải
+            font-size: 18px;
+            color: gray;
+            cursor: pointer;
+        }
+        }
         }
     }
     &_bottom{

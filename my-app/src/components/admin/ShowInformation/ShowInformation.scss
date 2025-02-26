@@ -23,7 +23,7 @@
         padding: 20px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         animation: slideIn 0.4s ease-in-out;
-    
+        position: relative;
         @keyframes slideIn {
             from {
                 transform: translateY(-20px);
@@ -34,24 +34,68 @@
                 opacity: 1;
             }
         }
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
+        .content-delete {
+            display: none;
+                position: absolute;
+                top: 70px;
+                right: 18px;
+                background-color: rgb(226, 22, 22);
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                border-radius: 10px;
+                list-style: none;
+        }
+        .content-delete li {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 10px;
+            color: white;
             font-weight: bold;
         }
+        
+        .content-delete li:hover {
+            background-color: #e44f4f;
+        }
+        
+        /* Khi hiển thị */
+        .show-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Giữ tiêu đề ở giữa */
+            position: relative;
+            width: 100%;
+            .content h2{
+                font-weight: bold;
+            }
+        }
+        .icon {
+            position: absolute;
+            right: 20px; /* Đặt icon bên phải so với content */
+            font-size: 24px;
+            cursor: pointer;
+           
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
+        
         .form-group {
             margin-bottom: 10px;
           }
-       .form-group-img {
-            margin-bottom: 10px;
-        }
+    //    .form-group-img {
+    //         margin-bottom: 10px;
+    //     }
 
-        .form-group-img-svg {
-            width: 200px;
-            height: 200px;
-            border-radius: 20px;
-        }
+        // .form-group-img-svg {
+        //     width: 200px;
+        //     height: 200px;
+        //     border-radius: 20px;
+        // }
         .form-group label {
             font-weight: bold;
             margin-right: 10px;
@@ -94,4 +138,5 @@
             }
         }     
     }
+    
 }

@@ -5,11 +5,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineDelete } from "react-icons/ai";
 import Adjust from "../ModelAdjust/Adjust";
 import axios from "axios";
-
+import { FiMoreHorizontal } from "react-icons/fi";
+import Model_Delete from "../../Model_Delete/Model_Delete";
 const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
     const [showAdjust, setShowAdjust] = useState(false);
     const [employee, setEmployee] = useState(null);
-
+    const [deleteVisible, setDeleteVisible] = useState(false);
+    const [modelDelete,setModelDelete] = useState(false);
     const notify_delete = () =>
         toast.error("Xoá thành công!", {
             icon: <AiOutlineDelete style={{ color: "#0C2D79", fontSize: "24px" }} />,
@@ -25,89 +27,71 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
                 fontWeight: "bold",
             },
         });
-    // Gọi API show thông tin
-    useEffect(() => {
-        const showEmployeesId = async () => {
-            if (!employeeId) return;
-    
-            const token = localStorage.getItem("accessToken");
-            const url = isConsulting
-                ? `http://localhost:3001/api/v1/admin/consultant/${employeeId}`
-                : `http://localhost:3001/api/v1/admin/doctor/${employeeId}`;
-            try {
-                const response = await axios.get(url, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setEmployee(response.data[0]); 
-            
-            } catch (error) {
-                if (error.response) {
-                    toast.error(error.response.data.message);
-                }
-            }
-        };
-    
-        showEmployeesId();
-    }, [employeeId, isConsulting]);
+    // Call API show information of a employee
+    const showEmployeesIdAPI = async () => {
+        if (!employeeId) return;
 
-    // Kiểm tra nếu employee chưa có dữ liệu // bug
-    if (!employee) {
-        return <p>Đang tải dữ liệu...</p>;
-    }
-    // gọi API xoá thông xin\
-    const deleteEmployee = async () => {
         const token = localStorage.getItem("accessToken");
-            const url = isConsulting
-                ? `http://localhost:3001/api/v1/admin/consultant/${employeeId}`
-                : `http://localhost:3001/api/v1/admin/doctor/${employeeId}`;
+        const url = isConsulting
+            ? `http://localhost:3001/api/v1/admin/consultant/${employeeId}`
+            : `http://localhost:3001/api/v1/admin/doctor/${employeeId}`;
         try {
-            const response = await axios.delete(url, {
+            const response = await axios.get(url, {
                 headers: { Authorization: `Bearer ${token}` },
-            })
-            notify_delete();
+            });   
+            setEmployee(response.data);
         } catch (error) {
-             if(error.response) {
+            if (error.response) {
                 toast.error(error.response.data.message);
-                        }
+            }
         }
     };
+    useEffect(() => {
+        showEmployeesIdAPI();
+    }, [employeeId, isConsulting]);
     return (
         <div className="show-information-overlay">
             <div className="show-information-content">
+                <div className="content">
                 <h2>THÔNG TIN NHÂN VIÊN</h2>
-                <form className="information_detail" key={employee.id}>
+                <FiMoreHorizontal className="icon" onClick={()=> setDeleteVisible(!deleteVisible)} />
+                </div>
+                <div className={`content-delete ${deleteVisible ? "show-menu" : ""}`}>
+                    <li onClick={() => setModelDelete(true)}>Xoá nhân viên</li>
+                </div>
+                <form className="information_detail" key={employee?.id}>
                     <div className="form-group">
-                        <label>Họ và tên:</label>
-                        {employee.name}
+                        <label>MSNV:</label>
+                        {employee?.id}
                     </div>
                     <div className="form-group">
-                        <label>Ngày sinh:</label>
-                        {employee.dob ? new Date(employee.dob).toISOString().split("T")[0] : "" }
+                        <label>Họ và tên:</label>
+                        {employee?.name}
                     </div>
                     <div className="form-group">
                         <label>Giới tính:</label>
-                        {employee.male ? "Nam" : "Nữ"}
+                        {employee?.male ? "Nam" : "Nữ"}
                     </div>
                     <div className="form-group">
-                        <label>MSNV:</label>
-                        {employee.id}
+                        <label>Ngày sinh:</label>
+                        {employee?.dob ? new Date(employee.dob).toISOString().split("T")[0] : "" }
                     </div>
                     <div className="form-group">
                         <label>SĐT:</label>
-                        {employee.phone}
+                        {employee?.phone}
                     </div>
                     <div className="form-group">
                         <label>EMAIL:</label>
-                        {employee.email}
+                        {employee?.email}
                     </div>
                     <div className="form-group">
                         <label>ĐỊA CHỈ:</label>
-                        {employee.location}
+                        {employee?.location}
                     </div>
                     {!isConsulting && (
                         <div className="form-group">
                             <label>KINH NGHIỆM:</label>
-                            {employee.experience}
+                            {employee?.experience}
                         </div>
                     )}
                     <div className="button-group">
@@ -117,10 +101,7 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
                             </button>
                         </div>
                         <div className="button-group-left">
-                            <button className="button-delete" type="button" onClick={deleteEmployee}>
-                                Xoá
-                            </button>
-                            <button className="button-adjust" type="button" onClick={() => setShowAdjust(true)}>
+                            <button className="button-adjust" type="button" onClick={() => setShowAdjust(true)}> 
                                 Điều chỉnh
                             </button>
                         </div>
@@ -130,7 +111,13 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
             <ToastContainer position="top-right" autoClose={1200} hideProgressBar={false} closeOnClick pauseOnHover={false} draggable={false} theme="light" />
             {showAdjust && <Adjust onClose={() => setShowAdjust(false)}
                             adjustEmployeeId = {employee.id}
-                            isAdjustConsulting = {isConsulting}                     />}
+                            isAdjustConsulting = {isConsulting}    
+                             />}
+            {modelDelete && <Model_Delete onClose={() => setModelDelete(false)}
+                            DeleteEmployeeID = {employee.id}
+                            isDeleteConsultant = {isConsulting} 
+                            />
+                            }
         </div>
     );
 };

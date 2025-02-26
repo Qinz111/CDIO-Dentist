@@ -1,44 +1,63 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import './Consultants.scss';
 import { FaUserPlus } from "react-icons/fa";
 import AddEmployees from "../../../AddEmployees/AddEmployees";
 import ShowInformation from "../../../ShowInformation/ShowInformation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-import Adjust from "../../../ModelAdjust/Adjust";
+import { IoSearchSharp } from "react-icons/io5";
+
 function Consultants() {
     const [consultantsList, setConsultantsList] = useState([]);
     const [selectedEmployeeId, setSelectedEmployeeId] = useState(null);
     const [addEmployees, setAddEmployees] = useState(false);
     const [showInformation, setShowInformation] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const consultantsPerPage = 6; // Set this to 6
+    const consultantsPerPage = 6;
+    const [searchText, setSearchText] = useState('');
 
-    // Calculate the consultants to display on the current page
-    const indexOfLastConsultant = currentPage * consultantsPerPage;
-    const indexOfFirstConsultant = indexOfLastConsultant - consultantsPerPage;
-    const currentConsultants = consultantsList.slice(indexOfFirstConsultant, indexOfLastConsultant);
-    // Calculate the total number of pages
-    const totalPages = Math.ceil(consultantsList.length / consultantsPerPage);
-    const handleClick = (pageNumber) => {
-        setCurrentPage(pageNumber);
+    // Lọc danh sách consultants dựa trên searchText với useMemo
+    const filteredConsultants = useMemo(() => {
+        return consultantsList.filter(consul =>
+            consul.name.toLowerCase().includes(searchText.toLowerCase())
+        );
+    }, [consultantsList, searchText]);
+
+    // Lấy danh sách consultants cần hiển thị trên trang hiện tại
+    const currentConsultants = useMemo(() => {
+        const indexOfLastConsultant = currentPage * consultantsPerPage;
+        const indexOfFirstConsultant = indexOfLastConsultant - consultantsPerPage;
+        return filteredConsultants.slice(indexOfFirstConsultant, indexOfLastConsultant);
+    }, [filteredConsultants, currentPage]);
+
+    // Tính tổng số trang
+    const totalPages = useMemo(() => {
+        return Math.ceil(filteredConsultants.length / consultantsPerPage);
+    }, [filteredConsultants]);
+
+    // Xử lý sự kiện tìm kiếm
+    const handleSearch = (event) => {
+        setSearchText(event.target.value);
+        setCurrentPage(1);
     };
-    // call API
+
+    // Gọi API lấy danh sách consultants
     const getConsultants = async () => {
         try {
             const token = localStorage.getItem('accessToken');
             const response = await axios.get("http://localhost:3001/api/v1/admin/consultants", {
                 headers: { "Authorization": `Bearer ${token}` },
             });
-            setConsultantsList(response.data); // Cập nhật danh sách từ API
+            setConsultantsList(response.data);
         } catch (error) {
-
+            console.error("Lỗi khi lấy danh sách consultants:", error);
         }
     };
+
     useEffect(() => {
         getConsultants();
     }, []);
-    console.log()
+
     return (
         <div className="Consultants">
             <div className="Consultants_header">
@@ -49,6 +68,18 @@ function Consultants() {
                     <FaUserPlus />
                     Thêm nhân viên
                 </button>
+                <div className="Consultants_middle_right">
+                   <div className="Consultants_container">
+                   <input 
+                        type="text" 
+                        placeholder="Nhập tên nhân viên" 
+                        prefix={<IoSearchSharp />} 
+                        value={searchText}
+                        onChange={handleSearch}
+                    />
+                    <IoSearchSharp className="iconSearch" />
+                   </div>
+                </div>
             </div>
             <div className="Consultants_content">
                 <div className="Consultants_list">
@@ -66,53 +97,63 @@ function Consultants() {
                         <tbody>
                             {currentConsultants.map((consul, index) => (
                                 <tr key={consul.id}> 
-                                    <th scope="row">{indexOfFirstConsultant + index + 1}</th>
+                                    <th scope="row">{(currentPage - 1) * consultantsPerPage + index + 1}</th>
                                     <td>{consul.name}</td>
                                     <td>{consul.male ? "Nam" : "Nữ"}</td>
                                     <td>{consul.location}</td>
                                     <td>{consul.phone}</td>
-                                    <td><button className="check_view" onClick={() => { 
-                                        setSelectedEmployeeId(consul.id); 
-                                        setShowInformation(true);
-                                    }                                           
-                                    } >Chi tiết</button></td>
+                                    <td>
+                                        <button className="check_view" onClick={() => { 
+                                            setSelectedEmployeeId(consul.id); 
+                                            setShowInformation(true);
+                                        }}>
+                                            Chi tiết
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    {filteredConsultants.length === 0 && <p className="text-center">Không tìm thấy nhân viên nào</p>}
                 </div>
             </div>
-            <div className="Doctors_bottom">
+            <div className="Consultants_bottom">
                 <nav aria-label="Page navigation example">
                     <ul className="pagination">
                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                            <a className="page-link" href="#" onClick={() => handleClick(currentPage - 1)}>Previous</a>
+                            <button className="page-link" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>
+                                Previous
+                            </button>
                         </li>
                         {[...Array(totalPages)].map((_, index) => (
                             <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                                <a className="page-link" href="#" onClick={() => handleClick(index + 1)}>{index + 1}</a>
+                                <button className="page-link" onClick={() => setCurrentPage(index + 1)}>
+                                    {index + 1}
+                                </button>
                             </li>
                         ))}
                         <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                            <a className="page-link" href="#" onClick={() => handleClick(currentPage + 1)}>Next</a>
+                            <button className="page-link" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}>
+                                Next
+                            </button>
                         </li>
                     </ul>
                 </nav>
             </div>
-            {addEmployees === true && (
+            {addEmployees && (
                 <AddEmployees 
-                onClose={() => setAddEmployees(false) } 
-                isConsulting = {true}
-                checkRole={true}
+                    onClose={() => setAddEmployees(false)} 
+                    isConsulting={true}
+                    checkRole={true}
                 />
             )}
-            {showInformation === true && (
-                <ShowInformation onClose={() => setShowInformation(false)}
-                isConsulting = {true} 
-                employeeId={selectedEmployeeId} />
+            {showInformation && (
+                <ShowInformation 
+                    onClose={() => setShowInformation(false)}
+                    isConsulting={true} 
+                    employeeId={selectedEmployeeId} 
+                />
             )}
-            {/* <Adjust  isConsulting = {true}
-                     employeeId={selectedEmployeeId} />   */}
         </div>
     );
 }

@@ -23,30 +23,27 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
             fontWeight: 'bold',
         }
     });
+    // call APL show Employees'information 
     const token = localStorage.getItem("accessToken");
     const url = isAdjustConsulting
         ? `http://localhost:3001/api/v1/admin/consultant/${adjustEmployeeId}`
         : `http://localhost:3001/api/v1/admin/doctor/${adjustEmployeeId}`;
-    useEffect(() => {
-        const fetchEmployee = async () => {
-            try {
-                const response = await axios.get(url, {
+    const fetchEmployee = async () => {
+        try {
+            const response = await axios.get(url, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                setEmployee(response.data[0]);
+                setEmployee(response.data);
             } catch (error) {
                 if (error.response) {
                     toast.error(error.response.data.message);
                 }
             }
         };
+    useEffect(() => {
         fetchEmployee();
     }, [adjustEmployeeId, isAdjustConsulting]);
-
-    if (!employee) {
-        return <p>Đang tải dữ liệu...</p>;
-    }
-    // API update
+    // API update Employees'information 
     const adjustEmployee = async () => {
         const adjustedEmployees = {
             name: document.getElementById('name').value,
@@ -62,8 +59,8 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
         try {
             const response = await axios.put(url,adjustedEmployees, {
                 headers: {
-                    "Authorization": `Bearer ${token}`,  // Thêm token vào headers
-                    "Content-Type": "application/json" // Quan trọng khi gửi FormData
+                    "Authorization": `Bearer ${token}`, 
+                    "Content-Type": "application/json"
                   },
             });
             notify(response.data.message);
@@ -125,16 +122,16 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                             <div className="Adjust_content_bottom_grid">
                                 <p>HỌ TÊN:
                                     <input id='name' type="text" placeholder='Nhập họ tên'
-                                        value={employee.name || ''}
+                                        value={employee?.name || ''}
                                         onChange={handleInputChange} required />
                                 </p>
                                 <p>NGÀY SINH:
                                     <input id='dob' type="date" placeholder='Nhập ngày sinh'
-                                        value={employee.dob ? new Date(employee.dob).toISOString().split("T")[0] : ""}
+                                        value={employee?.dob ? new Date(employee.dob).toISOString().split("T")[0] : ""}
                                         onChange={handleInputChange} required />
                                 </p>
                                 <p>GIỚI TÍNH:
-                                    <select id='male' value={employee.male ? "Nam" : "Nữ"} onChange={handleInputChange} required>
+                                    <select id='male' value={employee?.male ? "Nam" : "Nữ"} onChange={handleInputChange} required>
                                         <option value="">Chọn giới tính</option>
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
@@ -142,23 +139,23 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                                 </p>
                                 <p>SĐT:
                                     <input id='phone' type="tel" placeholder='Nhập số điện thoại'
-                                        value={employee.phone || ''}
+                                        value={employee?.phone || ''}
                                         onChange={handleInputChange} required />
                                 </p>
                                 <p>EMAIL:
                                     <input id='email' type="email" placeholder='Nhập email'
-                                        value={employee.email || ''}
+                                        value={employee?.email || ''}
                                         onChange={handleInputChange} required />
                                 </p>
                                 <p>ĐỊA CHỈ:
                                     <input id='location' type="text" placeholder='Nhập địa chỉ'
-                                        value={employee.location || ''}
+                                        value={employee?.location || ''}
                                         onChange={handleInputChange} required />
                                 </p>
                                 {!isAdjustConsulting && (
                                     <p>KINH NGHIỆM:
                                         <input id='experience' type="text" placeholder='Nhập kinh nghiệm'
-                                            value={employee.experience || ''}
+                                            value={employee?.experience || ''}
                                             onChange={handleInputChange} required />
                                     </p>
                                 )}
