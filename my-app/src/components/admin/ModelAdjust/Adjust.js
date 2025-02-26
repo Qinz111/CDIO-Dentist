@@ -68,7 +68,7 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
             setTimeout(() => {
                 onClose(); // Đóng form sau khi cập nhật
                 window.location.reload();
-            }, 1200);
+            }, 500);
         } catch (error) {
             if (error.response) {
                 toast.error(error.response.data.message);
