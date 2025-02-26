@@ -23,4 +23,15 @@ const createAppointment = (
 
   return instance.post("api/v1/user/appointment", data);
 };
-export { getAllDentist, createAppointment };
+
+const LoginConsultan = (email, password, id) => {
+  const data = {
+    email: email,
+    password: password,
+    id: id,
+  };
+
+  return instance.post("api/v1/consultant/login", data);
+};
+
+export { getAllDentist, createAppointment, LoginConsultan };

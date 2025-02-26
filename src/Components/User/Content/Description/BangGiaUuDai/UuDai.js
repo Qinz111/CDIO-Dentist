@@ -245,27 +245,27 @@ const UuDai = () => {
               <td>Răng</td>
               <td>100.000</td>
             </tr>
-            <tr class="border-t border-gray-200">
+            <tr>
               <td>Nhổ răng khôn mọc thẳng hàm trên</td>
               <td>Răng</td>
               <td>1.500.000</td>
             </tr>
-            <tr class="border-t border-gray-200">
+            <tr>
               <td>Nhổ răng khôn mọc thẳng hàm dưới</td>
               <td>Răng</td>
               <td>2.000.000</td>
             </tr>
-            <tr class="border-t border-gray-200">
+            <tr>
               <td>Nhổ răng khôn mọc lệch – Tiểu phẫu ca khó mức 1</td>
               <td>Răng</td>
               <td>2.000.000</td>
             </tr>
-            <tr class="border-t border-gray-200">
+            <tr>
               <td>Nhổ răng khôn mọc lệch – Tiểu phẫu ca khó mức 2</td>
               <td>Răng</td>
               <td>3.000.000</td>
             </tr>
-            <tr class="border-t border-gray-200">
+            <tr>
               <td>Nhổ răng khôn mọc ngầm – Tiểu phẫu ca khó mức 3</td>
               <td>Răng</td>
               <td>5.000.000</td>

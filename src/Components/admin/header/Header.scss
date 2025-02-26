@@ -29,10 +29,9 @@
       img {
         cursor: pointer;
         width: auto; /* Để ảnh tự điều chỉnh theo chiều rộng */
-        max-height: 230px;
+        max-height: 100px;
         object-fit: contain;
         filter: brightness(1.05) saturate(1.1);
-        height: 200px;
       }
     }
     .header_content_right {

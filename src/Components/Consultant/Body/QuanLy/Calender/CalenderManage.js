@@ -6,15 +6,15 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import "./CalenderManage.scss";
 
-const CalenderManage = () => {
+const CalendarManage = () => {
   const location = useLocation();
   const dentist_manage = location.state?.dentist_manage;
 
   if (!dentist_manage) {
-    return <div>Loading vl...</div>;
+    return <div>Loading...</div>;
   }
 
-  // console.log("dentist:", dentist_manage);
+  // console.log(dentist);
   return (
     <div>
       <div className="modal-content">
@@ -50,4 +50,4 @@ const CalenderManage = () => {
   );
 };
 
-export default CalenderManage;
+export default CalendarManage;

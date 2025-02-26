@@ -1,20 +1,7 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./QuanLy.scss";
-import { useNavigate } from "react-router-dom";
-
 const QuanLy = () => {
-  const navigate = useNavigate();
-
-  const handleCalendarDentist = (dentist) => {
-    if (dentist && dentist.id) {
-      navigate(`/consultant/quan-li-bs/calendar/${dentist.id}`, {
-        state: { dentist_manage: dentist },
-      });
-    } else {
-      console.error("Invalid dentist object:", dentist);
-    }
-  };
-
   const userList = [
     {
       id: 1,
@@ -209,16 +196,31 @@ const QuanLy = () => {
       ],
     },
   ];
-  console.log(userList);
+  const handlecalendarDentist = (dentist) => {
+    if (dentist && dentist.id) {
+      navigate(`/consultant/quan-li-bs/calendar/${dentist.id}`, {
+        state: { dentist_manage: dentist },
+      });
+    } else {
+      console.error("conchoquang");
+    }
+  };
+
+  const navigate = useNavigate();
+
   return (
     <div className="container-quanly">
-      <div className="quanly-top">XXX</div>
+      <div className="quanly-bs">
+        <p className="title">DANH SÁCH BÁC SĨ</p>
+        <hr className="divider" />
+        <p className="speciality">SPECIALITY</p>
+      </div>
       <div className="quanly-list-user">
         <div className="quanly-user">
           {userList.map((user) => (
             <div
               className="quanly-user-image"
-              onClick={() => handleCalendarDentist(user)}
+              onClick={() => handlecalendarDentist(user)}
               key={user.id}
             >
               <img src={user.image} alt="" />

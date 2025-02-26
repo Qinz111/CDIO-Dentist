@@ -19,10 +19,10 @@ const HomePage = () => {
         </div>
         <div className="thongtincanhanh2">
           <div className="contener2">
-            <div className="anhcanhan">
-              <img src="/images/anhcanhan.png" alt="?" />
-            </div>
             <div className="thongtin2">
+              <div className="userimage">
+                <img src="/images/user.png" alt="?" />
+              </div>
               <h1>SỐ KHÁCH HÀNG TRONG NGÀY</h1>
               <p>11</p>
             </div>
@@ -31,7 +31,11 @@ const HomePage = () => {
         <div className="thongtincanhanh3">
           <div className="contener3">
             <div className="hinhanh2">
-              <img src="/images/anhcanhan2.png" alt="?" />
+              <img
+                src="/images/anhcanhan3.png"
+                alt="?"
+                className="anhcanhan2"
+              />
             </div>
             <div className="thongtin3">
               <h1>LỊCH HẸN SẮP TỚI</h1>

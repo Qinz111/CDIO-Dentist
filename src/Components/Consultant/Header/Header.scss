@@ -1,12 +1,9 @@
 .header-consultant {
-  // position: absolute;
   display: flex;
   flex-direction: column;
   background-color: #e4eefb;
   left: 0;
   right: 0;
-  // // padding-bottom: 200px;
-  // margin-bottom: 200px;
   .header_top {
     height: 47px;
     display: flex;
@@ -30,10 +27,8 @@
       text-align: center;
       img {
         width: auto; /* Để ảnh tự điều chỉnh theo chiều rộng */
-        max-height: 230px;
+        max-height: 80px;
         object-fit: contain;
-        // filter: brightness(1.05) saturate(1.1);
-        // height: 200px;
       }
     }
     .header_content_right {

@@ -18,7 +18,7 @@ const Content = () => {
   return (
     <div className="content-container">
       <div className="content-wrapper">
-        <div className="home-page">
+        <div className="home-page-user">
           <img src={s1} alt="" />
           <img src={s2} alt="" />
           <img src={s3} alt="" />

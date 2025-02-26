@@ -8,12 +8,13 @@ import Consultant from "./Components/Consultant/Consultant";
 import HomePage from "./Components/Consultant/Body/HomePage/HomePage";
 import QuanLy from "./Components/Consultant/Body/QuanLy/QuanLy";
 import TuVan from "./Components/Consultant/Body/TuVan/TuVan";
-import CalendarManage from "./Components/Consultant/Body/QuanLy/Calendar/CalenderManage";
 import Header_Admin from "./Components/admin/header/Header";
 import Homepage_Admin from "./Components/admin/Homepage/Homepage";
 import Consultants_Admin from "./Components/admin/Account/ManageAccount/Consultants/Consultants";
 import Doctors_Admin from "./Components/admin/Account/ManageAccount/Doctors/Doctors";
 import Admin from "./Components/admin/Admin";
+import CalendarManage from "./Components/Consultant/Body/QuanLy/Calender/CalenderManage";
+import Loginpage from "./Components/Consultant/Body/LoginPage/Loginpage";
 
 const Layout = () => {
   return (
@@ -31,12 +32,16 @@ const Layout = () => {
           <Route path="doctors" element={<Doctors_Admin />} />
         </Route>
       </Route>
-      {/* <Route path="/consultant" element={<Consultant />}>
+      {/* <Route path="/login-consultant" element={<Loginpage />} /> */}
+      <Route path="/consultant" element={<Consultant />}>
         <Route index element={<HomePage />} />
-        <Route path="quan-li-bs" element={<QuanLy />} />
-        <Route path="quan-li-bs/calendar/:id" element={<CalendarManage />} />
-        <Route path="dang-ki-tu-van" element={<TuVan />} />
-      </Route> */}
+        <Route path="/consultant/quan-li-bs" element={<QuanLy />} />
+        <Route
+          path="/consultant/quan-li-bs/calendar/:id"
+          element={<CalendarManage />}
+        />
+        <Route path="/consultant/dang-ki-tu-van" element={<TuVan />} />
+      </Route>
     </Routes>
   );
 };
