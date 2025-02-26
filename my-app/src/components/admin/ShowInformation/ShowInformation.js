@@ -39,6 +39,7 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
             const response = await axios.get(url, {
                 headers: { Authorization: `Bearer ${token}` },
             });   
+            console.log(response.data);
             setEmployee(response.data);
         } catch (error) {
             if (error.response) {
