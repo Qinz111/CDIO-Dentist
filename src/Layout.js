@@ -9,23 +9,28 @@ import Consultant from "./Components/Consultant/Consultant";
 import HomePage from "./Components/Consultant/Body/HomePage/HomePage";
 import TuVan from "./Components/Consultant/Body/TuVan/TuVan";
 import QuanLy from "./Components/Consultant/Body/QuanLy/QuanLy.js";
+import CalendarManage from "./Components/Consultant/Body/QuanLy/Calender/CalenderManage";
+import Loginpage from "./Components/Consultant/Body/LoginPage/Loginpage.js";
 const Layout = () => {
-return (
-<Routes>
-  <Route path="/" element={<App />}>
-  <Route path="/" element={<User />}>
-  <Route index element={<Content />} />
-  <Route path="dentist-calendar/:id" element={<Calendar />} />
-  </Route>
-  </Route>
-  <Route path="/admin" element={<Admin />} />
-  <Route path="/consultant" element={<Consultant />}>
-  <Route index element={<HomePage />} />
-  <Route path="/consultant/quan-li-bs" element={<QuanLy />} />
-  <Route path="/consultant/dang-ki-tu-van" element={<TuVan />} />
-  </Route>
-</Routes>
-);
+  return (
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route path="/" element={<User />}>
+          <Route index element={<Content />} />
+          <Route path="dentist-calendar/:id" element={<Calendar />} />
+        </Route>
+      </Route>
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/consultant" element={<Consultant />}>
+        <Route path="/consultant/login" element={<Loginpage />} />
+        <Route index element={<HomePage />} />
+        <Route path="/consultant/quan-li-bs" element={<QuanLy />} />
+        <Route path="/consultant/quan-li-bs/calendar/:id" element={<CalendarManage />} />
+        <Route path="/consultant/dang-ki-tu-van" element={<TuVan />} />
+
+      </Route>
+    </Routes>
+  );
 };
 
 export default Layout;

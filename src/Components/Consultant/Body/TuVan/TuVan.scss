@@ -1,4 +1,84 @@
 .container-tuvan {
-  padding-top: 200px;
-  margin: auto;
+  display: flex;
+  align-items: center;
+  background-color: #e5eaf2;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.header-tuvan {
+  
+  padding: 20px;  
+}
+
+.table-tuvan {
+  width: 70%;
+  border-collapse: collapse;
+  background-color: #6c6c6c;
+  color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  
+  
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #2a2a2a;
+  }
+
+  th {
+    background-color: #4a4a4a;
+    font-weight: bold;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #5c5c5c;
+  }
+
+  tbody tr {
+    font-style: italic;
+  }
+}
+input[type="date"] {
+  width: 180px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 2px solid #8bbfdd; /* Viền xanh lá */
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  background-color: #8bbfdd;
+  color: #333;
+  appearance: none; /* Ẩn kiểu mặc định của trình duyệt */
+  position: relative;
+  cursor: pointer;
+}
+
+/* Hiệu ứng hover */
+input[type="date"]:hover {
+  border-color: #060a0b;
+}
+
+/* Khi người dùng focus vào input */
+input[type="date"]:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Bọc input date trong container để thêm icon */
+.datepicker-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Thêm icon lịch */
+.datepicker-container::after {
+  content: "📅";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  pointer-events: none;
+  color: #4CAF50;
 }
