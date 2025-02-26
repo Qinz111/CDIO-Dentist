@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
     const [image, setImage] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
     const [employee, setEmployee] = useState(null);
 
     const notify = () => toast.success("Cập nhật thành công!", {
@@ -23,11 +24,11 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
             fontWeight: 'bold',
         }
     });
-    // call APL show Employees'information 
     const token = localStorage.getItem("accessToken");
     const url = isAdjustConsulting
-        ? `http://localhost:3001/api/v1/admin/consultant/${adjustEmployeeId}`
-        : `http://localhost:3001/api/v1/admin/doctor/${adjustEmployeeId}`;
+    ? `http://localhost:3001/api/v1/admin/consultant/${adjustEmployeeId}`
+    : `http://localhost:3001/api/v1/admin/doctor/${adjustEmployeeId}`;
+    // call APL show Employees'information 
     const fetchEmployee = async () => {
         try {
             const response = await axios.get(url, {
@@ -46,22 +47,30 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
     }, [adjustEmployeeId, isAdjustConsulting]);
     // API update Employees'information 
     const adjustEmployee = async () => {
-        const adjustedEmployees = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            location: document.getElementById('location').value,
-            dob: document.getElementById('dob').value,
-            male: document.getElementById('male').value === 'Nam' ? true : false,
-        }
+        const formData = new FormData();
+        formData.append("name", document.getElementById("name").value);
+        formData.append("email", document.getElementById("email").value);
+        formData.append("phone", document.getElementById("phone").value);
+        formData.append("location", document.getElementById("location").value);
+        formData.append("dob", document.getElementById("dob").value);
+        formData.append(
+          "male",
+          document.getElementById("male").value === "Nam" ? 1 : 0
+        );
         if(isAdjustConsulting === false) {
-            adjustedEmployees.experience = document.getElementById('experience').value
+            formData.append(
+                "experience",
+                document.getElementById("experience").value
+              );
         }
+        if (imageFile) {
+            formData.append("profile_image", imageFile);
+          }
         try {
-            const response = await axios.put(url,adjustedEmployees, {
+            const response = await axios.put(url,formData, {
                 headers: {
-                    "Authorization": `Bearer ${token}`, 
-                    "Content-Type": "application/json"
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data",
                   },
             });
             notify(response.data.message);
@@ -93,10 +102,11 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setImage(imageUrl);
+          const imageUrl = URL.createObjectURL(file);
+          setImage(imageUrl);
+          setImageFile(file);
         }
-    };
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -110,18 +120,20 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 <div className="Adjust_header">CẬP NHẬT NHÂN VIÊN</div>
                 <div className="Adjust_content">
                     <div className="Adjust_content_top">
-                        <div className="image-upload-section">
-                            <input
-                                type="file"
-                                accept="image/*"
-                                id="image-upload"
-                                onChange={handleImageChange}
-                            />
-                            <label htmlFor="image-upload" className="upload-label">
-                                {image ? 'Thay đổi ảnh' : 'Tải ảnh lên'}
-                            </label>
-                            {image && <img src={image} alt="Preview" className="image-preview" />}
-                        </div>
+                    <div className="image-upload-section">
+              <input
+                type="file"
+                accept="image/*"
+                id="image-upload"
+                onChange={handleImageChange}
+              />
+              <label htmlFor="image-upload" className="upload-label">
+                {image ? "Thay đổi ảnh" : "Tải ảnh lên"}
+              </label>
+              {image && (
+                <img src={image} alt="Preview" className="image-preview" />
+              )}
+            </div>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="Adjust_content_bottom">
