@@ -101,6 +101,13 @@
             margin-right: 10px;
           }
 
+          .image-container {
+            max-width: 100%;
+            .employee-image {
+                width: 50px !important;
+            }
+          }
+
         .button-group {
             display: flex;
             justify-content: space-between;

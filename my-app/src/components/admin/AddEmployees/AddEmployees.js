@@ -71,7 +71,7 @@ const AddEmployees = (props) => {
       setTimeout(() => {
         props.onClose(); // Đóng form trước
         window.location.reload(); // Reload trang sau khi thông báo hiển thị
-      }, 500); // Delay 1.5s để người dùng thấy thông báo trước khi reload
+      }, 1500); // Delay 1.5s để người dùng thấy thông báo trước khi reload
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);

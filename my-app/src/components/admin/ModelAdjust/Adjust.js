@@ -34,6 +34,7 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setEmployee(response.data);
+                
             } catch (error) {
                 if (error.response) {
                     toast.error(error.response.data.message);
@@ -64,6 +65,10 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                   },
             });
             notify(response.data.message);
+            setTimeout(() => {
+                onClose(); // Đóng form sau khi cập nhật
+                window.location.reload();
+            }, 1200);
         } catch (error) {
             if (error.response) {
                 toast.error(error.response.data.message);
@@ -97,6 +102,7 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
         e.preventDefault();
         adjustEmployee();
     };
+    
 
     return (
         <div className="Adjust-overlay">

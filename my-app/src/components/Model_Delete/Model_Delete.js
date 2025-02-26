@@ -31,8 +31,11 @@ function Model_Delete({onClose,DeleteEmployeeID,isDeleteConsultant}) {
             const response = await axios.delete(url, {
                 headers: { Authorization: `Bearer ${token}` },
             })
-            notify_delete();
-            onClose();
+            notify_delete(response.data.message);
+            setTimeout(() => {
+              onClose(); // Đóng form sau khi cập nhật
+              window.location.reload();
+          }, 500);
         } catch (error) {
              if(error.response) {
                 toast.error(error.response.data.message);
