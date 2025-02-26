@@ -1,0 +1,35 @@
+.ManageAccount {
+    background-color: #E4EEFB;
+    padding: 20px;
+    min-height: 100vh;
+    width: 100%;
+    &_title {
+        color: #9BD6F0;
+        font-size: 32px;
+        text-align: center;
+        font-style: italic;
+        margin-bottom: 20px;
+    }
+
+    &_content {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        height: 100%;
+
+        /* Test nested elements with hover effect */
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: #007bff;
+                color: white;
+                transform: scale(1.05);
+            }
+        }
+    }
+}
