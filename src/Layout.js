@@ -14,7 +14,6 @@ import Consultants_Admin from "./Components/admin/Account/ManageAccount/Consulta
 import Doctors_Admin from "./Components/admin/Account/ManageAccount/Doctors/Doctors";
 import Admin from "./Components/admin/Admin";
 import CalendarManage from "./Components/Consultant/Body/QuanLy/Calender/CalenderManage";
-import Loginpage from "./Components/Consultant/Body/LoginPage/Loginpage";
 
 const Layout = () => {
   return (
@@ -32,7 +31,7 @@ const Layout = () => {
           <Route path="doctors" element={<Doctors_Admin />} />
         </Route>
       </Route>
-      {/* <Route path="/login-consultant" element={<Loginpage />} /> */}
+
       <Route path="/consultant" element={<Consultant />}>
         <Route index element={<HomePage />} />
         <Route path="/consultant/quan-li-bs" element={<QuanLy />} />

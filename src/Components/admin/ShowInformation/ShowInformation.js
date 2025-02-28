@@ -6,7 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import Adjust from "../ModelAdjust/Adjust";
 import axios from "axios";
 import { FiMoreHorizontal } from "react-icons/fi";
-import Model_Delete from "../../admin/Model_Delete/Model_Delete.js";
+import Model_Delete from "../../admin/Model_Delete/Model_Delete";
 const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
   const [showAdjust, setShowAdjust] = useState(false);
   const [employee, setEmployee] = useState(null);

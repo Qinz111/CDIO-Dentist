@@ -16,15 +16,15 @@ const Header_Admin = () => {
   };
 
   const ReturnHomepage = () => {
-    window.location.href = "/Homepage";
+    window.location.href = "/";
   };
 
   const GoAheadDoctor = () => {
-    window.location.href = "/Doctors";
+    window.location.href = "Doctors";
   };
 
   const GoAheadConsultants = () => {
-    window.location.href = "/Consultants";
+    window.location.href = "Consultants";
   };
 
   return (

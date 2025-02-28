@@ -7,7 +7,7 @@ import s2 from "../../../assets/hp2.png";
 import s3 from "../../../assets/hp3.png";
 import s4 from "../../../assets/hp4.png";
 import axios from "axios";
-import { LoginConsultan } from "../../../services/userService";
+import { LoginConsultan } from "../../../services/ConsultantService";
 const Homepage_Admin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");

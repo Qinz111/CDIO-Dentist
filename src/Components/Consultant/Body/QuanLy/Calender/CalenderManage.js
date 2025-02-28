@@ -24,8 +24,7 @@ const CalendarManage = () => {
               <img src={dentist_manage.image} alt={dentist_manage.name} />
             </div>
             <div className="dentist-status">
-              <div className="free">Chưa đặt</div>
-              <div className="busy">Đã đặt</div>
+              <button className="btn-schedule">Lịch</button>
             </div>
           </div>
           <div className="user-calendar-container">
