@@ -64,7 +64,7 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
           <li onClick={() => setModelDelete(true)}>Xoá nhân viên</li>
         </div>
         <form className="information_detail" key={employee?.id}>
-          <div div className="form-group image-container">
+          <div className="form-group image-container">
             {employee?.profile_image ? (
               <img
                 src={employee?.profile_image}

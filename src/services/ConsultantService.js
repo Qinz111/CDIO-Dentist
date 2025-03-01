@@ -30,4 +30,16 @@ const getApoinReq = async (config) => {
   return instance.get("api/v1/consultant/appointment-requests", config);
 };
 
-export { LoginConsultan, getApoinReq };
+const confirmReq = async (id, config) => {
+  return instance.put(
+    `/api/v1/consultant/appointment-requests/${id}/confirm`,
+    {},
+    config
+  );
+};
+
+const getDoctorSchedule = async (id, config) => {
+  return instance.get(`/api/v1/consultant/doctors/${id}/schedules`, {}, config);
+};
+
+export { LoginConsultan, getApoinReq, confirmReq, getDoctorSchedule };

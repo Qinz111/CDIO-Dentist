@@ -58,6 +58,31 @@ const FormRegister = (props) => {
       setValidated((prev) => ({ ...prev, time: false }));
       return false;
     }
+
+    // Chia thời gian thành giờ và phút
+    const [hour, minute] = time.split(":").map(Number);
+
+    // Kiểm tra giờ có nằm trong khoảng 07:00 - 17:00 không
+    if (hour < 7 || hour > 17) {
+      setErrors((prev) => ({
+        ...prev,
+        time: "Thời gian phải từ 07:00 đến 17:00!",
+      }));
+      setValidated((prev) => ({ ...prev, time: false }));
+      return false;
+    }
+
+    // Kiểm tra phút có phải là 0, 15, 30, 45 không
+    if (![0, 15, 30, 45].includes(minute)) {
+      setErrors((prev) => ({
+        ...prev,
+        time: "Chỉ được chọn phút 00, 15, 30, 45!",
+      }));
+      setValidated((prev) => ({ ...prev, time: false }));
+      return false;
+    }
+
+    // Nếu hợp lệ
     setErrors((prev) => ({ ...prev, time: "" }));
     setValidated((prev) => ({ ...prev, time: true }));
     return true;
@@ -205,11 +230,14 @@ const FormRegister = (props) => {
               <input
                 type="time"
                 className="form-control"
-                placeholder="Chọn thời gian"
                 value={time}
+                min="07:00"
+                max="17:00"
+                step="900"
                 onChange={(e) => setTime(e.target.value)}
                 onBlur={(e) => validateTime(e.target.value)}
               />
+
               {errors.time && <span className="error-text">{errors.time}</span>}
               <input
                 type="date"

@@ -8,28 +8,30 @@ const GroupInforUser = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchDentists = async () => {
-      try {
-        let res = await getAllDentist();
-        if (res.data?.doctors) {
-          setUserList(res.data.doctors); //nếu có dentist thì sẽ lưu vào userList
-          setSelectedUser(res.data.doctors[0]);
-          console.log("check", res);
-        }
-      } catch (error) {
-        console.error("Lỗi khi lấy danh sách nha sĩ: ", error);
+  const fetchDentists = async () => {
+    try {
+      let res = await getAllDentist();
+      if (res.data?.doctors) {
+        setUserList(res.data.doctors);
+        setSelectedUser(res.data.doctors[0]);
       }
-    };
+    } catch (error) {
+      console.error("Lỗi khi lấy danh sách nha sĩ: ", error);
+    }
+  };
 
+  useEffect(() => {
     fetchDentists();
+    const interval = setInterval(() => {
+      fetchDentists();
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleSelectDentist = (dentist) => {
     if (dentist?.id) {
-      navigate(`/dentist-calendar/${dentist.id}`, {
-        state: { dentist },
-      });
+      navigate(`/dentist-calendar/${dentist.id}`, { state: { dentist } });
     } else {
       console.error("Invalid dentist object:", dentist);
     }
@@ -44,7 +46,6 @@ const GroupInforUser = () => {
             <>
               <div className="info-grid">
                 <p>Họ và tên: {selectedUser.name}</p>
-                <p>Ngày sinh: {selectedUser.birthday}</p>
                 <p>Số điện thoại: {selectedUser.phone}</p>
                 <p>Email: {selectedUser.email}</p>
                 <p>Địa chỉ: {selectedUser.location}</p>
@@ -82,7 +83,7 @@ const GroupInforUser = () => {
               onClick={() => setSelectedUser(user)}
             >
               <div className="user-info">
-                <img src={user.profile_image} alt="?" />
+                <img src={user.profile_image} alt="Avatar" />
               </div>
               <div className="detail-info">
                 <p>{user.name}</p>
