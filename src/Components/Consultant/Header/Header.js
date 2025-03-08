@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import icon2 from "../../../assets/icon2.jpg";
 import log_out from "../../../assets/log-out.png";
@@ -10,12 +10,26 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
-
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
 
-  const natigate = useNavigate();
+  useEffect(() => {
+    const token =
+      localStorage.getItem("accessToken") ||
+      sessionStorage.getItem("accessToken");
+    if (!token) {
+      navigate("/login"); // Chuyển hướng về trang đăng nhập nếu chưa đăng nhập
+    }
+  }, [navigate]);
+
+  const ReturnHomepage = () => {
+    localStorage.removeItem("accessToken");
+    sessionStorage.removeItem("accessToken");
+
+    window.location.href = "/";
+  };
 
   return (
     <>
@@ -51,19 +65,19 @@ const Header = () => {
               }`}
             >
               <ul>
-                <li onClick={() => natigate("/consultant")}>
+                <li onClick={() => navigate("/consultant")}>
                   <a className="dropdown-item">
                     <FaUserDoctor />
                     Trang chủ
                   </a>
                 </li>
-                <li onClick={() => natigate("/consultant/quan-li-bs")}>
+                <li onClick={() => navigate("/consultant/quan-li-bs")}>
                   <a className="dropdown-item">
                     <FaPhoneAlt />
                     Quản lý bác sĩ
                   </a>
                 </li>
-                <li onClick={() => natigate("/consultant/dang-ki-tu-van")}>
+                <li onClick={() => navigate("/consultant/dang-ki-tu-van")}>
                   <a className="dropdown-item">
                     <FaPhoneAlt />
                     Đăng kí tư vấn
@@ -72,7 +86,7 @@ const Header = () => {
               </ul>
             </div>
           </div>
-          <div className="header_bottom_right" onClick={() => natigate("/")}>
+          <div className="header_bottom_right" onClick={ReturnHomepage}>
             <div className="header_bottom_right_icon">
               <img src={log_out} alt="log_out" />
             </div>

@@ -39,7 +39,7 @@ const confirmReq = async (id, config) => {
 };
 
 const getDoctorSchedule = async (id, config) => {
-  return instance.get(`/api/v1/consultant/doctors/${id}/schedules`, {}, config);
+  return instance.get(`/api/v1/consultant/doctor-schedule/${id}`, {}, config);
 };
 
 export { LoginConsultan, getApoinReq, confirmReq, getDoctorSchedule };

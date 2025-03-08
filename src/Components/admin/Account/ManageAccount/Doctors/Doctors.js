@@ -6,7 +6,7 @@ import ShowInformation from "../../../ShowInformation/ShowInformation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { IoSearchSharp } from "react-icons/io5";
-
+import { showEmployees } from "../../../../../services/adminService";
 function Doctors_Admin() {
   const [doctorsList, setDoctorsList] = useState([]);
   const [addEmployees, setAddEmployees] = useState(false);
@@ -15,7 +15,7 @@ function Doctors_Admin() {
   const doctorsPerPage = 6;
   const [selectedEmployeeId, setSelectedEmployeeId] = useState(null);
   const [searchText, setSearchText] = useState("");
-
+  const checkRole = false;
   // Tìm kiếm Doctors theo tên
   const filteredDoctors = useMemo(() => {
     return doctorsList.filter((doctor) =>
@@ -35,13 +35,7 @@ function Doctors_Admin() {
   // Tải danh sách bác sĩ từ API
   const getDoctors = async () => {
     try {
-      const token = localStorage.getItem("accessToken");
-      const response = await axios.get(
-        "http://localhost:3001/api/v1/admin/doctors",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await showEmployees(checkRole);
       setDoctorsList(response.data);
     } catch (error) {
       console.error("Lỗi khi lấy dữ liệu bác sĩ:", error);
@@ -49,7 +43,7 @@ function Doctors_Admin() {
   };
 
   useEffect(() => {
-    getDoctors();
+    getDoctors(); 
   }, []);
 
   // Xử lý tìm kiếm

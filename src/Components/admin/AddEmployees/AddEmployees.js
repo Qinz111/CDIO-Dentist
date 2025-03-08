@@ -4,12 +4,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoCheck } from "react-icons/go";
 import axios from "axios";
-
+import { addEmployees } from "../../../services/adminService";
 const AddEmployees = (props) => {
   const [image, setImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
   const notify = (message) => {
+    // Xóa async vì toast.success không cần Promise
     toast.success(message || "Thêm nhân viên thành công!", {
       icon: <GoCheck style={{ color: "#0C2D79", fontSize: "24px" }} />,
       position: "top-right",
@@ -28,10 +29,6 @@ const AddEmployees = (props) => {
 
   const addEmployeeAPI = async () => {
     const token = localStorage.getItem("accessToken");
-    if (!token) {
-      toast.error("Bạn chưa đăng nhập!");
-      return;
-    }
 
     const formData = new FormData();
     formData.append("name", document.getElementById("name").value);
@@ -39,41 +36,26 @@ const AddEmployees = (props) => {
     formData.append("phone", document.getElementById("phone").value);
     formData.append("location", document.getElementById("location").value);
     formData.append("dob", document.getElementById("dob").value);
-
-    const genderValue = document.getElementById("male").value;
-    formData.append(
-      "male",
-      genderValue === "Nam" ? 1 : genderValue === "Nữ" ? 0 : ""
+    formData.append("male", document.getElementById("male").value === "Nam" ? 1 : 0
     );
-
-    if (props.isConsulting) {
+    if (props.isConsulting === true) {
       formData.append("password", document.getElementById("password").value);
-    } else {
-      formData.append(
-        "experience",
-        document.getElementById("experience").value
+    } else { 
+      formData.append( "experience", document.getElementById("experience").value
       );
     }
-
     if (imageFile) {
       formData.append("profile_image", imageFile);
     }
 
     try {
-      const url = props.checkRole
-        ? "http://localhost:3001/api/v1/admin/consultant"
-        : "http://localhost:3001/api/v1/admin/doctor";
-
-      const response = await axios.post(url, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
+      const response = await addEmployees(props.isConsulting,formData);
+      // Gọi notify trước, sau đó đóng form và reload
       notify(response.data.message);
-      props.onClose(); // Đóng form trước khi reload
-      setTimeout(() => window.location.reload(), 1500);
+      setTimeout(() => {
+        props.onClose(); // Đóng form trước
+        window.location.reload(); // Reload trang sau khi thông báo hiển thị
+      }, 1500); // Delay 1.5s để người dùng thấy thông báo trước khi reload
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);
@@ -83,12 +65,10 @@ const AddEmployees = (props) => {
     }
   };
 
+  //
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      if (image) {
-        URL.revokeObjectURL(image); // Giải phóng URL cũ
-      }
       const imageUrl = URL.createObjectURL(file);
       setImage(imageUrl);
       setImageFile(file);
@@ -125,7 +105,7 @@ const AddEmployees = (props) => {
             <div className="AddEmployees_content_bottom">
               <div className="AddEmployees_content_bottom_grid">
                 <p>
-                  HỌ TÊN:
+                  HỌ TÊN:{" "}
                   <input
                     id="name"
                     type="text"
@@ -134,8 +114,13 @@ const AddEmployees = (props) => {
                   />
                 </p>
                 <p>
-                  NGÀY SINH:
-                  <input id="dob" type="date" required />
+                  NGÀY SINH:{" "}
+                  <input
+                    id="dob"
+                    type="date"
+                    placeholder="Nhập ngày sinh"
+                    required
+                  />
                 </p>
                 <p>
                   GIỚI TÍNH:
@@ -146,7 +131,7 @@ const AddEmployees = (props) => {
                   </select>
                 </p>
                 <p>
-                  SĐT:
+                  SĐT:{" "}
                   <input
                     id="phone"
                     type="tel"
@@ -155,7 +140,7 @@ const AddEmployees = (props) => {
                   />
                 </p>
                 <p>
-                  EMAIL:
+                  EMAIL:{" "}
                   <input
                     id="email"
                     type="email"
@@ -164,7 +149,7 @@ const AddEmployees = (props) => {
                   />
                 </p>
                 <p>
-                  ĐỊA CHỈ:
+                  ĐỊA CHỈ:{" "}
                   <input
                     id="location"
                     type="text"
@@ -172,9 +157,9 @@ const AddEmployees = (props) => {
                     required
                   />
                 </p>
-                {props.isConsulting && (
+                {props.isConsulting === true && (
                   <p>
-                    PASSWORD:
+                    PASSWORD:{" "}
                     <input
                       id="password"
                       type="password"
@@ -183,9 +168,9 @@ const AddEmployees = (props) => {
                     />
                   </p>
                 )}
-                {!props.isConsulting && (
+                {props.isConsulting === false && (
                   <p>
-                    KINH NGHIỆM:
+                    KINH NGHIỆM:{" "}
                     <input
                       id="experience"
                       type="text"
@@ -206,12 +191,21 @@ const AddEmployees = (props) => {
               </button>
               <button type="submit" className="submit-btn">
                 Xác nhận
+                <ToastContainer />
               </button>
             </div>
           </form>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={1200}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover={false}
+        draggable={false}
+        theme="light"
+      />
     </div>
   );
 };

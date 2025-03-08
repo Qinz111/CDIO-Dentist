@@ -8,6 +8,7 @@ import s3 from "../../../assets/hp3.png";
 import s4 from "../../../assets/hp4.png";
 import axios from "axios";
 import { LoginConsultan } from "../../../services/ConsultantService";
+import {loginAdmin} from "../../../services/adminService";
 const Homepage_Admin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -26,10 +27,7 @@ const Homepage_Admin = () => {
     event.preventDefault();
     try {
       if (change === false) {
-        const response = await axios.post(
-          "http://localhost:3001/api/v1/admin/login",
-          { email, password }
-        );
+        const response = await loginAdmin(email, password)
         const { accessToken, refreshToken } = response.data;
         storeTokenData(accessToken, refreshToken);
         navigate("Doctors");

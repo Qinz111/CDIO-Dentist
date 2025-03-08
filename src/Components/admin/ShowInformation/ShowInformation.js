@@ -7,6 +7,7 @@ import Adjust from "../ModelAdjust/Adjust";
 import axios from "axios";
 import { FiMoreHorizontal } from "react-icons/fi";
 import Model_Delete from "../../admin/Model_Delete/Model_Delete";
+import { showEmployeesByID } from "../../../services/adminService";
 const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
   const [showAdjust, setShowAdjust] = useState(false);
   const [employee, setEmployee] = useState(null);
@@ -30,16 +31,8 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
   // Call API show information of a employee
   const showEmployeesIdAPI = async () => {
     if (!employeeId) return;
-
-    const token = localStorage.getItem("accessToken");
-    const url = isConsulting
-      ? `http://localhost:3001/api/v1/admin/consultant/${employeeId}`
-      : `http://localhost:3001/api/v1/admin/doctor/${employeeId}`;
     try {
-      const response = await axios.get(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      console.log(response.data.profile_image);
+      const response = await showEmployeesByID(employeeId, isConsulting);
       setEmployee(response.data);
     } catch (error) {
       if (error.response) {
@@ -64,7 +57,7 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
           <li onClick={() => setModelDelete(true)}>Xoá nhân viên</li>
         </div>
         <form className="information_detail" key={employee?.id}>
-          <div className="form-group image-container">
+          <div div className="form-group image-container">
             {employee?.profile_image ? (
               <img
                 src={employee?.profile_image}

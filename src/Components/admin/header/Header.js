@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.scss";
 import icon2 from "../../../assets/icon2_admin.jpg";
 import log_out from "../../../assets/log-out.png";
 import logo2 from "../../../assets/logo2.png";
 import { BsList } from "react-icons/bs";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 
 const Header_Admin = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
+  useEffect(() => {
+    const token =
+      localStorage.getItem("accessToken") ||
+      sessionStorage.getItem("accessToken");
+    if (!token) {
+      navigate("/login"); // Chuyển hướng về trang đăng nhập nếu chưa đăng nhập
+    }
+  }, [navigate]);
 
   const ReturnHomepage = () => {
+    localStorage.removeItem("accessToken");
+    sessionStorage.removeItem("accessToken");
+
     window.location.href = "/";
+  };
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
   };
 
   const GoAheadDoctor = () => {

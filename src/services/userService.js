@@ -37,4 +37,8 @@ const createAppointment = (
   });
 };
 
-export { getAllDentist, createAppointment };
+const getSchedule = (id) => {
+  return instance.get(`api/v1/user/doctor/${id}`);
+};
+
+export { getAllDentist, createAppointment, getSchedule };

@@ -6,7 +6,7 @@ import ShowInformation from "../../../ShowInformation/ShowInformation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { IoSearchSharp } from "react-icons/io5";
-
+import { showEmployees } from "../../../../../services/adminService";
 function Consultants_Admin() {
   const [consultantsList, setConsultantsList] = useState([]);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState(null);
@@ -15,7 +15,7 @@ function Consultants_Admin() {
   const [currentPage, setCurrentPage] = useState(1);
   const consultantsPerPage = 6;
   const [searchText, setSearchText] = useState("");
-
+  const checkRole = true;
   // Lọc danh sách consultants dựa trên searchText với useMemo
   const filteredConsultants = useMemo(() => {
     return consultantsList.filter((consul) =>
@@ -47,13 +47,7 @@ function Consultants_Admin() {
   // Gọi API lấy danh sách consultants
   const getConsultants = async () => {
     try {
-      const token = localStorage.getItem("accessToken");
-      const response = await axios.get(
-        "http://localhost:3001/api/v1/admin/consultants",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await showEmployees(checkRole);
       setConsultantsList(response.data);
     } catch (error) {
       console.error("Lỗi khi lấy danh sách consultants:", error);

@@ -3,21 +3,12 @@ import "./Adjust.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoCheck } from "react-icons/go";
-import axios from "axios";
-
+import { showEmployeesByID } from "../../../services/adminService";
+import { adjustEmployees } from "../../../services/adminService";
 const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
-  const [image, setImage] = useState(null);
-  const [employee, setEmployee] = useState({
-    profile_image: "",
-    name: "",
-    email: "",
-    phone: "",
-    location: "",
-    dob: "",
-    male: "",
-    experience: "",
-  });
-
+  const [employee, setEmployee] = useState(null);
+  const [imageFile, setImageFile] = useState();
+  const [image, setImage] = useState(false);
   const notify = () =>
     toast.success("Cập nhật thành công!", {
       icon: <GoCheck style={{ color: "#0C2D79", fontSize: "24px" }} />,
@@ -28,42 +19,84 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
       pauseOnHover: false,
       draggable: false,
       theme: "light",
-      style: { color: "#0C2D79", fontWeight: "bold" },
+      style: {
+        color: "#0C2D79",
+        fontWeight: "bold",
+      },
     });
-
-  useEffect(() => {
-    if (!adjustEmployeeId) return;
-
-    const token = localStorage.getItem("accessToken");
-    const url = isAdjustConsulting
-      ? `http://localhost:3001/api/v1/admin/consultant/${adjustEmployeeId}`
-      : `http://localhost:3001/api/v1/admin/doctor/${adjustEmployeeId}`;
-
-    const fetchEmployee = async () => {
-      try {
-        const response = await axios.get(url, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = response.data;
-
-        setEmployee({
-          ...data,
-          male: data.male ? "Nam" : "Nữ",
-        });
-        setImage(data.profile_image || null);
-      } catch (error) {
-        toast.error(error.response?.data?.message || "Lỗi khi tải dữ liệu!");
+  // call APL show Employees'information
+  const fetchEmployee = async () => {
+    try {
+      const response = await showEmployeesByID(
+        adjustEmployeeId,
+        isAdjustConsulting
+      );
+      setEmployee(response.data);
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
       }
-    };
-
+    }
+  };
+  useEffect(() => {
     fetchEmployee();
   }, [adjustEmployeeId, isAdjustConsulting]);
+  const adjustEmployee = async () => {
+    const formData = new FormData();
+    formData.append("name", document.getElementById("name").value);
+    formData.append("email", document.getElementById("email").value);
+    formData.append("phone", document.getElementById("phone").value);
+    formData.append("location", document.getElementById("location").value);
+    formData.append("dob", document.getElementById("dob").value);
+    formData.append(
+      "male",
+      document.getElementById("male").value === "Nam" ? 1 : 0
+    );
 
+    if (!isAdjustConsulting) {
+      formData.append(
+        "experience",
+        document.getElementById("experience").value
+      );
+    }
+
+    // Chỉ thêm ảnh nếu người dùng chọn ảnh mới
+    if (imageFile) {
+      formData.append("profile_image", imageFile);
+    } else if (employee?.profile_image) {
+      formData.append("profile_image", employee.profile_image);
+    }
+
+    try {
+      const response = await adjustEmployees(
+        adjustEmployeeId,
+        isAdjustConsulting,
+        formData
+      );
+      notify(response.data.message);
+      setTimeout(() => {
+        onClose();
+        window.location.reload();
+      }, 500);
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      }
+    }
+  };
+
+  //onchange
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { id, value } = e.target;
+
+    let newValue = value;
+    if (id === "male") {
+      newValue = value === "Nam";
+    }
+
     setEmployee((prev) => ({
       ...prev,
-      [name]: name === "male" ? (value === "Nam" ? 1 : 0) : value,
+      [id]: newValue,
     }));
   };
 
@@ -71,42 +104,17 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
     const file = event.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
-      setImage(imageUrl);
       setEmployee((prev) => ({
         ...prev,
-        profile_image: file,
+        profile_image: imageUrl,
       }));
+      setImageFile(file);
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("accessToken");
-    const url = isAdjustConsulting
-      ? `http://localhost:3001/api/v1/admin/consultant/${adjustEmployeeId}`
-      : `http://localhost:3001/api/v1/admin/doctor/${adjustEmployeeId}`;
-
-    const formData = new FormData();
-    Object.keys(employee).forEach((key) => {
-      formData.append(key, employee[key]);
-    });
-
-    try {
-      await axios.put(url, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      notify();
-      setTimeout(() => {
-        onClose();
-        window.location.reload();
-      }, 500);
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Cập nhật thất bại!");
-    }
+    adjustEmployee();
   };
 
   return (
@@ -123,10 +131,18 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 onChange={handleImageChange}
               />
               <label htmlFor="image-upload" className="upload-label">
-                {image ? "Thay đổi ảnh" : "Tải ảnh lên"}
+                {employee?.profile_image ? "Thay đổi ảnh" : "Tải ảnh lên"}
               </label>
-              {image && (
-                <img src={image} alt="Preview" className="image-preview" />
+
+              {/* Hiển thị ảnh mới được chọn hoặc ảnh từ dữ liệu ban đầu */}
+              {employee?.profile_image ? (
+                <img
+                  src={employee?.profile_image}
+                  alt="Employee"
+                  className="employee-image-adjust"
+                />
+              ) : (
+                <p>Chưa có ảnh</p>
               )}
             </div>
           </div>
@@ -136,10 +152,10 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 <p>
                   HỌ TÊN:
                   <input
-                    name="name"
+                    id="name"
                     type="text"
                     placeholder="Nhập họ tên"
-                    value={employee.name || ""}
+                    value={employee?.name || ""}
                     onChange={handleInputChange}
                     required
                   />
@@ -147,10 +163,11 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 <p>
                   NGÀY SINH:
                   <input
-                    name="dob"
+                    id="dob"
                     type="date"
+                    placeholder="Nhập ngày sinh"
                     value={
-                      employee.dob
+                      employee?.dob
                         ? new Date(employee.dob).toISOString().split("T")[0]
                         : ""
                     }
@@ -161,11 +178,12 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 <p>
                   GIỚI TÍNH:
                   <select
-                    name="male"
-                    value={employee.male === 1 ? "Nam" : "Nữ"}
+                    id="male"
+                    value={employee?.male ? "Nam" : "Nữ"}
                     onChange={handleInputChange}
                     required
                   >
+                    <option value="">Chọn giới tính</option>
                     <option value="Nam">Nam</option>
                     <option value="Nữ">Nữ</option>
                   </select>
@@ -173,10 +191,10 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 <p>
                   SĐT:
                   <input
-                    name="phone"
+                    id="phone"
                     type="tel"
                     placeholder="Nhập số điện thoại"
-                    value={employee.phone || ""}
+                    value={employee?.phone || ""}
                     onChange={handleInputChange}
                     required
                   />
@@ -184,10 +202,10 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 <p>
                   EMAIL:
                   <input
-                    name="email"
+                    id="email"
                     type="email"
                     placeholder="Nhập email"
-                    value={employee.email || ""}
+                    value={employee?.email || ""}
                     onChange={handleInputChange}
                     required
                   />
@@ -195,10 +213,10 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 <p>
                   ĐỊA CHỈ:
                   <input
-                    name="location"
+                    id="location"
                     type="text"
                     placeholder="Nhập địa chỉ"
-                    value={employee.location || ""}
+                    value={employee?.location || ""}
                     onChange={handleInputChange}
                     required
                   />
@@ -207,10 +225,10 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                   <p>
                     KINH NGHIỆM:
                     <input
-                      name="experience"
+                      id="experience"
                       type="text"
                       placeholder="Nhập kinh nghiệm"
-                      value={employee.experience || ""}
+                      value={employee?.experience || ""}
                       onChange={handleInputChange}
                       required
                     />
