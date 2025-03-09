@@ -30,10 +30,10 @@ const getApoinReq = async (config) => {
   return instance.get("api/v1/consultant/appointment-requests", config);
 };
 
-const confirmReq = async (id, config) => {
+const confirmReq = async (id, status, config) => {
   return instance.put(
     `/api/v1/consultant/appointment-requests/${id}/confirm`,
-    {},
+    status,
     config
   );
 };

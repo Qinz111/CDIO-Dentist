@@ -50,7 +50,7 @@ const TuVan = () => {
     return format(new Date(dateString), "dd/MM/yyyy HH:mm");
   };
 
-  const handleConfirmAppointment = async (id) => {
+  const handleConfirmAppointment = async (id, status) => {
     try {
       const token = localStorage.getItem("accessToken");
       if (!token) {
@@ -58,12 +58,18 @@ const TuVan = () => {
         return;
       }
 
-      // Gọi API với headers
-      const res = await confirmReq(id, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // Gọi API với body chứa status
+      const res = await confirmReq(
+        id,
+        { status: status },
+        {
+          // Thêm status vào body
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (res.data) {
         console.log("Lịch hẹn đã được duyệt:", res.data);
@@ -91,6 +97,7 @@ const TuVan = () => {
             <th>GIỜ HẸN</th>
             <th>NGÀY TẠO</th>
             <th>Duyệt</th>
+            <th>Từ Chối</th>
           </tr>
         </thead>
         <tbody>
@@ -107,9 +114,17 @@ const TuVan = () => {
                 <td>
                   <button
                     className="btn-confirm-appointment"
-                    onClick={() => handleConfirmAppointment(item.id)}
+                    onClick={() => handleConfirmAppointment(item.id, 1)}
                   >
                     OK
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn-confirm-appointment"
+                    onClick={() => handleConfirmAppointment(item.id, 0)}
+                  >
+                    No
                   </button>
                 </td>
               </tr>
