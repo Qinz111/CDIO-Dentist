@@ -47,7 +47,7 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
     <div className="show-information-overlay">
       <div className="show-information-content">
         <div className="content">
-          <h2>THÔNG TIN NHÂN VIÊN</h2>
+        <h2>{isConsulting ? "Thông tin nhân viên tư vấn" : "Thông tin bác sĩ"}</h2>
           <FiMoreHorizontal
             className="icon"
             onClick={() => setDeleteVisible(!deleteVisible)}
@@ -101,7 +101,7 @@ const ShowInformation = ({ onClose, isConsulting, employeeId }) => {
           {!isConsulting && (
             <div className="form-group">
               <label>KINH NGHIỆM:</label>
-              {employee?.experience}
+              <pre className="experience-text">{employee?.experience}</pre>
             </div>
           )}
           <div className="button-group">

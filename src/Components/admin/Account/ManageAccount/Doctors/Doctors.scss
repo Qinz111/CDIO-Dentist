@@ -123,7 +123,16 @@
         }
     }
 }
+.table{
+    --bs-table-border-color: #dadbdd !important;
+    .title {
+        font-size: 18px !important;
+    }
+    tbody {
+        tr th {
+          background-color: #fff !important; 
+        }
+      }
 }
-.Consultants_content .Consultants_list .title {
-    background-color: #8ab5e3;
 }
+

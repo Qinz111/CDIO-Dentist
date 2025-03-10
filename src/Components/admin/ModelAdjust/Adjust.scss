@@ -98,7 +98,10 @@
           font-size: 15px;
           font-weight: bold;
           color: #000;
-
+          .NgaySinh{
+            background-color: #f9f9f9;
+         
+          }
           input,
           select {
             width: 500px;
@@ -169,4 +172,28 @@
 .employee-image-adjust {
   width: 200px;
   height: 200px;
+}
+.experience-textarea {
+  width: 500px;
+  min-height: 80px;
+  margin-left: auto;
+  resize: vertical; // Cho phép kéo thay đổi kích thước
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  &::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+
+  &:hover {
+    border-color: #0c2d79;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #0c2d79;
+    background-color: #f9f9f9;
+  }
 }

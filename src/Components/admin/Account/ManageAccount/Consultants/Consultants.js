@@ -13,7 +13,7 @@ function Consultants_Admin() {
   const [addEmployees, setAddEmployees] = useState(false);
   const [showInformation, setShowInformation] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const consultantsPerPage = 6;
+  const consultantsPerPage = 10;
   const [searchText, setSearchText] = useState("");
   const checkRole = true;
   // Lọc danh sách consultants dựa trên searchText với useMemo
@@ -60,7 +60,7 @@ function Consultants_Admin() {
 
   return (
     <div className="Consultants">
-      <div className="Consultants_header">Danh sách Consultants</div>
+      <div className="Consultants_header">Danh sách nhân viên tư vấn</div>
       <div className="Consultants_middle">
         <button
           className="Consultants_middle_button"
@@ -84,7 +84,7 @@ function Consultants_Admin() {
       </div>
       <div className="Consultants_content">
         <div className="Consultants_list">
-          <table className="table table-hover table-striped table-bordered">
+          <table className="table table-hover table-striped table-bordered ">
             <thead>
               <tr className="title">
                 <th className="title" scope="col">
@@ -143,7 +143,7 @@ function Consultants_Admin() {
                 className="page-link"
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               >
-                Previous
+                Trước
               </button>
             </li>
             {[...Array(totalPages)].map((_, index) => (
@@ -172,7 +172,7 @@ function Consultants_Admin() {
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
               >
-                Next
+                Sau
               </button>
             </li>
           </ul>

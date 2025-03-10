@@ -120,7 +120,9 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
   return (
     <div className="Adjust-overlay">
       <div className="Adjust">
-        <div className="Adjust_header">CẬP NHẬT NHÂN VIÊN</div>
+      <div className="Adjust_header">
+           {isAdjustConsulting ? "Cập nhật nhân viên tư vấn" : "Cập nhật bác sĩ"}
+      </div>
         <div className="Adjust_content">
           <div className="Adjust_content_top">
             <div className="image-upload-section">
@@ -173,6 +175,7 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                     }
                     onChange={handleInputChange}
                     required
+                    className="NgaySinh"
                   />
                 </p>
                 <p>
@@ -197,6 +200,8 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                     value={employee?.phone || ""}
                     onChange={handleInputChange}
                     required
+                    pattern="[0-9]{10}"
+                    title="Số điện thoại phải có đúng 10 chữ số"
                   />
                 </p>
                 <p>
@@ -224,14 +229,15 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                 {!isAdjustConsulting && (
                   <p>
                     KINH NGHIỆM:
-                    <input
+                    <textarea
                       id="experience"
-                      type="text"
-                      placeholder="Nhập kinh nghiệm"
+                      placeholder="Nhập kinh nghiệm chi tiết"
+                      required
+                      rows="3"
                       value={employee?.experience || ""}
                       onChange={handleInputChange}
-                      required
-                    />
+                      className="experience-textarea"
+                    ></textarea>
                   </p>
                 )}
               </div>

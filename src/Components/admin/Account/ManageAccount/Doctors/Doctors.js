@@ -12,7 +12,7 @@ function Doctors_Admin() {
   const [addEmployees, setAddEmployees] = useState(false);
   const [showInformation, setShowInformation] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const doctorsPerPage = 6;
+  const doctorsPerPage = 10;
   const [selectedEmployeeId, setSelectedEmployeeId] = useState(null);
   const [searchText, setSearchText] = useState("");
   const checkRole = false;
@@ -53,7 +53,7 @@ function Doctors_Admin() {
   };
   return (
     <div className="Doctors">
-      <div className="Doctors_header">Danh sách Doctors</div>
+      <div className="Doctors_header">Danh sách bác sĩ</div>
       <div className="Doctors_middle">
         <button
           className="Doctors_middle_button"
@@ -135,7 +135,7 @@ function Doctors_Admin() {
                 className="page-link"
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               >
-                Previous
+                Trước
               </button>
             </li>
             {[...Array(totalPages)].map((_, index) => (
@@ -164,7 +164,7 @@ function Doctors_Admin() {
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
               >
-                Next
+                Sau
               </button>
             </li>
           </ul>

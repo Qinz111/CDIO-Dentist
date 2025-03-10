@@ -102,7 +102,10 @@
           font-size: 15px;
           font-weight: bold;
           color: #000;
-
+          .NgaySinh{
+            background-color: #f9f9f9;
+            width: 377.5px;
+          }
           input,
           select {
             margin-top: 5px;
@@ -165,6 +168,29 @@
           }
         }
       }
+    }
+  }
+  .experience-textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical; // Cho phép kéo thay đổi kích thước
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    &::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+
+    &:hover {
+      border-color: #0c2d79;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #0c2d79;
+      background-color: #f9f9f9;
     }
   }
 }

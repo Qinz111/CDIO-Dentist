@@ -19,7 +19,7 @@
             .Consultants_list {
                 width: 100%;
                 .title{
-                    background-color: #cccaca;
+                    background-color: #8ab5e3;
                 }
                 .check_view {
                     border: none;
@@ -30,8 +30,8 @@
                         color: #0056b3; // Màu khi hover (xanh đậm hơn)
                     }
                 }
-
             }
+
     }
     &_info {
         flex: 1;
@@ -123,6 +123,17 @@
             }
         }
     }
+}
+table{
+    --bs-table-border-color: #dadbdd !important;
+    .title {
+        font-size: 18px !important;
+    }
+    tbody {
+        tr th {
+          background-color: #fff !important; 
+        }
+      }
 }
 }
 

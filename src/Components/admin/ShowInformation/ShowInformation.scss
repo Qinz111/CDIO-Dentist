@@ -39,6 +39,14 @@
         opacity: 1;
       }
     }
+    h2{ 
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #0c2d79;
+  
+    }
     .content-delete {
       display: none;
       position: absolute;
@@ -152,5 +160,14 @@
         }
       }
     }
+  }
+  .experience-text {
+    white-space: pre-wrap; // Giữ định dạng xuống dòng
+    word-wrap: break-word; // Ngắt dòng nếu quá dài
+    font-size: 16px; // Cùng kích thước chữ với các trường khác
+    color: #333; // Màu chữ đồng bộ
+    font-weight: normal; // Giữ nguyên độ đậm của chữ
+    line-height: 1.5; // Giúp dòng chữ dễ đọc hơn
+    padding: 5px 0; // Tạo khoảng cách đồng nhất
   }
 }

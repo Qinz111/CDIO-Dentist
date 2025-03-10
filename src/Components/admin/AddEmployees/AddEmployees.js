@@ -83,7 +83,7 @@ const AddEmployees = (props) => {
   return (
     <div className="AddEmployees-overlay">
       <div className="AddEmployees">
-        <div className="AddEmployees_header">THÊM NHÂN VIÊN</div>
+        <div className="AddEmployees_header"><h2>{props.isConsulting ? "Thêm nhân viên tư vấn" : "Thêm bác sĩ"}</h2></div>
         <div className="AddEmployees_content">
           <div className="AddEmployees_content_top">
             <div className="image-upload-section">
@@ -120,6 +120,7 @@ const AddEmployees = (props) => {
                     type="date"
                     placeholder="Nhập ngày sinh"
                     required
+                    className="NgaySinh"
                   />
                 </p>
                 <p>
@@ -137,6 +138,8 @@ const AddEmployees = (props) => {
                     type="tel"
                     placeholder="Nhập số điện thoại"
                     required
+                    pattern="[0-9]{10}"
+                    title="Số điện thoại phải có đúng 10 chữ số"
                   />
                 </p>
                 <p>
@@ -171,12 +174,13 @@ const AddEmployees = (props) => {
                 {props.isConsulting === false && (
                   <p>
                     KINH NGHIỆM:{" "}
-                    <input
+                    <textarea
                       id="experience"
-                      type="text"
-                      placeholder="Nhập số năm kinh nghiệm"
+                      placeholder="Nhập kinh nghiệm chi tiết"
                       required
-                    />
+                      rows="3"
+                      className="experience-textarea"
+                    ></textarea>
                   </p>
                 )}
               </div>
