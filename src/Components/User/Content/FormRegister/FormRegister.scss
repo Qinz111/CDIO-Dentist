@@ -55,7 +55,7 @@
           input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-top: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
 
@@ -263,7 +263,33 @@
 .form-select {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  // max-width: fit-content;
+}
+
+.form-regis-container {
+  // padding: 20px;
+  overflow-y: auto; /* Cho phép cuộn dọc khi nội dung vượt quá kích thước */
+  max-height: 100vh;
+}
+
+@media screen and (max-width: 575px) {
+  .modal-dialog {
+    top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .modal-content {
+      max-width: fit-content;
+    }
+  }
 }

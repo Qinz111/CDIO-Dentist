@@ -162,8 +162,8 @@ const FormRegister = (props) => {
   };
 
   return (
-    <Modal show={show}>
-      <div className="container">
+    <Modal show={show} className="modal-regis">
+      <div className="container form-regis-container">
         <div className="container-box">
           <div className="box-header">
             <div className="header-logo">

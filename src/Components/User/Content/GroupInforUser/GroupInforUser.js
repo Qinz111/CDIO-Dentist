@@ -40,7 +40,7 @@ const GroupInforUser = () => {
   return (
     <div className="group-info-wrapper">
       <div className="group-info-container">
-        <h2 className="group-title">ĐỘI HÌNH</h2>
+        <h2 className="group-title">BÁC SĨ</h2>
         <div className="group-info-container-left">
           {selectedUser && (
             <>
@@ -49,14 +49,24 @@ const GroupInforUser = () => {
                 <p>Số điện thoại: {selectedUser.phone}</p>
                 <p>Email: {selectedUser.email}</p>
                 <p>Địa chỉ: {selectedUser.location}</p>
+                <p>Kinh nghiệm làm việc: {selectedUser.experience} năm</p>
               </div>
               <div className="btn-dk">
-                <button
+                {/* <button
                   className="btn-dk"
                   onClick={() => handleSelectDentist(selectedUser)}
                 >
                   DK
-                </button>
+                </button>  */}
+                <a
+                  class="fancy"
+                  onClick={() => handleSelectDentist(selectedUser)}
+                >
+                  <span class="top-key"></span>
+                  <span class="text">Xem lịch</span>
+                  <span class="bottom-key-1"></span>
+                  <span class="bottom-key-2"></span>
+                </a>
               </div>
             </>
           )}
