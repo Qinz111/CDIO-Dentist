@@ -5,8 +5,11 @@ import {
   getApoinReq,
 } from "../../../../services/ConsultantService";
 import { format } from "date-fns";
-import "./TuVan.scss";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { GoCheck } from "react-icons/go";
+import { MdError } from "react-icons/md";
+import { GiConfirmed } from "react-icons/gi";
 const TuVan = () => {
   const [appointment, setAppointment] = useState([]);
 
@@ -18,7 +21,6 @@ const TuVan = () => {
         return;
       }
 
-      // Gọi API với headers
       const res = await getApoinReq({
         headers: {
           Authorization: `Bearer ${token}`,
@@ -32,19 +34,20 @@ const TuVan = () => {
       }
     } catch (error) {
       console.error("Lỗi khi lấy lịch hẹn:", error);
+      toast.error("Lỗi khi tải lịch hẹn. Vui lòng thử lại!", {
+        icon: <MdError style={{ color: "red", fontSize: "24px" }} />,
+      });
     }
   };
+
   useEffect(() => {
     getAppoinment();
-
     const interval = setInterval(() => {
       getAppoinment();
     }, 10000);
-
     return () => clearInterval(interval);
   }, []);
 
-  // Hàm định dạng thời gian
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
     return format(new Date(dateString), "dd/MM/yyyy HH:mm");
@@ -58,12 +61,10 @@ const TuVan = () => {
         return;
       }
 
-      // Gọi API với body chứa status
       const res = await confirmReq(
         id,
         { status: status },
         {
-          // Thêm status vào body
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -72,20 +73,29 @@ const TuVan = () => {
       );
 
       if (res.data) {
-        console.log("Lịch hẹn đã được duyệt:", res.data);
-
-        // Gọi lại API để cập nhật danh sách lịch hẹn
+        toast.success(
+          status === 1
+            ? "Lịch hẹn đã được duyệt thành công!"
+            : "Lịch hẹn đã bị từ chối!",
+          {
+            icon: <GoCheck style={{ color: "#0C2D79", fontSize: "24px" }} />,
+          }
+        );
         getAppoinment();
       } else {
-        console.error("Phản hồi không hợp lệ:", res);
+        toast.error("Phản hồi không hợp lệ từ server!");
       }
     } catch (error) {
       console.error("Lỗi khi duyệt lịch hẹn:", error);
+      toast.error("Đã có người đặt thời gian này", {
+        icon: <MdError style={{ color: "red", fontSize: "24px" }} />,
+      });
     }
   };
 
   return (
     <div className="container-tuvan">
+      <ToastContainer />
       <table className="table-tuvan">
         <thead>
           <tr>
@@ -111,27 +121,27 @@ const TuVan = () => {
                 <td>{item.customer_phone}</td>
                 <td>{formatDate(item.preferred_time)}</td>
                 <td>{formatDate(item.created_at)}</td>
-                <td>
+                <td className="btn-confirm-appointment">
                   <button
-                    className="btn-confirm-appointment"
+                    // className="btn-confirm-appointment"
                     onClick={() => handleConfirmAppointment(item.id, 1)}
                   >
-                    OK
+                    Xác nhận
                   </button>
                 </td>
-                <td>
+                <td className="btn-reject-appointment">
                   <button
                     className="btn-confirm-appointment"
                     onClick={() => handleConfirmAppointment(item.id, 0)}
                   >
-                    No
+                    Từ chối
                   </button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="7" style={{ textAlign: "center" }}>
+              <td colSpan="9" style={{ textAlign: "center" }}>
                 Không có lịch hẹn
               </td>
             </tr>

@@ -4,6 +4,7 @@
   background-color: #e5eaf2;
   height: 100vh;
   flex-direction: column;
+  padding-top: 30px;
 }
 
 .header-tuvan {
@@ -85,4 +86,15 @@ input[type="date"]:focus {
 .table-tuvan {
   margin-top: 10px;
   width: 90%;
+}
+
+.btn-confirm-appointment {
+  button {
+    background-color: #7bc1e0;
+  }
+}
+.btn-reject-appointment {
+  button {
+    background-color: red;
+  }
 }

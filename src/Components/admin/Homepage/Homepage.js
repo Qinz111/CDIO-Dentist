@@ -6,9 +6,8 @@ import s1 from "../../../assets/cdio-dentist.png";
 import s2 from "../../../assets/hp2.png";
 import s3 from "../../../assets/hp3.png";
 import s4 from "../../../assets/hp4.png";
-import axios from "axios";
 import { LoginConsultan } from "../../../services/ConsultantService";
-import {loginAdmin} from "../../../services/adminService";
+import { loginAdmin } from "../../../services/adminService";
 const Homepage_Admin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -27,7 +26,7 @@ const Homepage_Admin = () => {
     event.preventDefault();
     try {
       if (change === false) {
-        const response = await loginAdmin(email, password)
+        const response = await loginAdmin(email, password);
         const { accessToken, refreshToken } = response.data;
         storeTokenData(accessToken, refreshToken);
         navigate("Doctors");
@@ -53,7 +52,7 @@ const Homepage_Admin = () => {
         <img src={s4} alt="" />
       </div>
       <div className="login__card">
-        <div className="login__custom">CIDO</div>
+        <div className="login__custom">CDIO</div>
         <h1 className="login__title">Đăng nhập</h1>
 
         <form onSubmit={GoAhead}>
@@ -84,7 +83,7 @@ const Homepage_Admin = () => {
             <div className="login__input-container">
               <input
                 type="number"
-                placeholder="Nhập mật khẩu"
+                placeholder="Nhập ID"
                 className="login__input"
                 value={id}
                 onChange={(e) => setId(e.target.value)}

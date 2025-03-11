@@ -148,12 +148,19 @@ const FormRegister = (props) => {
       isTimeValid &&
       isDoctorValid
     ) {
-      alert("Đăng ký thành công!");
+      alert(
+        "Hệ thống đã ghi nhận thông tin của bạn. CDIO Dentistn sẽ liên hệ với bạn trong thời gian sớm nhất. Cảm ơn bạn đã quan tâm tới dịch vụ ủa chúng tôi!"
+      );
 
       let formattedDate = date.split("-").reverse().join("/");
       let resultTime = `${time}, ${formattedDate}`;
       let data = await createAppointment(name, phone, doctor, resultTime);
-      console.log(data);
+      // console.log(data);
+      setName("");
+      setPhone("");
+      setDate("");
+      setTime("");
+      setDoctor("");
 
       handleClose();
     } else {

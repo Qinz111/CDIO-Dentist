@@ -25,7 +25,7 @@ const Header_Admin = () => {
     localStorage.removeItem("accessToken");
     sessionStorage.removeItem("accessToken");
 
-    window.location.href = "/";
+    window.location.href = "/login";
   };
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);

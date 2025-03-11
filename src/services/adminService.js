@@ -13,6 +13,7 @@ const loginAdmin = (email, password) => {
 };
 // Hàm xóa nhân viên
 const deleteEmployees = (employeeID, checkRole) => {
+  const token = localStorage.getItem("accessToken");
   const url = checkRole
     ? `api/v1/admin/consultant/${employeeID}`
     : `api/v1/admin/doctor/${employeeID}`;
@@ -22,6 +23,7 @@ const deleteEmployees = (employeeID, checkRole) => {
 };
 // Xem thông tin 1 nhân viên
 const showEmployeesByID = (employeeID, checkRole) => {
+  const token = localStorage.getItem("accessToken");
   const url = checkRole
     ? `api/v1/admin/consultant/${employeeID}`
     : `api/v1/admin/doctor/${employeeID}`;
@@ -32,6 +34,7 @@ const showEmployeesByID = (employeeID, checkRole) => {
 // thêm nhân viên
 const addEmployees = (checkRole, employee) => {
   const url = checkRole ? `api/v1/admin/consultant` : `api/v1/admin/doctor`;
+  const token = localStorage.getItem("accessToken");
   return instance.post(url, employee, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -51,6 +54,7 @@ const showEmployees = (checkRole) => {
 };
 // Các hàm quản lý nhân viên (chưa triển khai)
 const adjustEmployees = (employeeID, checkRole, employee) => {
+  const token = localStorage.getItem("accessToken");
   const url = checkRole
     ? `api/v1/admin/consultant/${employeeID}`
     : `api/v1/admin/doctor/${employeeID}`;

@@ -40,7 +40,7 @@ const GroupInforUser = () => {
   return (
     <div className="group-info-wrapper">
       <div className="group-info-container">
-        <h2 className="group-title">BÁC SĨ</h2>
+        <h2 className="group-title">NHA SĨ</h2>
         <div className="group-info-container-left">
           {selectedUser && (
             <>
@@ -59,13 +59,13 @@ const GroupInforUser = () => {
                   DK
                 </button>  */}
                 <a
-                  class="fancy"
+                  className="fancy"
                   onClick={() => handleSelectDentist(selectedUser)}
                 >
-                  <span class="top-key"></span>
-                  <span class="text">Xem lịch</span>
-                  <span class="bottom-key-1"></span>
-                  <span class="bottom-key-2"></span>
+                  <span className="top-key"></span>
+                  <span className="text">Xem lịch</span>
+                  <span className="bottom-key-1"></span>
+                  <span className="bottom-key-2"></span>
                 </a>
               </div>
             </>

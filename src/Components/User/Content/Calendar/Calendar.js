@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import { getSchedule } from "../../../../services/userService";
-
+import "./Calendar.scss";
 const CalendarManage = () => {
   const location = useLocation();
   const dentist_manage = location.state?.dentist;
   const [schedule, setSchedule] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchSchedule = async () => {
       try {
@@ -62,7 +62,12 @@ const CalendarManage = () => {
             <img src={dentist_manage.profile_image} alt="Dentist" />
           </div>
           <div className="dentist-status">
-            <button className="btn-schedule">Lịch</button>
+            <a className="fancy" onClick={() => navigate("/")}>
+              <span className="top-key"></span>
+              <span className="text">Trở về</span>
+              <span className="bottom-key-1"></span>
+              <span className="bottom-key-2"></span>
+            </a>
           </div>
         </div>
         <div className="user-calendar-container">

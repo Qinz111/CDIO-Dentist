@@ -17,6 +17,7 @@ const LoginConsultan = async (email, password, id) => {
     // Kiểm tra nếu response có chứa accessToken
     if (res.data && res.data.accessToken) {
       localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("consultantId", id);
     }
 
     return res;
@@ -24,6 +25,15 @@ const LoginConsultan = async (email, password, id) => {
     console.error("Lỗi khi đăng nhập:", error);
     throw error;
   }
+};
+
+const getInfo = async (config) => {
+  const id = localStorage.getItem("consultantId"); // Lấy id từ localStorage
+  if (!id) {
+    throw new Error("Không tìm thấy consultantId trong localStorage");
+  }
+
+  return instance.get(`api/v1/consultant/${id}`, config);
 };
 
 const getApoinReq = async (config) => {
@@ -42,4 +52,4 @@ const getDoctorSchedule = async (id, config) => {
   return instance.get(`/api/v1/consultant/doctor-schedule/${id}`, {}, config);
 };
 
-export { LoginConsultan, getApoinReq, confirmReq, getDoctorSchedule };
+export { LoginConsultan, getApoinReq, confirmReq, getDoctorSchedule, getInfo };

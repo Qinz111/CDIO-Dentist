@@ -28,7 +28,22 @@ const Header = () => {
     localStorage.removeItem("accessToken");
     sessionStorage.removeItem("accessToken");
 
-    window.location.href = "/";
+    window.location.href = "/login";
+  };
+
+  const handleTrangChu = () => {
+    navigate("/consultant");
+    toggleMenu();
+  };
+
+  const handleBacSi = () => {
+    navigate("/consultant/quan-li-bs");
+    toggleMenu();
+  };
+
+  const handleTuVan = () => {
+    navigate("/consultant/dang-ki-tu-van");
+    toggleMenu();
   };
 
   return (
@@ -39,7 +54,12 @@ const Header = () => {
         </div>
         <div className="header_content">
           <div className="header_content_left">
-            <img src={logo2} alt="logo2" />
+            <img
+              className="logo-const"
+              src={logo2}
+              alt="logo2"
+              onClick={() => navigate("/consultant")}
+            />
           </div>
           <div className="header_content_right">
             <div className="header_content_right_icon">
@@ -56,7 +76,7 @@ const Header = () => {
         <div className="header_bottom">
           <div className="header_bottom_left">
             <div className="header_bottom_left_icon">
-              <BsList className="icon" onClick={toggleMenu} />
+              <BsList className="icon" onClick={() => toggleMenu()} />
             </div>
 
             <div
@@ -65,19 +85,19 @@ const Header = () => {
               }`}
             >
               <ul>
-                <li onClick={() => navigate("/consultant")}>
+                <li onClick={() => handleTrangChu()}>
                   <a className="dropdown-item">
                     <FaUserDoctor />
                     Trang chủ
                   </a>
                 </li>
-                <li onClick={() => navigate("/consultant/quan-li-bs")}>
+                <li onClick={() => handleBacSi()}>
                   <a className="dropdown-item">
                     <FaPhoneAlt />
                     Quản lý bác sĩ
                   </a>
                 </li>
-                <li onClick={() => navigate("/consultant/dang-ki-tu-van")}>
+                <li onClick={() => handleTuVan()}>
                   <a className="dropdown-item">
                     <FaPhoneAlt />
                     Đăng kí tư vấn

@@ -3,7 +3,6 @@ import "./AddEmployees.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoCheck } from "react-icons/go";
-import axios from "axios";
 import { addEmployees } from "../../../services/adminService";
 const AddEmployees = (props) => {
   const [image, setImage] = useState(null);
@@ -36,12 +35,16 @@ const AddEmployees = (props) => {
     formData.append("phone", document.getElementById("phone").value);
     formData.append("location", document.getElementById("location").value);
     formData.append("dob", document.getElementById("dob").value);
-    formData.append("male", document.getElementById("male").value === "Nam" ? 1 : 0
+    formData.append(
+      "male",
+      document.getElementById("male").value === "Nam" ? 1 : 0
     );
     if (props.isConsulting === true) {
       formData.append("password", document.getElementById("password").value);
-    } else { 
-      formData.append( "experience", document.getElementById("experience").value
+    } else {
+      formData.append(
+        "experience",
+        document.getElementById("experience").value
       );
     }
     if (imageFile) {
@@ -49,7 +52,7 @@ const AddEmployees = (props) => {
     }
 
     try {
-      const response = await addEmployees(props.isConsulting,formData);
+      const response = await addEmployees(props.isConsulting, formData);
       // Gọi notify trước, sau đó đóng form và reload
       notify(response.data.message);
       setTimeout(() => {
@@ -83,7 +86,11 @@ const AddEmployees = (props) => {
   return (
     <div className="AddEmployees-overlay">
       <div className="AddEmployees">
-        <div className="AddEmployees_header"><h2>{props.isConsulting ? "Thêm nhân viên tư vấn" : "Thêm bác sĩ"}</h2></div>
+        <div className="AddEmployees_header">
+          <h2>
+            {props.isConsulting ? "Thêm nhân viên tư vấn" : "Thêm bác sĩ"}
+          </h2>
+        </div>
         <div className="AddEmployees_content">
           <div className="AddEmployees_content_top">
             <div className="image-upload-section">
