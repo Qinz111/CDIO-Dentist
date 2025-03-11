@@ -101,7 +101,7 @@ const TuVan = () => {
           <tr>
             <th>STT</th>
             <th>ID</th>
-            <th>ID DOCTOR</th>
+            <th>ID BÁC SĨ</th>
             <th>TÊN KHÁCH HÀNG</th>
             <th>SỐ ĐIỆN THOẠI</th>
             <th>GIỜ HẸN</th>

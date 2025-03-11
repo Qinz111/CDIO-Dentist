@@ -41,7 +41,7 @@ const QuanLy = () => {
       <div className="quanly-bs">
         <p className="title">DANH SÁCH BÁC SĨ</p>
         <hr className="divider" />
-        <p className="speciality">SPECIALITY</p>
+       
       </div>
       <div className="quanly-list-user">
         <div className="quanly-user">

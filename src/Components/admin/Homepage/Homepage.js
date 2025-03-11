@@ -52,7 +52,7 @@ const Homepage_Admin = () => {
         <img src={s4} alt="" />
       </div>
       <div className="login__card">
-        <div className="login__custom">CDIO</div>
+        <div className="login__custom">CIDO</div>
         <h1 className="login__title">Đăng nhập</h1>
 
         <form onSubmit={GoAhead}>
@@ -106,8 +106,8 @@ const Homepage_Admin = () => {
             }}
           >
             {change === false
-              ? "Đăng nhập với tư cách consultant"
-              : "Đăng nhập với tư cách admin"}
+              ? "Đăng nhập với tư cách nhân viên tư vấn"
+              : "Đăng nhập với tư cách bác sĩ"}
           </p>
         </form>
       </div>
