@@ -4,12 +4,38 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoCheck } from "react-icons/go";
 import { addEmployees } from "../../../services/adminService";
+
+const validatePhoneNumber = (phone, setErrors, setValidated) => {
+  let vnf_regex = /^(0[3|5|7|8|9])[0-9]{8}$/;
+  let mobile = phone.trim();
+
+  if (!mobile) {
+    setErrors((prev) => ({ ...prev, phone: "Bạn chưa điền số điện thoại!" }));
+    setValidated((prev) => ({ ...prev, phone: false }));
+    return false;
+  }
+
+  if (!vnf_regex.test(mobile)) {
+    setErrors((prev) => ({
+      ...prev,
+      phone: "Số điện thoại không đúng định dạng!",
+    }));
+    setValidated((prev) => ({ ...prev, phone: false }));
+    return false;
+  }
+
+  setErrors((prev) => ({ ...prev, phone: "" }));
+  setValidated((prev) => ({ ...prev, phone: true }));
+  return true;
+};
+
 const AddEmployees = (props) => {
   const [image, setImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [validated, setValidated] = useState({ phone: true });
 
   const notify = (message) => {
-    // Xóa async vì toast.success không cần Promise
     toast.success(message || "Thêm nhân viên thành công!", {
       icon: <GoCheck style={{ color: "#0C2D79", fontSize: "24px" }} />,
       position: "top-right",
@@ -53,12 +79,11 @@ const AddEmployees = (props) => {
 
     try {
       const response = await addEmployees(props.isConsulting, formData);
-      // Gọi notify trước, sau đó đóng form và reload
       notify(response.data.message);
       setTimeout(() => {
-        props.onClose(); // Đóng form trước
-        window.location.reload(); // Reload trang sau khi thông báo hiển thị
-      }, 1500); // Delay 1.5s để người dùng thấy thông báo trước khi reload
+        props.onClose();
+        window.location.reload();
+      }, 1500);
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);
@@ -68,7 +93,6 @@ const AddEmployees = (props) => {
     }
   };
 
-  //
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -80,6 +104,12 @@ const AddEmployees = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const phone = document.getElementById("phone").value;
+
+    if (!validatePhoneNumber(phone, setErrors, setValidated)) {
+      return;
+    }
+
     addEmployeeAPI();
   };
 
@@ -145,9 +175,11 @@ const AddEmployees = (props) => {
                     type="tel"
                     placeholder="Nhập số điện thoại"
                     required
-                    pattern="[0-9]{10}"
-                    title="Số điện thoại phải có đúng 10 chữ số"
+                    className={validated.phone ? "" : "error-input"}
                   />
+                  {!validated.phone && (
+                    <span className="error-message">{errors.phone}</span>
+                  )}
                 </p>
                 <p>
                   EMAIL:{" "}
@@ -167,7 +199,7 @@ const AddEmployees = (props) => {
                     required
                   />
                 </p>
-                {props.isConsulting === true && (
+                {props.isConsulting && (
                   <p>
                     PASSWORD:{" "}
                     <input
@@ -178,7 +210,7 @@ const AddEmployees = (props) => {
                     />
                   </p>
                 )}
-                {props.isConsulting === false && (
+                {!props.isConsulting && (
                   <p>
                     KINH NGHIỆM:{" "}
                     <textarea
