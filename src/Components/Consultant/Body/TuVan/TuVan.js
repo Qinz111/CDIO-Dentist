@@ -9,7 +9,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoCheck } from "react-icons/go";
 import { MdError } from "react-icons/md";
-import { GiConfirmed } from "react-icons/gi";
 const TuVan = () => {
   const [appointment, setAppointment] = useState([]);
 
@@ -53,7 +52,55 @@ const TuVan = () => {
     return format(new Date(dateString), "dd/MM/yyyy HH:mm");
   };
 
+  // const handleConfirmAppointment = async (id, status) => {
+  //   try {
+  //     const token = localStorage.getItem("accessToken");
+  //     if (!token) {
+  //       console.error("Không có token trong localStorage.");
+  //       return;
+  //     }
+
+  //     const res = await confirmReq(
+  //       id,
+  //       { status: status },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+
+  //     if (res.data) {
+  //       toast.success(
+  //         status === 1
+  //           ? "Lịch hẹn đã được duyệt thành công!"
+  //           : "Lịch hẹn đã bị từ chối!",
+  //         {
+  //           icon: <GoCheck style={{ color: "#0C2D79", fontSize: "24px" }} />,
+  //         }
+  //       );
+  //       getAppoinment();
+  //     } else {
+  //       toast.error("Phản hồi không hợp lệ từ server!");
+  //     }
+  //   } catch (error) {
+  //     console.error("Lỗi khi duyệt lịch hẹn:", error);
+  //     toast.error("Đã có người đặt thời gian này", {
+  //       icon: <MdError style={{ color: "red", fontSize: "24px" }} />,
+  //     });
+  //   }
+  // };
+
   const handleConfirmAppointment = async (id, status) => {
+    const isConfirmed = window.confirm(
+      status === 1
+        ? "Bạn có chắc chắn muốn DUYỆT lịch hẹn này không?"
+        : "Bạn có chắc chắn muốn TỪ CHỐI lịch hẹn này không?"
+    );
+
+    if (!isConfirmed) return; // Nếu người dùng bấm 'Hủy', thoát khỏi hàm
+
     try {
       const token = localStorage.getItem("accessToken");
       if (!token) {

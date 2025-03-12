@@ -4,9 +4,9 @@ import { FaUserPlus } from "react-icons/fa";
 import AddEmployees from "../../../AddEmployees/AddEmployees";
 import ShowInformation from "../../../ShowInformation/ShowInformation";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
 import { IoSearchSharp } from "react-icons/io5";
 import { showEmployees } from "../../../../../services/adminService";
+import { useNavigate } from "react-router-dom";
 function Doctors_Admin() {
   const [doctorsList, setDoctorsList] = useState([]);
   const [addEmployees, setAddEmployees] = useState(false);
@@ -33,17 +33,19 @@ function Doctors_Admin() {
     return Math.ceil(filteredDoctors.length / doctorsPerPage);
   }, [filteredDoctors]);
   // Tải danh sách bác sĩ từ API
+  const navigate = useNavigate();
   const getDoctors = async () => {
     try {
       const response = await showEmployees(checkRole);
       setDoctorsList(response.data);
     } catch (error) {
       console.error("Lỗi khi lấy dữ liệu bác sĩ:", error);
+      navigate("/login");
     }
   };
 
   useEffect(() => {
-    getDoctors(); 
+    getDoctors();
   }, []);
 
   // Xử lý tìm kiếm

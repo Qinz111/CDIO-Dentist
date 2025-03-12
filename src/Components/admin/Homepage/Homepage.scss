@@ -11,21 +11,39 @@ $border-radius: 20px;
   position: relative; // Ensure the login container is positioned relative to its parent
   .home-page {
     min-height: 700px;
-    position: absolute; 
+    position: absolute;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; 
-  
+    z-index: 1;
+
     img {
       position: absolute;
       width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 1.5s ease-in-out;
     }
-  
+
+    @keyframes fade {
+      0% {
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      } /* Giữ ảnh hiển thị */
+      40% {
+        opacity: 1;
+      } /* Ảnh vẫn sáng */
+      50% {
+        opacity: 0;
+      } /* Mờ dần */
+      100% {
+        opacity: 0;
+      }
+    }
+
     img:nth-child(1) {
       animation: fade 12s infinite 0s;
     }
@@ -39,18 +57,28 @@ $border-radius: 20px;
       animation: fade 12s infinite 9s;
     }
   }
-  
+
   @keyframes fade {
-    0% { opacity: 1; }
-    25% { opacity: 0; }
-    50% { opacity: 0; }
-    75% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
   &__card {
     height: 480px;
-    position: absolute; 
-    z-index: 10; 
+    position: absolute;
+    z-index: 10;
     background: #fff;
     padding: 0 30px;
     margin-left: 120px;
@@ -80,19 +108,19 @@ $border-radius: 20px;
     justify-content: center;
     align-items: center;
 
-    &::before{
-      content: '';
-      top :0;
-      left:-30px;
+    &::before {
+      content: "";
+      top: 0;
+      left: -30px;
       position: absolute;
       border-top-right-radius: 50%;
       width: 30px;
       height: 30px;
       box-shadow: 15px 0 0 0 $primary-color;
     }
-    &::after{
-      content: '';
-      top :0;
+    &::after {
+      content: "";
+      top: 0;
       right: -30px;
       position: absolute;
       border-top-left-radius: 50%;
@@ -105,7 +133,7 @@ $border-radius: 20px;
     font-size: 24px;
     font-weight: bold;
     color: $text-color;
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
   }
 
   &__subtitle {
@@ -167,7 +195,6 @@ $border-radius: 20px;
   }
 
   &__button {
-    
     background: $primary-color;
     color: white;
     border: none;
@@ -175,8 +202,8 @@ $border-radius: 20px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
- 
-    margin-top: 30px;
+
+    margin: 30px 0;
     width: 100%;
 
     &:hover {
@@ -187,4 +214,3 @@ $border-radius: 20px;
 .errorMessage {
   color: red;
 }
-

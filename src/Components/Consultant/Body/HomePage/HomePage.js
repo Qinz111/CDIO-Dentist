@@ -1,39 +1,51 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./HomePage.scss";
 import { getInfo } from "../../../../services/ConsultantService";
 
 const HomePage = () => {
   const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate(); // Hook để điều hướng
 
   useEffect(() => {
     const fetchInfo = async () => {
       try {
         const token = localStorage.getItem("accessToken");
-        const id = localStorage.getItem("consultantId"); // Lấy id từ localStorage
+        const id = localStorage.getItem("consultantId");
 
         if (!token || !id) {
-          console.error("Không có token hoặc ID, vui lòng đăng nhập.");
+          handleLogout();
           return;
         }
 
-        // Gọi API với token
         const res = await getInfo({
           headers: { Authorization: `Bearer ${token}` },
         });
 
         if (res.data) {
-          setUserInfo(res.data); // Lưu thông tin vào state
+          setUserInfo(res.data);
         } else {
           console.error("Không nhận được dữ liệu hợp lệ:", res);
         }
       } catch (error) {
         console.error("Lỗi khi lấy thông tin:", error);
+        if (
+          error.response &&
+          (error.response.status === 401 || error.response.status === 403)
+        ) {
+          handleLogout();
+        }
       }
     };
 
-    console.log(userInfo);
     fetchInfo();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("consultantId");
+    navigate("/login"); // Chuyển hướng về trang đăng nhập
+  };
 
   return (
     <div className="home-page-container">

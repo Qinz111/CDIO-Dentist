@@ -108,8 +108,8 @@ const CalendarManage = () => {
               right: "dayGridMonth,timeGridWeek,timeGridDay", // Thêm chế độ xem theo tháng
             }}
             allDaySlot={false}
-            // slotMinTime="08:00:00"
-            // slotMaxTime="18:00:00"
+            slotMinTime="07:00:00"
+            slotMaxTime="17:00:00"
             height="auto"
           />
         </div>
