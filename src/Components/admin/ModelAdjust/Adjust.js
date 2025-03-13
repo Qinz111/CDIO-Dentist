@@ -120,9 +120,9 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
   return (
     <div className="Adjust-overlay">
       <div className="Adjust">
-      <div className="Adjust_header">
-           {isAdjustConsulting ? "Cập nhật nhân viên tư vấn" : "Cập nhật bác sĩ"}
-      </div>
+        <div className="Adjust_header">
+          {isAdjustConsulting ? "Cập nhật nhân viên tư vấn" : "Cập nhật bác sĩ"}
+        </div>
         <div className="Adjust_content">
           <div className="Adjust_content_top">
             <div className="image-upload-section">
@@ -176,6 +176,7 @@ const Adjust = ({ onClose, adjustEmployeeId, isAdjustConsulting }) => {
                     onChange={handleInputChange}
                     required
                     className="NgaySinh"
+                    max={new Date().toISOString().split("T")[0]}
                   />
                 </p>
                 <p>

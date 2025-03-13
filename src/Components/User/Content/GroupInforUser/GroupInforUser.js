@@ -49,7 +49,7 @@ const GroupInforUser = () => {
                 <p>Số điện thoại: {selectedUser.phone}</p>
                 <p>Email: {selectedUser.email}</p>
                 <p>Địa chỉ: {selectedUser.location}</p>
-                <p>Kinh nghiệm làm việc: {selectedUser.experience} năm</p>
+                <p>Kinh nghiệm làm việc: {selectedUser.experience} </p>
               </div>
               <div className="btn-dk">
                 {/* <button

@@ -83,7 +83,7 @@ const CalendarManage = () => {
             allDaySlot={false}
             height="auto"
             slotMinTime="07:00:00" // Bắt đầu từ 7h sáng
-            slotMaxTime="17:00:00" // Kết thúc lúc 17h chiều
+            slotMaxTime="19:00:00" // Kết thúc lúc 17h chiều
           />
         </div>
       </div>

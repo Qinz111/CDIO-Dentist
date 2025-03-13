@@ -158,6 +158,7 @@ const AddEmployees = (props) => {
                     placeholder="Nhập ngày sinh"
                     required
                     className="NgaySinh"
+                    max={new Date().toISOString().split("T")[0]}
                   />
                 </p>
                 <p>

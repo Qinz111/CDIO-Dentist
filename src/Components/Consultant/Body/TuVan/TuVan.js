@@ -9,9 +9,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoCheck } from "react-icons/go";
 import { MdError } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 const TuVan = () => {
   const [appointment, setAppointment] = useState([]);
-
+  const navigate = useNavigate();
   const getAppoinment = async () => {
     try {
       const token = localStorage.getItem("accessToken");
@@ -36,6 +37,7 @@ const TuVan = () => {
       toast.error("Lỗi khi tải lịch hẹn. Vui lòng thử lại!", {
         icon: <MdError style={{ color: "red", fontSize: "24px" }} />,
       });
+      navigate("/login");
     }
   };
 

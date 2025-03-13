@@ -14,6 +14,7 @@ const QuanLy = () => {
       }
     } catch (error) {
       console.error("Lỗi khi lấy danh sách nha sĩ: ", error);
+      navigate("/login");
     }
   };
 
@@ -32,16 +33,20 @@ const QuanLy = () => {
         state: { dentist_manage: dentist },
       });
     } else {
-      console.error("conchoquang");
+      console.error("??");
     }
   };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("accessToken");
+  //   localStorage.removeItem("consultantId");
+  //   navigate("/login"); // Chuyển hướng về trang đăng nhập
+  // };
 
   return (
     <div className="container-quanly">
       <div className="quanly-bs">
         <p className="title">DANH SÁCH BÁC SĨ</p>
         <hr className="divider" />
-       
       </div>
       <div className="quanly-list-user">
         <div className="quanly-user">

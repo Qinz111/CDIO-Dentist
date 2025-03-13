@@ -109,7 +109,7 @@ const CalendarManage = () => {
             }}
             allDaySlot={false}
             slotMinTime="07:00:00"
-            slotMaxTime="17:00:00"
+            slotMaxTime="19:00:00"
             height="auto"
           />
         </div>

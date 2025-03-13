@@ -85,7 +85,7 @@ const Header = () => {
                 <div className="header_box1Right">
                   <div className="header_box1Address">
                     <ul>
-                      <li>Mở cửa từ 7h - 17h</li>
+                      <li>Mở cửa từ 7h - 19h</li>
                       <li>Từ T2 - CN</li>
                     </ul>
                   </div>
